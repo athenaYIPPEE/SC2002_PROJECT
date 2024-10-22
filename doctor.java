@@ -154,10 +154,20 @@ public class doctor extends all_users{
 
         	for (Appointment appointment : appointments) {
             		if (appointment.getID().equals(appointmentID)) {
-                		System.out.println("Enter the outcome of the appointment: ");
+                		System.out.println("Enter the type of serivce: ");
                 		String outcome = sc.nextLine();
                 		appointment.setOutcome(outcome);
-                		System.out.println("Appointment outcome recorded.");
+                		System.out.println("Appointment service recorded.");
+				
+				System.out.println("Enter prescribed medications: ");
+                		String med = sc.nextLine();
+				appointment.setMedication(med) //new appointment method
+				System.out.println("Prescribed medications recorded.");
+
+				System.out.println("Enter consultation notes: ");
+                		String notes = sc.nextLine();
+				appointment.setNotes(notes) //new appointment method
+				System.out.println("Consultation notes recorded.");
                 		return;
             		}
         	}
