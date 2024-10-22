@@ -17,7 +17,7 @@ public class doctor extends all_users{
 		this.patientsMap = new HashMap<>();
 		this.diagnosisTreatmentMap = new HashMap<>();
 		this.appointments = new ArrayList<>();
-        this.slots = new ArrayList<>();
+        	this.slots = new ArrayList<>();
 	}
 	
 	public void displaymenu() {
@@ -33,14 +33,19 @@ public class doctor extends all_users{
 		int option = sc.nextInt();
 		switch(option) {
 			case 1: medicalRecordsView();
-					break;
+				break;
 			case 2: medicalRecordsUpdate();
-					break;
+				break;
 			case 3: personalSchedule();
+				break;
 			case 4: setAvailability();
+				break;
 			case 5: appointmentRequest();
+				break;
 			case 6: upcomingAppointmentsView();
+				break;
 			case 7: appointmentOutcome();
+				break;
 		}
 	}
 	
