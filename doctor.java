@@ -55,14 +55,14 @@ public class doctor extends all_users{
 			return;
 		}
 		Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the patient's ID: ");
-        String patientID = sc.next();
+        	System.out.println("Enter the patient's ID: ");
+        	String patientID = sc.next();
         
 		for (Patient patient : patients) {
 			if (patient.getID().equals(patientID)) {  
-	            patient.viewMedicalRecord(); 
-	            return; // exit once the patient's record is displayed
-	        }
+	            		patient.viewMedicalRecord(); 
+	            		return; // exit once the patient's record is displayed
+	        	}
 		}
 		System.out.println("Patient not found.");
 	}
@@ -70,98 +70,97 @@ public class doctor extends all_users{
 	public void medicalRecordsUpdate() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the patient's ID: ");
-        String patientID = sc.next();
+        	String patientID = sc.next();
         
-        Patient patient = patientsMap.get(patientID);
-        if (patient == null) {
-            System.out.println("Patient not found.");
-            return;
-        }
+        	Patient patient = patientsMap.get(patientID);
+        	if (patient == null) {
+            		System.out.println("Patient not found.");
+            		return;
+        	}
         
 		System.out.println("Enter new diagnosis: ");
 		String newDiagnosis = sc.next();
 		
 		if (diagnosisTreatmentMap.containsKey(newDiagnosis)) {
-            String treatment = diagnosisTreatmentMap.get(newDiagnosis);
-            System.out.println("Treatment for diagnosis '" + newDiagnosis + "' is: " + treatment);
-        } else {
-            System.out.println("No treatment found for the diagnosis: " + newDiagnosis); //new method to add treatment plan?
-        }
+            		String treatment = diagnosisTreatmentMap.get(newDiagnosis);
+            		System.out.println("Treatment for diagnosis '" + newDiagnosis + "' is: " + treatment);
+        	} else {
+            		System.out.println("No treatment found for the diagnosis: " + newDiagnosis); //new method to add treatment plan?
+        	}
 	}
 	
 	public void personalSchedule() {
 		System.out.println("Upcoming Appointments:");
-        if (appointments.isEmpty()) {
-            System.out.println("No upcoming appointments.");
-        } else {
-            for (Appointment appointment : appointments) {
-                System.out.println(appointment);  // Display each appointment
-            }
-        System.out.println("Available Slots: ");
-        if (slots.isEmpty()) {System.out.println("No available slots.");}
-        else {
-        	for (String avail: slots) {
-        		System.out.println(slots);
+        	if (appointments.isEmpty()) {
+            		System.out.println("No upcoming appointments.");
+        	} else {
+            	for (Appointment appointment : appointments) {
+                	System.out.println(appointment);  // Display each appointment
+            	}
+        	System.out.println("Available Slots: ");
+        	if (slots.isEmpty()) {System.out.println("No available slots.");}
+        	else {
+        		for (String avail: slots) {
+        			System.out.println(slots);
+        		}
         	}
-        }
 	}
         
-    public void setAvailability() {
-    	Scanner sc = new Scanner(System.in);
-        System.out.println("Enter your availability slot (e.g., 'Monday 9-10 AM'):");
-        String slot = sc.nextLine();
-        slots.add(slot);
-        System.out.println("Availability slot added successfully.");
-    }
+    	public void setAvailability() {
+    		Scanner sc = new Scanner(System.in);
+        	System.out.println("Enter your availability slot (e.g., 'Monday 9-10 AM'):");
+        	String slot = sc.nextLine();
+        	slots.add(slot);
+        	System.out.println("Availability slot added successfully.");
+    	}
     
-    public void appointmentRequest() {
-    	Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the appointment ID to review: ");
-        String appointmentID = sc.nextLine();
+    	public void appointmentRequest() {
+    		Scanner sc = new Scanner(System.in);
+        	System.out.println("Enter the appointment ID to review: ");
+        	String appointmentID = sc.nextLine();
 
-        for (Appointment appointment : appointments) {
-            if (appointment.getID().equals(appointmentID)) {
-                System.out.println("Do you want to accept or decline this appointment? (Enter 'accept' or 'decline')");
-                String decision = sc.nextLine();
-                if (decision.equalsIgnoreCase("accept")) {
-                    appointment.setStatus("confirmed");
-                    System.out.println("Appointment confirmed.");
-                } else if (decision.equalsIgnoreCase("decline")) {
-                    appointment.setStatus("cancelled");
-                    System.out.println("Appointment declined.");
-                } else {
-                    System.out.println("Invalid choice.");
-                }
-                return;
-            }
-        }
-        System.out.println("Appointment not found.");
-    }
+        	for (Appointment appointment : appointments) {
+            		if (appointment.getID().equals(appointmentID)) {
+                		System.out.println("Do you want to accept or decline this appointment? (Enter 'accept' or 'decline')");
+                		String decision = sc.nextLine();
+                		if (decision.equalsIgnoreCase("accept")) {
+                    			appointment.setStatus("confirmed");
+                    			System.out.println("Appointment confirmed.");
+                		} else if (decision.equalsIgnoreCase("decline")) {
+                    			appointment.setStatus("cancelled");
+                    			System.out.println("Appointment declined.");
+                		} else {
+                    			System.out.println("Invalid choice.");
+                		}
+                		return;
+            		}
+        	}
+        	System.out.println("Appointment not found.");
+    	}
     
-    public void upcomingAppointmentsView() {
-    	System.out.println("Upcoming confirmed appointments:");
-        for (Appointment appointment : appointments) {
-            if (appointment.getStatus().equals("confirmed")) {
-                System.out.println(appointment);
-            }
-        }
-    }
+    	public void upcomingAppointmentsView() {
+    		System.out.println("Upcoming confirmed appointments:");
+        	for (Appointment appointment : appointments) {
+            		if (appointment.getStatus().equals("confirmed")) {
+                	System.out.println(appointment);
+            		}
+        	}
+    	}
 	
-    public void appointmentOutcome() {
-    	Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the appointment ID to record the outcome: ");
-        String appointmentID = sc.nextLine();
+    	public void appointmentOutcome() {
+    		Scanner sc = new Scanner(System.in);
+        	System.out.println("Enter the appointment ID to record the outcome: ");
+        	String appointmentID = sc.nextLine();
 
-        for (Appointment appointment : appointments) {
-            if (appointment.getID().equals(appointmentID)) {
-                System.out.println("Enter the outcome of the appointment: ");
-                String outcome = sc.nextLine();
-                appointment.setOutcome(outcome);
-                System.out.println("Appointment outcome recorded.");
-                return;
-            }
-        }
-        System.out.println("Appointment not found.");
-    }
-    
-}
+        	for (Appointment appointment : appointments) {
+            		if (appointment.getID().equals(appointmentID)) {
+                		System.out.println("Enter the outcome of the appointment: ");
+                		String outcome = sc.nextLine();
+                		appointment.setOutcome(outcome);
+                		System.out.println("Appointment outcome recorded.");
+                		return;
+            		}
+        	}
+        	System.out.println("Appointment not found.");
+    		}
+	}
