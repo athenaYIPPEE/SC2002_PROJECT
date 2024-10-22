@@ -142,7 +142,7 @@ public class doctor extends all_users{
     		System.out.println("Upcoming confirmed appointments:");
         	for (Appointment appointment : appointments) {
             		if (appointment.getStatus().equals("confirmed")) {
-                	System.out.println(appointment);
+                		System.out.println(appointment);
             		}
         	}
     	}
