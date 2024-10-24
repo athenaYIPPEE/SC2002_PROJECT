@@ -2,20 +2,19 @@ package labproject;
 
 import java.util.HashMap;
 import java.util.Scanner;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class doctor extends all_users{
+public class Doctor extends all_users{
 
 	private HashMap<String, Patient> patientsMap;
-	private HashMap<String, String> diagnosisTreatmentMap;
 	private List<Appointment> appointments; //appointment objects
 	private List<String> slots;
 	
 	public doctor(String hospitalId, String password, String role) {
 		super(hospitalId, password, role);
 		this.patientsMap = new HashMap<>();
-		this.diagnosisTreatmentMap = new HashMap<>();
 		this.appointments = new ArrayList<>();
         	this.slots = new ArrayList<>();
 	}
@@ -32,25 +31,19 @@ public class doctor extends all_users{
 		Scanner sc = new Scanner(System.in);
 		int option = sc.nextInt();
 		switch(option) {
-			case 1: medicalRecordsView();
-				break;
-			case 2: medicalRecordsUpdate();
-				break;
-			case 3: personalSchedule();
-				break;
-			case 4: setAvailability();
-				break;
-			case 5: appointmentRequest();
-				break;
-			case 6: upcomingAppointmentsView();
-				break;
-			case 7: appointmentOutcome();
-				break;
+			case 1: medicalRecordsView(); break;
+			case 2: medicalRecordsUpdate(); break;
+			case 3: personalSchedule(); break;
+			case 4: setAvailability(); break;
+			case 5: appointmentRequest(); break;
+			case 6: upcomingAppointmentsView(); break;
+			case 7: appointmentOutcome(); break;
+			default: System.out.println("Invalid option. Please try again."); break;	
 		}
 	}
 	
 	public void medicalRecordsView() {
-		if (patients.isEmpty()) {
+		if (patientsMap.isEmpty()) {
 			System.out.println("No patients available");
 			return;
 		}
@@ -78,15 +71,43 @@ public class doctor extends all_users{
             		return;
         	}
         
-		System.out.println("Enter new diagnosis: ");
-		String newDiagnosis = sc.next();
-		
-		if (diagnosisTreatmentMap.containsKey(newDiagnosis)) {
-            		String treatment = diagnosisTreatmentMap.get(newDiagnosis);
-            		System.out.println("Treatment for diagnosis '" + newDiagnosis + "' is: " + treatment);
-        	} else {
-            		System.out.println("No treatment found for the diagnosis: " + newDiagnosis); //new method to add treatment plan?
-        	}
+		boolean updating = true;
+        	while (updating) {
+            		System.out.println("What would you like to update?");
+            		System.out.println("1. Add new diagnosis");
+            		System.out.println("2. Add new prescription");
+            		System.out.println("3. Add new treatment plan");
+            		System.out.println("4. Exit update menu");
+            		int choice = sc.nextInt();
+            		sc.nextLine();
+            
+            		switch (choice) {
+            			case 1:
+                			System.out.println("Enter new diagnosis: ");
+                			String diagnosis = sc.nextLine();
+                			medicalRecord.addDiagnosis(diagnosis); 
+                			System.out.println("Diagnosis added.");
+                			break;
+
+            			case 2:
+                			System.out.println("Enter new prescription: ");
+                			String prescription = sc.nextLine();
+                			medicalRecord.addPrescription(prescription); 
+                			System.out.println("Prescription added.");
+                			break;
+				case 3: 
+					System.out.println("Enter new treatment plan: ");
+                			String treatmentPlan = sc.nextLine();
+                			medicalRecord.addTreatmentPlan(treatmentPlan); 
+                			System.out.println("Treatment plan added.");
+                			break;
+				case 4: 	
+					updating = false; // Exit the update menu
+                			break;
+				default:
+                			System.out.println("Invalid choice. Please try again.");
+            		}
+		} System.out.println("Medical record updated successfully.");
 	}
 	
 	public void personalSchedule() {
@@ -97,6 +118,7 @@ public class doctor extends all_users{
             	for (Appointment appointment : appointments) {
                 	System.out.println(appointment);  // Display each appointment
             	}
+		}	
         	System.out.println("Available Slots: ");
         	if (slots.isEmpty()) {System.out.println("No available slots.");}
         	else {
@@ -140,11 +162,15 @@ public class doctor extends all_users{
     
     	public void upcomingAppointmentsView() {
     		System.out.println("Upcoming confirmed appointments:");
+		boolean hasConfirmedAppointments = false;
         	for (Appointment appointment : appointments) {
             		if (appointment.getStatus().equals("confirmed")) {
                 		System.out.println(appointment);
             		}
         	}
+		if (!hasConfirmedAppointments) {
+			System.out.println("No confirmed appointments.");
+		}
     	}
 	
     	public void appointmentOutcome() {
@@ -154,23 +180,55 @@ public class doctor extends all_users{
 
         	for (Appointment appointment : appointments) {
             		if (appointment.getID().equals(appointmentID)) {
-                		System.out.println("Enter the type of serivce: ");
-                		String outcome = sc.nextLine();
-                		appointment.setOutcome(outcome);
-                		System.out.println("Appointment service recorded.");
-				
-				System.out.println("Enter prescribed medications: ");
-                		String med = sc.nextLine();
-				appointment.setMedication(med) //new appointment method
-				System.out.println("Prescribed medications recorded.");
+                		//record date
+            			LocalDate appointmentDate = LocalDate.now();
+            			System.out.println("Date of Appointment: " + appointmentDate);
+            			appointment.setDate(appointmentDate);
 
-				System.out.println("Enter consultation notes: ");
-                		String notes = sc.nextLine();
-				appointment.setNotes(notes) //new appointment method
-				System.out.println("Consultation notes recorded.");
-                		return;
-            		}
+				//serviceType
+				System.out.println("Select type of service provided:");
+				for (int i = 0; i < serviceType.values().length; i++) {
+					System.out.println((i + 1) + ": " + serviceType.values()[i]);
+				}
+				int serviceChoice = sc.nextInt() - 1;
+				sc.nextLine();
+				if (serviceChoice >= 0 && serviceChoice < serviceType.values().length) {
+					serviceType selectedService = serviceType.values()[serviceChoice];
+					appointment.setServiceType(selectedService);
+					System.out.println("Service type recorded: " + selectedService);
+				} else { 
+					System.out.println("Invalid service type selected.");
+				}
+                		
+				//medication 
+				boolean addingMedications = true;
+				while (addingMedications) {
+					System.out.print("Enter medication name (or type 'exit' to stop adding medications): ");
+					String medicationName = sc.nextLine();
+					if (medicationName.equalsIgnoreCase("exit")) {
+						addingMedications = false;
+						continue;
+					}
+					Medication medication = new Medication(medicationName, 0);
+					appointment.addMedication(medication);
+					
+					System.out.println("Medication added: " + medicationName); 
+				}
+
+				//consultation
+				boolean addingNotes = true;
+				while (addingNotes) {
+					System.out.println("Enter consultation note (or type 'exit' to stop adding notes): ");
+					String consultationNote = sc.nextLine();
+					appointment.recordConsultationNotes(consultationNote);
+					if (consultationNote.equalsIgnoreCase("exit")) {
+						addingNotes = false;
+						continue;
+					}
+				} System.out.println("Appointment outcome recorded.");
+			}	
+            		else System.out.println("Appointment not found.");
         	}
-        	System.out.println("Appointment not found.");
-    		}
-	}
+        	
+    	}
+}
