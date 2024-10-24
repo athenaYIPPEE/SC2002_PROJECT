@@ -69,3 +69,21 @@ public class Appointment {
 //private String serviceType;
     //private List<Medication> prescribedMedications; 
     //private String consultationNotes;
+
+/* //setters
+    public void setServiceType(serviceType){
+        this.serviceType = serviceType;
+    }
+    
+    public void addMedication(Medication medication) {
+        this.prescribedMedications.add(medication);
+    }
+    
+    public void recordConsultationNotes(String notes) {
+    	if (this.consultationNotes.isEmpty()) {
+            this.consultationNotes = notes; // If no existing notes, set directly
+        } else {
+            this.consultationNotes += "\n" + notes; // Append new notes with a newline
+        }
+    }
+*/
