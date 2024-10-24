@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 public class all_users {
-	//testing commit and push from eclipse
+	//testing commit and push
 	private String hospitalId;
     private String password;
     private String role;
