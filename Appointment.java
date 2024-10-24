@@ -64,3 +64,8 @@ public class Appointment {
                 ", Time Slot: " + timeSlot + ", Status: " + status + "]";
     }
 }
+
+//ADD
+//private String serviceType;
+    //private List<Medication> prescribedMedications; 
+    //private String consultationNotes;
