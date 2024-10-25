@@ -1,86 +1,68 @@
-package sc2002_proj;
+package users;
 
+import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class Administrator extends all_users {
-    private ArrayList<String> staffList;
-    private ArrayList<String> medicationInventory;
-    private ArrayList<String> appointmentList;
+public class Administrator extends All_users {
+    private List<Doctor> doctors;
+    private List<Pharmacist> pharmacists;
+    private List<Medication> inventory;
 
     public Administrator(String hospitalId, String password) {
         super(hospitalId, password, "Administrator");
-        this.staffList = new ArrayList<>();
-        this.medicationInventory = new ArrayList<>();
-        this.appointmentList = new ArrayList<>();
+        this.doctors = new ArrayList<>();
+        this.pharmacists = new ArrayList<>();
+        this.inventory = new ArrayList<>();
     }
 
-    public void displayMenu() {
-        Scanner sc = new Scanner(System.in);
-        int choice;
-        do {
-            System.out.println("\nAdministrator Menu:");
-            System.out.println("1. View and Manage Hospital Staff");
-            System.out.println("2. View Appointments Details");
-            System.out.println("3. View and Manage Medication Inventory");
-            System.out.println("4. Approve Replenishment Requests");
-            System.out.println("5. Logout");
-            System.out.print("Enter your choice: ");
-            choice = sc.nextInt();
-            switch (choice) {
-                case 1:
-                    manageHospitalStaff();
-                    break;
-                case 2:
-                    viewAppointmentsDetails();
-                    break;
-                case 3:
-                    manageMedicationInventory();
-                    break;
-                case 4:
-                    approveReplenishmentRequests();
-                    break;
-                case 5:
-                    System.out.println("Logging out...");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Try again.");
-            }
-        } while (choice != 5);
-    }
-
-    private void manageHospitalStaff() {
-        System.out.println("Managing hospital staff...");
-        // Code to view, add, update, or remove staff members
-    }
-
-    private void viewAppointmentsDetails() {
-        System.out.println("Viewing appointment details...");
-        if (appointmentList.isEmpty()) {
-            System.out.println("No appointments available.");
-        } else {
-            for (String appointment : appointmentList) {
-                System.out.println(appointment);
-            }
+    // Manage hospital staff
+    public void addStaff(All_users staff) {
+        if (staff instanceof Doctor) {
+            doctors.add((Doctor) staff);
+            System.out.println("Doctor added: " + staff.getHospitalId());
+        } else if (staff instanceof Pharmacist) {
+            pharmacists.add((Pharmacist) staff);
+            System.out.println("Pharmacist added: " + staff.getHospitalId());
         }
     }
 
-    private void manageMedicationInventory() {
-        System.out.println("Managing medication inventory...");
-        if (medicationInventory.isEmpty()) {
-            System.out.println("No medications available.");
-        } else {
-            for (String medication : medicationInventory) {
-                System.out.println(medication);
-            }
+    public void removeStaff(String hospitalId) {
+        doctors.removeIf(doctor -> doctor.getHospitalId().equals(hospitalId));
+        pharmacists.removeIf(pharmacist -> pharmacist.getHospitalId().equals(hospitalId));
+        System.out.println("Staff with ID " + hospitalId + " removed.");
+    }
+
+    // View appointments (with details)
+    public void viewAppointments(List<Appointment> appointments) {
+        System.out.println("Appointments List:");
+        for (Appointment appointment : appointments) {
+            System.out.println(appointment);
         }
     }
 
-    private void approveReplenishmentRequests() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the replenishment request to approve: ");
-        String request = sc.next();
-        System.out.println("Replenishment request " + request + " approved.");
-        // Code to approve the request and update the medication inventory
+    // Manage medication inventory
+    public void manageInventory(String medicationName, int newStock) {
+        for (Medication medication : inventory) {
+            if (medication.getName().equals(medicationName)) {
+                medication.setStock(newStock);
+                System.out.println("Updated stock for " + medicationName + ": " + newStock);
+                return;
+            }
+        }
+        System.out.println("Medication not found.");
+    }
+
+    // Approve replenishment requests from pharmacists
+    public void approveReplenishmentRequest(String medicationName) {
+        for (Medication medication : inventory) {
+            if (medication.getName().equals(medicationName)) {
+                // Assuming some logic here to approve request
+                int restockedAmount = medication.getLowStockAlertLevel() + 50; // Example replenishment amount
+                medication.setStock(restockedAmount);
+                System.out.println("Replenishment approved for " + medicationName + ". New stock: " + restockedAmount);
+                return;
+            }
+        }
+        System.out.println("Replenishment request for " + medicationName + " not found.");
     }
 }
