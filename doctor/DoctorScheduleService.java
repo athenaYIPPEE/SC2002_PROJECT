@@ -1,10 +1,10 @@
 package labproject;
 
-public class doctorScheduleService {
+public class DoctorScheduleService {
 
 	private List<String> availableSlots;
 	
-	public doctorScheduleService() {
+	public DoctorScheduleService() {
 		this.availableSlots = new ArrayList<>();
 	}
 	
