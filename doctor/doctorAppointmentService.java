@@ -92,6 +92,9 @@ public class doctorAppointmentService {
                     			appointment.addMedication(medication); // Add the medication to the appointment
 
                     			System.out.println("Medication added: " + medicationName);    
+					System.out.println("Do you want to add another medication? (y/n)");
+            				String response = scanner.next();
+            				addingMedications = response.equalsIgnoreCase("y");
             			}
 				
             			//consultation
