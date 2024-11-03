@@ -7,7 +7,7 @@ public class DoctorAppointmentService {
 
 	private List<Appointment> appointments;
 	
-	public doctorAppointmentService() {
+	public DoctorAppointmentService() {
 		this.appointments = new ArrayList<>();
 	}
 	
