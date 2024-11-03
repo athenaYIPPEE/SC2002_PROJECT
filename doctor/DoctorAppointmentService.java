@@ -3,7 +3,7 @@ package labproject;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class doctorAppointmentService {
+public class DoctorAppointmentService {
 
 	private List<Appointment> appointments;
 	
