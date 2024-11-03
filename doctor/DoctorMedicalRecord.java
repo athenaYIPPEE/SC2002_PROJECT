@@ -6,7 +6,7 @@ public class DoctorMedicalRecord {
 
 	private HashMap<String, Patient> patientsMap;
 	
-	public doctorMedicalRecord() {
+	public DoctorMedicalRecord() {
 		this.patientsMap = new HashMap<>();
 	}
 	
