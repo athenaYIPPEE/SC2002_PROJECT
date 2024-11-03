@@ -2,7 +2,7 @@ package labproject;
 
 import java.util.Scanner;
 
-public class doctorMedicalRecord {
+public class DoctorMedicalRecord {
 
 	private HashMap<String, Patient> patientsMap;
 	
