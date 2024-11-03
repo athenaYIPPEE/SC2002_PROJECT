@@ -16,7 +16,7 @@ public class Doctor extends all_users{
 		super(hospitalId, password, role);
 		this.patientsMap = new HashMap<>();
 		this.appointments = new ArrayList<>();
-        this.slots = new ArrayList<>();
+        	this.slots = new ArrayList<>();
 	}
 	
 	public void displaymenu() {
