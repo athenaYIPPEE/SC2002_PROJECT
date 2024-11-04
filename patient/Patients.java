@@ -3,7 +3,7 @@ package users;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Patients extends All_users {
+public class Patients extends all_users {
     private String name;
     private String dob;
     private String gender;
@@ -16,7 +16,7 @@ public class Patients extends All_users {
     private static ArrayList<Patients> patientList = new ArrayList<>();
 
     // Constructor
-    public Patients(String hospitalId, String password, String name, String dob, String gender, String phoneNumber, String emailAddress, String bloodType) {
+    public Patients(String hospitalId, String password) {
         super(hospitalId, password, "Patient");
         this.name = name;
         this.dob = dob;
@@ -25,13 +25,6 @@ public class Patients extends All_users {
         this.emailAddress = emailAddress;
         this.medicalRecord = new MedicalRecord(bloodType); // Initialize medical record
         this.appointments = new ArrayList<>(); // Initialize appointment list
-    }
-
-    // Method to allow patients to update contact info only
-    public void updateContactInfo(String newPhoneNumber, String newEmailAddress) {
-        this.phoneNumber = newPhoneNumber;
-        this.emailAddress = newEmailAddress;
-        System.out.println("Contact information updated for " + this.name);
     }
 
     // Method to view the encapsulated medical record
