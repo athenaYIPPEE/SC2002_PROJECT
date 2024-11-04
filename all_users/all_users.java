@@ -4,8 +4,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 public class all_users {
-	//testing github
-	private String hospitalId;
+    private String hospitalId;
     private String password;
     private String role;
     
@@ -53,42 +52,14 @@ public class all_users {
 		
 	}
 	
-	/*public void changePassword(String hospital_id)
-	{
-		Scanner obj = new Scanner(System.in);
-		
-		System.out.print("Enter your current password: ");
-		String cur_pw = obj.next();
-		if (!this.password.equals(cur_pw)) {
-            System.out.println("Incorrect password, please try again.");
-            return;
-        }
-		System.out.print("Enter your new password: ");
-		String new_pw = obj.next();
-		System.out.print("Confirm your new password: ");
-		String cfm_new_pw = obj.next();
-		
-		while (!new_pw.equals(cfm_new_pw))
-		{
-			System.out.println("Passwords do not match, please try again!");
-			System.out.print("Enter your new password: ");
-			new_pw = obj.next();
-			System.out.print("Confirm your new password: ");
-			cfm_new_pw = obj.next();
-		}
-		
-		this.password = new_pw;
-		user.put(hospital_id, new_pw);
-		System.out.println("Password updated!");
-	}*/
-	
-	public void resetPassword() 
+	public void resetPassword() //soliD, abstraction
 	{
 	    changePassword managePassword = new changePassword(user);
 	    managePassword.changeUserPassword(this.hospitalId);
 	}
 	
-	public void roleSpecificAccess() {
+	public void roleSpecificAccess() //sort of soliD?, high level module
+	{
         switch (this.getRole()) {
             case "Patient":
                 ((Patient) this).displayMenu();
@@ -105,5 +76,7 @@ public class all_users {
         }
     }
 	
+    //no soLid in all_user bcos it's a superclass
 
 }
+
