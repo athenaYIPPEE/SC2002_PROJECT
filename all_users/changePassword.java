@@ -3,7 +3,7 @@ package sc2002_proj;
 import java.util.Scanner;
 import java.util.HashMap;
 
-public class changePassword{
+public class changePassword{ //Solid
 	private HashMap<String, String> users;
 	
 	public changePassword(HashMap<String, String> users) 
