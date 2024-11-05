@@ -1,14 +1,14 @@
-package sc2002_proj;
+package project;
 
 import java.util.Scanner;
 import java.util.HashMap;
 
-public class all_users {
+public class All_Users {
     private String hospitalId;
     private String password;
     private String role;
     
-    public all_users(String hospitalId, String password, String role) {
+    public All_Users(String hospitalId, String password, String role) {
         this.hospitalId = hospitalId;
         this.password = password;
         this.role = role;
