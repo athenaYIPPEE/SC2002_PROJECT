@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Doctor extends all_users{
+public class Doctor extends All_Users{
 
 	private HashMap<String, Patient> patientsMap;
 	private List<Appointment> appointments; //appointment objects

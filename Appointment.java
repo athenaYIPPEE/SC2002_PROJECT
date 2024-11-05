@@ -1,4 +1,4 @@
-package users;
+package project;
 
 import java.util.Date;
 
@@ -9,6 +9,9 @@ public class Appointment {
     private Date appointmentDate;
     private String timeSlot;
     private String status; // confirmed, canceled, completed, etc.
+    private String serviceType;
+    private List<Medication> prescribedMedications; 
+    private String consultationNotes;
 
     // Constructor
     public Appointment(String appointmentId, String doctorName, String patientId, Date appointmentDate, String timeSlot, String status) {
@@ -63,14 +66,7 @@ public class Appointment {
                 ", Patient ID: " + patientId + ", Date: " + appointmentDate + 
                 ", Time Slot: " + timeSlot + ", Status: " + status + "]";
     }
-}
 
-//ADD
-//private String serviceType;
-    //private List<Medication> prescribedMedications; 
-    //private String consultationNotes;
-
-/* //setters
     public void setServiceType(serviceType){
         this.serviceType = serviceType;
     }
@@ -86,4 +82,4 @@ public class Appointment {
             this.consultationNotes += "\n" + notes; // Append new notes with a newline
         }
     }
-*/
+}

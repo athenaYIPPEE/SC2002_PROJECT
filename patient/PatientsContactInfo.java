@@ -1,11 +1,11 @@
-package users;
+package project;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Patients_ContactInfo extends Patients {
+public class PatientsContactInfo extends Patients {
     
-    public Patients_ContactInfo( String phoneNumber, String emailAddress) {
+    public PatientsContactInfo( String phoneNumber, String emailAddress) {
         super(phoneNumber, emailAddress);
     }
 

@@ -1,10 +1,8 @@
-package Inheritance;
-
-
+package project;
 
 import java.util.List;
 
-public class Pharmacist extends All_users {
+public class Pharmacist extends AllUsers {
     private AppointmentManager appointmentManager;
     private InventoryManager inventoryManager;
 

@@ -1,7 +1,7 @@
-package sc2002_proj;
+package project;
 
-import java.util.Scanner;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class changePassword{ //Solid
 	private HashMap<String, String> users;

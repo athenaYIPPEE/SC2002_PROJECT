@@ -1,4 +1,4 @@
-package Inheritance;
+package project;
 
 
 import java.util.List;

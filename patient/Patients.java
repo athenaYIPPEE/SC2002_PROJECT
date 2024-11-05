@@ -1,9 +1,9 @@
-package users;
+package project;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Patients extends all_users {
+public class Patients extends AllUsers {
     private String name;
     private String dob;
     private String gender;
