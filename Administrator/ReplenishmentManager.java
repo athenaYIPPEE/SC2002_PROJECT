@@ -1,6 +1,4 @@
-package Inheritance;
-
-package users;
+package project;
 
 import java.util.List;
 

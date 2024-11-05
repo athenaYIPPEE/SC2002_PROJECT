@@ -9,6 +9,10 @@ public class MedicationStock {
 	
 	public MedicationStock() {
         this.stock = new HashMap<>();
+	    // Initialize stock with each medication and a default quantity of 0
+	    for (Medication medication : Medication.values()) {
+	        stock.put(medication, 0);
+	    }
     }
 	
 	public void addStock(Medication medication, int amount) {
@@ -34,7 +38,7 @@ public class MedicationStock {
         }
     }
 	
-	public int getStockLevel(Medication medication) {
+	public int getStock(Medication medication) {
         return stock.getOrDefault(medication, 0); // Returns 0 if not found
     }
 	

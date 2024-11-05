@@ -1,4 +1,4 @@
-package labproject;
+package project;
 
 public enum serviceType {
   CONSULTATION,
