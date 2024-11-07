@@ -55,4 +55,10 @@ public class MedicationStock {
             System.out.println("Invalid Choice.");
         }
     }
+
+    public void showAlert(MedicationName medication){
+        if (alert.containsKey(medication)) {
+            System.out.println("Alert level is: " + alert.get(medication));
+    }
+}
 }

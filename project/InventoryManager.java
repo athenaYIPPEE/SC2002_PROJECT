@@ -14,8 +14,8 @@ public class InventoryManager {
      * for administrator
      */
 
-    public InventoryManager(){
-        this.lowStockAlert = medicationlevel.lowLevel;
+    public InventoryManager(MedicationStock inventory){
+        this.inventory = inventory;
     }
     
      public void viewInventory() {
@@ -65,6 +65,18 @@ public class InventoryManager {
         System.out.println("New Alert Level?");
         int level = scanner.nextInt();
         inventory.setAlert(medicationEnum, level);
+    }
+
+    public void showAlert(){
+        System.out.println("Which Medication?");
+        Scanner scanner = new Scanner(System.in);
+        String choice = scanner.nextLine();
+        MedicationName medicationEnum = null;
+        for (MedicationName medication : MedicationName.values()) {
+            if (medication.getName().equals(choice)) {
+                medicationEnum = medication;}
+            }
+        inventory.showAlert(medicationEnum);
     }
 
 
