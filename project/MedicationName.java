@@ -1,13 +1,13 @@
 package project;
 
-public enum Medication {
+public enum MedicationName {
 	ASPIRIN("Aspirin"),
     IBUPROFEN("Ibuprofen"),
     PARACETAMOL("Paracetamol");
 	
 	private String name;
 
-    Medication(String name) {
+    MedicationName(String name){
         this.name = name;
     }
 

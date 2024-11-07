@@ -16,7 +16,7 @@ public class Patients extends AllUsers {
     private static ArrayList<Patients> patientList = new ArrayList<>();
 
     // Constructor
-    public Patients(String hospitalId, String password, String alice_Brown, String string, String female, String string1, String alicebrownexamplecom, String a) {
+    public Patients(String hospitalId, String password, String name, String dob, String gender, String phoneNumber, String emailAddress, String bloodType) {
         super(hospitalId, password, "Patient");
         this.name = name;
         this.dob = dob;
@@ -26,6 +26,7 @@ public class Patients extends AllUsers {
         this.medicalRecord = new MedicalRecord(bloodType); // Initialize medical record
         this.appointments = new ArrayList<>(); // Initialize appointment list
     }
+    
 
     public void displayMenu(){
         
