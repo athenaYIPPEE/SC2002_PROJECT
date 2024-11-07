@@ -2,6 +2,7 @@ package project;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Patients extends AllUsers {
     private String name;
@@ -29,7 +30,26 @@ public class Patients extends AllUsers {
     
 
     public void displayMenu(){
-        
+        System.out.println("Menu: \n"
+				+ "1: View Medical Records \n"
+				+ "2: Update Personal Information \n"
+				+ "3: View Available Appointment Slots \n"
+				+ "4: Schedule an Appointment \n"
+				+ "5: Reschedule an Appointment \n"
+				+ "6: Cancel an Appointment \n"
+				+ "7: View Past Appointment Outcome Records \n"
+                + "8: Logout");
+		Scanner sc = new Scanner(System.in);
+		int option = sc.nextInt();
+		switch(option) {
+			case 1 -> DoctorMedicalRecord.viewMedicalRecords();
+			case 2 -> DoctorMedicalRecord.updateMedicalRecords();
+			case 3 -> DoctorScheduleService.viewPersonalSchedule();
+			case 4 -> doctorScheduleService.setAvailability();
+			case 5 -> doctorAppointmentService.AppointmentRequest();
+			case 6 -> doctorAppointmentService.viewUpcomingAppointments();
+			case 7 -> doctorAppointmentService.recordAppointmentOutcome();
+			default -> System.out.println("Invalid option. Please try again."); 
     }
 
     // Method to view the encapsulated medical record
