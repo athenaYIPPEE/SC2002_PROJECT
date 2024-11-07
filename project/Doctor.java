@@ -19,7 +19,7 @@ public class Doctor extends AllUsers{
         	this.slots = new ArrayList<>();
 	}
 	
-	public void displaymenu() {
+	public void displayMenu() {
 		System.out.println("Menu: \n"
 				+ "1: View Patient Medical Records \n"
 				+ "2: Update Patient Medical Records \n"

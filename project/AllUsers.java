@@ -62,7 +62,7 @@ public class AllUsers {
 	{
         switch (this.getRole()) {
             case "Patient":
-                ((Patient) this).displayMenu();
+                ((Patients) this).displayMenu();
                 break;
             case "Doctor":
                 ((Doctor) this).displayMenu();
