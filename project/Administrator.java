@@ -6,7 +6,7 @@ public class Administrator extends AllUsers {
     private StaffManager staffManager;
     private InventoryManager inventoryManager;
 
-    public Administrator(String hospitalId, String password, List<Medication> inventory) {
+    public Administrator(String hospitalId, String password, MedicationStock inventory) {
         super(hospitalId, password, "Administrator");
         this.staffManager = new StaffManager();
         this.inventoryManager = new InventoryManager(inventory);
@@ -27,11 +27,11 @@ public class Administrator extends AllUsers {
         }
     }
 
-    public void manageInventory(String medicationName, int newStock) {
-        inventoryManager.manageInventory(medicationName, newStock);
+    public void manageInventory(String medicationName) {
+        inventoryManager.manageInventory(medicationName);
     }
 
     public void approveReplenishmentRequest(String medicationName) {
-        inventoryManager.approveReplenishmentRequest(medicationName);
+        inventoryManager.submitReplenishmentRequest(medicationName);
     }
 }

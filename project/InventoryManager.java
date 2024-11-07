@@ -45,9 +45,10 @@ public class InventoryManager {
                     System.out.println("How much stock?");
                     int amt = scanner.nextInt();
                     inventory.removeStock(medication, amt);
+                } else {
+                    System.out.println("Invalid selection.");
                 }
-                System.out.println("Updated stock for " + medicationName + ": " + newStock);
-                return;
+                System.out.println("Updated stock for " + medicationName + ": " + inventory.getStock(medication));
             }
         }
         System.out.println("Medication not found.");
