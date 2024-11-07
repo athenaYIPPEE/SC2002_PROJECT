@@ -7,7 +7,7 @@ public class PatientsAppointments extends Patients {
     
     // Constructor
     public PatientsAppointments(String phoneNumber, String emailAddress) {
-        super(phoneNumber, emailAddress);
+        super(phoneNumber, emailAddress, "Alice Brown", "1980-05-14", "Female", "1234567890", "alice.brown@example.com", "A+");
     }
 
     public void scheduleAppointment(Appointment appointment) {

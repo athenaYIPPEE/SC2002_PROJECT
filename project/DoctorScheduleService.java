@@ -8,7 +8,7 @@ public class DoctorScheduleService {
 		this.availableSlots = new ArrayList<>();
 	}
 	
-	public void viewPersonalScehdule() {
+	public void viewPersonalSchedule() {
 		System.out.println("Upcoming Appointments:");
         	if (appointments.isEmpty()) {
             		System.out.println("No upcoming appointments.");

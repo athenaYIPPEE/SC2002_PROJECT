@@ -31,9 +31,9 @@ public class Doctor extends AllUsers{
 		Scanner sc = new Scanner(System.in);
 		int option = sc.nextInt();
 		switch(option) {
-			case 1 -> doctorMedicalRecord.viewMedicalRecords();
-			case 2 -> doctorMedicalRecord.updateMedicalRecords();
-			case 3 -> doctorScheduleService.viewPersonalSchedule();
+			case 1 -> DoctorMedicalRecord.viewMedicalRecords();
+			case 2 -> DoctorMedicalRecord.updateMedicalRecords();
+			case 3 -> DoctorScheduleService.viewPersonalSchedule();
 			case 4 -> doctorScheduleService.setAvailability();
 			case 5 -> doctorAppointmentService.AppointmentRequest();
 			case 6 -> doctorAppointmentService.viewUpcomingAppointments();

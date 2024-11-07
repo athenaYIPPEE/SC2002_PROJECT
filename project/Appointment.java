@@ -10,17 +10,18 @@ public class Appointment {
     private String timeSlot;
     private String status; // confirmed, canceled, completed, etc.
     private String serviceType;
-    private List<Medication> prescribedMedications; 
+    private Medication prescribedMedications; 
     private String consultationNotes;
 
     // Constructor
-    public Appointment(String appointmentId, String doctorName, String patientId, Date appointmentDate, String timeSlot, String status) {
+    public Appointment(String appointmentId, String doctorName, String patientId, Date appointmentDate, String timeSlot, String status, String serviceType) {
         this.appointmentId = appointmentId;
         this.doctorName = doctorName;
         this.patientId = patientId;
         this.appointmentDate = appointmentDate;
         this.timeSlot = timeSlot;
         this.status = status;
+        this.serviceType = serviceType;
     }
 
     // Getters and Setters
@@ -67,13 +68,13 @@ public class Appointment {
                 ", Time Slot: " + timeSlot + ", Status: " + status + "]";
     }
 
-    public void setServiceType(serviceType){
+    public void setServiceType(StringserviceType){
         this.serviceType = serviceType;
     }
     
-    public void addMedication(Medication medication) {
+    /*public void addMedication(Medication medication) {
         this.prescribedMedications.add(medication);
-    }
+    } */
     
     public void recordConsultationNotes(String notes) {
     	if (this.consultationNotes.isEmpty()) {

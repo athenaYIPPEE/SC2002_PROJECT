@@ -10,7 +10,7 @@ public class DoctorMedicalRecord {
 		this.patientsMap = new HashMap<>();
 	}
 	
-	public void viewMedicalRecords() {
+	public static void viewMedicalRecords() {
 		if (patientsMap.isEmpty()) {
 			System.out.println("No patients available.");
 			return;
