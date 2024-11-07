@@ -23,40 +23,23 @@ public class InventoryManager {
 
     // Submit replenishment request
     public void submitReplenishmentRequest(String medicationName) {
-        for (MedicationName medication : MedicationName.values()) {
+        boolean found = false;
+    	for (MedicationName medication : MedicationName.values()) {
             if (medication.getName().equals(medicationName) && inventory.getStock(medication) < lowStock) {
-                System.out.println("How much stock?");
+                found = true;
+            	System.out.println("How much stock to add to " + medicationName);
                 Scanner scanner = new Scanner(System.in);
                 int amt = scanner.nextInt();
                 ReplenishmentRequest request = new ReplenishmentRequest(medicationName, amt);
                 replenishmentRequest.add(request);    
                 System.out.println("Replenishment request submitted for medication: " + medicationName);
             }
+           
         }
-        System.out.println("Medication not found or stock is sufficient.");
+    	if (found == false) System.out.println("Medication not found or stock is sufficient.");
+        
     }
 
     // Manage medication inventory
-    public void manageInventory(String medicationName) {
-        for (MedicationName medication : MedicationName.values()) {
-            if (medication.getName().equals(medicationName)) {
-                System.out.println("1. Add   2. Remove");
-                Scanner scanner = new Scanner(System.in);
-                int choice = scanner.nextInt();
-                if(choice == 1){
-                    System.out.println("How much stock?");
-                    int amt = scanner.nextInt();
-                    inventory.addStock(medication, amt);
-                } else if (choice == 2) {
-                    System.out.println("How much stock?");
-                    int amt = scanner.nextInt();
-                    inventory.removeStock(medication, amt);
-                } else {
-                    System.out.println("Invalid selection.");
-                }
-                System.out.println("Updated stock for " + medicationName + ": " + inventory.getStock(medication));
-            }
-        }
-        System.out.println("Medication not found.");
-    }
+  
 }

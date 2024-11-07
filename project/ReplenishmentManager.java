@@ -14,8 +14,8 @@ public class ReplenishmentManager {
             System.out.println(InventoryManager.replenishmentRequest.get(i));
             ReplenishmentRequest request = InventoryManager.replenishmentRequest.get(i);
             Scanner scanner = new Scanner(System.in);
-            int choice = scanner.nextInt();
             System.out.println("1. Approve   2. Reject");
+            int choice = scanner.nextInt();
             switch (choice){
                 case 1: 
                     System.out.println("Replenishment Approved.");
@@ -30,10 +30,12 @@ public class ReplenishmentManager {
                     }
                     inventory.addStock(medicationEnum, replenishmentAmount);
                     InventoryManager.replenishmentRequest.remove(i);
+                    i--;
                     break;
                 case 2:
                     System.out.println("Replenishment Rejected.");
                     InventoryManager.replenishmentRequest.remove(i);
+                    i--;
                     break;
                 default:
                     System.out.println("Invalid Choice."); 
