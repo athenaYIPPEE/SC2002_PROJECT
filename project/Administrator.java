@@ -32,7 +32,7 @@ public class Administrator extends AllUsers {
         case 2 -> removeStaff(); 
         case 3 -> viewAppointments(List<Appointment> appointment); 
         case 4 -> Pharmacist.manageInventory(String medicationName, int newStock); 
-        case 5 -> approveReplenishmentRequest(String medicationName); 
+        case 5 -> approveReplenishmentRequest(); 
         case 6 -> logout(); 
     } 
     } 
@@ -59,7 +59,7 @@ public class Administrator extends AllUsers {
         inventoryManager.manageInventory(medicationName, newStock); 
     } 
  
-    public void approveReplenishmentRequest(String medicationName) { 
-        inventoryManager.approveReplenishmentRequest(medicationName); 
+    public void approveReplenishmentRequest() { 
+        ReplenishmentManager.approveReplenishmentRequest(); 
     } 
 }
