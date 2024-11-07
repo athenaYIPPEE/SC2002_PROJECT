@@ -6,6 +6,7 @@ import java.util.Map;
 public class MedicationStock {
 
 	private Map<MedicationName, Integer> stock;
+    private Map<MedicationName, Integer> alert;
 	
 	public MedicationStock() {
         this.stock = new HashMap<>();
@@ -13,7 +14,12 @@ public class MedicationStock {
 	    for (MedicationName medication : MedicationName.values()) {
 	        stock.put(medication, 0);
 	    }
+        this.alert = new HashMap<>();
+        for (MedicationName medication : MedicationName.values()) {
+	        alert.put(medication, 50);
+	    }
     }
+
 	
 	public void addStock(MedicationName medication, int amount) {
         if (stock.containsKey(medication)) {
@@ -41,5 +47,12 @@ public class MedicationStock {
 	public int getStock(MedicationName medication) {
         return stock.getOrDefault(medication, 0); // Returns 0 if not found
     }
-	
+
+    public void setAlert(MedicationName medication, int level){
+        if (alert.containsKey(medication)) {
+            alert.put(medication, level);
+        } else {
+            System.out.println("Invalid Choice.");
+        }
+    }
 }

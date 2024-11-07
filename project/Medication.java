@@ -3,11 +3,13 @@ package project;
 public class Medication {
     private MedicationName name;  // Medication name from enum
     private String status;        // Status, defaulting to "pending"
+    public int lowLevel;
 
     // Constructor to initialize Medication with a name and an optional status
     public Medication(MedicationName name) {
         this.name = name;
         this.status = "pending";  // Default status is "pending"
+        this.lowLevel = 50;
     }
 
     // Getter for the medication name
