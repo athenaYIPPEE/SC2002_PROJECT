@@ -4,12 +4,20 @@ import java.util.List;
 
 public class Administrator extends AllUsers {
     private StaffManager staffManager;
-    private InventoryManager inventoryManager;
+    private InventoryMonitor inventoryManager;
 
     public Administrator(String hospitalId, String password, MedicationStock inventory) {
         super(hospitalId, password, "Administrator");
         this.staffManager = new StaffManager();
         this.inventoryManager = new InventoryManager(inventory);
+    }
+
+    public void displayMenu(){
+        /*view n manage staff
+         * view appt details
+         * view n manage med inventory
+         * approve replenishment req
+         */
     }
 
     public void addStaff(AllUsers staff) {
@@ -31,7 +39,4 @@ public class Administrator extends AllUsers {
         inventoryManager.manageInventory(medicationName);
     }
 
-    public void approveReplenishmentRequest(String medicationName) {
-        inventoryManager.submitReplenishmentRequest(medicationName);
-    }
-}
+

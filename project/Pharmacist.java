@@ -4,12 +4,12 @@ import java.util.List;
 
 public class Pharmacist extends AllUsers {
     private AppointmentManager appointmentManager;
-    private InventoryManager inventoryManager;
+    private InventoryMonitor inventoryManager;
 
     public Pharmacist(String hospitalId, String password, List<Medication> inventory) {
         super(hospitalId, password, "Pharmacist");
         this.appointmentManager = new AppointmentManager();
-        this.inventoryManager = new InventoryManager(inventory);
+        this.inventoryManager = new InventoryMonitor(inventory);
     }
 
     public void viewAppointmentOutcome(Appointment appointment) {
