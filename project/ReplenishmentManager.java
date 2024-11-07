@@ -1,5 +1,6 @@
 package project;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReplenishmentManager {
@@ -18,10 +19,10 @@ public class ReplenishmentManager {
                 System.out.println("Replenishment approved for " + medicationName + ". New stock: " + restockedAmount);
                 return;
             }
+            ArrayList<InventoryManager> list = InventoryManager.replenishmentRequest;
         }
         System.out.println("Replenishment request for " + medicationName + " not found.");
     }
 
-    //doctors prescribe medication to a certain patient, then pharmacist use this class to read the prescription order and give out meds to patient
 }
 

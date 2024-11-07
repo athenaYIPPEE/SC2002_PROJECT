@@ -1,10 +1,12 @@
 package project;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InventoryManager {
     private MedicationStock inventory;
     private Medication medication;
+    static ArrayList<InventoryManager> replenishmentRequest = new ArrayList<>();
     static final int lowStock = 10;
 
     public InventoryManager(MedicationStock inventory) {
@@ -14,15 +16,18 @@ public class InventoryManager {
     // View medication inventory
     public void viewInventory() {
         System.out.println("Medication Inventory:");
-        for (Medication medication : Medication.values()) {
+        for (MedicationName medication : MedicationName.values()) {
             System.out.println(medication.getName() + " " + "Stock: " + inventory.getStock(medication));
         }
     }
 
     // Submit replenishment request
     public void submitReplenishmentRequest(String medicationName) {
-        for (Medication medication : Medication.values()) {
+        for (MedicationName medication : MedicationName.values()) {
             if (medication.getName().equals(medicationName) && inventory.getStock(medication) < lowStock) {
+                System.out.println("How much stock?");
+                int amt = scanner.nextInt();
+                    
                 System.out.println("Replenishment request submitted for medication: " + medicationName);
                 return;
             }
@@ -32,7 +37,7 @@ public class InventoryManager {
 
     // Manage medication inventory
     public void manageInventory(String medicationName) {
-        for (Medication medication : Medication.values()) {
+        for (MedicationName medication : MedicationName.values()) {
             if (medication.getName().equals(medicationName)) {
                 System.out.println("1. Add   2. Remove");
                 Scanner scanner = new Scanner(System.in);
