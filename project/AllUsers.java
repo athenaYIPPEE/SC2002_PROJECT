@@ -14,7 +14,7 @@ public class AllUsers {
         this.role = role;
     }
     
-    private static HashMap<String, String> user = new HashMap<>(); //smth like a dictionary, <id, password>
+    protected static HashMap<String, String> user = new HashMap<>(); //smth like a dictionary, <id, password>
 
     public String getHospitalId() {
         return hospitalId;

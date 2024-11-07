@@ -23,23 +23,21 @@ public class Administrator extends AllUsers {
     		    + "4: View and Manage Medication Inventory  \n" 
     		    + "5: Approve Replenishment Requests \n" 
     		    + "6: Logout \n"); 
-    }
     
     Scanner sc = new Scanner(System.in);
     int option = sc.nextInt();
     switch(option)
-        {
-        case 1 : 
-            addStaff();
-            break;
-        case 2 -> removeStaff();
-        case 3 -> viewAppointments(List<Appointment> appointment);
-        case 4 -> Pharmacist.manageInventory(String medicationName, int newStock);
-        case 5 -> approveReplenishmentRequest(String medicationName);
-        case 6 -> logout();
-        }
+    {
+    case 1 : 
+    	addStaff();
+    	break;
+    case 2 -> removeStaff();
+    case 3 -> viewAppointments(List<Appointment> appointment);
+    case 4 -> Pharmacist.manageInventory(String medicationName, int newStock);
+    case 5 -> approveReplenishmentRequest(String medicationName);
+    case 6 -> logout();
     }
-    
+
     public void addStaff() {
         staffManager.addStaff();
     }
