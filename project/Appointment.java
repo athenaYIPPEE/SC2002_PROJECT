@@ -68,7 +68,7 @@ public class Appointment {
                 ", Time Slot: " + timeSlot + ", Status: " + status + "]";
     }
 
-    public void setServiceType(StringserviceType){
+    public void setServiceType(String serviceType){
         this.serviceType = serviceType;
     }
     

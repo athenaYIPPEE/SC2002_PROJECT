@@ -8,7 +8,7 @@ public class AppointmentManager {
     public void viewAppointmentOutcome(Appointment appointment) {
         System.out.println("Viewing appointment outcome for prescription processing:");
         System.out.println(appointment);
-        List<Medication> prescribedMedications = appointment.getPrescribedMedications();
+        Medication prescribedMedications = appointment.getPrescribedMedications();
         for (Medication medication : prescribedMedications) {
             System.out.println("Medication: " + medication.getName() + ", Status: " + medication.getStatus());
         }
