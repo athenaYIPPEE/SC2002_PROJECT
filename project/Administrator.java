@@ -1,23 +1,53 @@
 package project;
 
-import java.util.List;
+
+import java.util.*;
 
 public class Administrator extends AllUsers {
     private StaffManager staffManager;
     private InventoryManager inventoryManager;
 
-    public Administrator(String hospitalId, String password, MedicationStock inventory) {
+    public Administrator(String hospitalId, String password, List<Medication> inventory) {
         super(hospitalId, password, "Administrator");
         this.staffManager = new StaffManager();
         this.inventoryManager = new InventoryManager(inventory);
     }
-
-    public void addStaff(AllUsers staff) {
-        staffManager.addStaff(staff);
+    
+    public void displayMenu()
+    {
+    	
+    	System.out.println("Menu: \n" 
+    		    + "1: Add Staff \n" 
+    		    + "2: Remove Staff \n" 
+    		    + "3: View Appointments details \n" 
+    		    + "4: View and Manage Medication Inventory  \n" 
+    		    + "5: Approve Replenishment Requests \n" 
+    		    + "6: Logout \n"); 
+    }
+    
+    Scanner sc = new Scanner(System.in);
+    int option = sc.nextInt();
+    switch(option)
+    {
+    case 1 : 
+    	addStaff();
+    	break;
+    case 2 -> removeStaff();
+    case 3 -> viewAppointments(List<Appointment> appointment);
+    case 4 -> Pharmacist.manageInventory(String medicationName, int newStock);
+    case 5 -> approveReplenishmentRequest(String medicationName);
+    case 6 -> logout();
     }
 
-    public void removeStaff(String hospitalId) {
-        staffManager.removeStaff(hospitalId);
+    public void addStaff() {
+        staffManager.addStaff();
+    }
+
+    
+    public void removeStaff() {
+    	staffManager.removeStaff();
+        
+        
     }
 
     public void viewAppointments(List<Appointment> appointments) {
@@ -27,11 +57,11 @@ public class Administrator extends AllUsers {
         }
     }
 
-    public void manageInventory(String medicationName) {
-        inventoryManager.manageInventory(medicationName);
+    public void manageInventory(String medicationName, int newStock) {
+        inventoryManager.manageInventory(medicationName, newStock);
     }
 
     public void approveReplenishmentRequest(String medicationName) {
-        inventoryManager.submitReplenishmentRequest(medicationName);
+        inventoryManager.approveReplenishmentRequest(medicationName);
     }
 }
