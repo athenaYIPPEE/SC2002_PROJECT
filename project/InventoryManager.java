@@ -54,7 +54,17 @@ public class InventoryManager {
     }
 
     public void alertUpdate(){
-
+        System.out.println("Which Medication?");
+        Scanner scanner = new Scanner(System.in);
+        String choice = scanner.nextLine();
+        MedicationName medicationEnum = null;
+        for (MedicationName medication : MedicationName.values()) {
+            if (medication.getName().equals(choice)) {
+                medicationEnum = medication;}
+            }
+        System.out.println("New Alert Level?");
+        int level = scanner.nextInt();
+        inventory.setAlert(medicationEnum, level);
     }
 
 
