@@ -21,5 +21,7 @@ public class ReplenishmentManager {
         }
         System.out.println("Replenishment request for " + medicationName + " not found.");
     }
+
+    //doctors prescribe medication to a certain patient, then pharmacist use this class to read the prescription order and give out meds to patient
 }
 
