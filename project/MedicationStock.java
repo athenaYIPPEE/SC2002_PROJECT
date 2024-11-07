@@ -5,17 +5,17 @@ import java.util.Map;
 
 public class MedicationStock {
 
-	private Map<Medication, Integer> stock;
+	private Map<MedicationName, Integer> stock;
 	
 	public MedicationStock() {
         this.stock = new HashMap<>();
 	    // Initialize stock with each medication and a default quantity of 0
-	    for (Medication medication : Medication.values()) {
+	    for (MedicationName medication : MedicationName.values()) {
 	        stock.put(medication, 0);
 	    }
     }
 	
-	public void addStock(Medication medication, int amount) {
+	public void addStock(MedicationName medication, int amount) {
         if (stock.containsKey(medication)) {
             stock.put(medication, stock.get(medication) + amount);
             System.out.println("Added " + amount + " units to " + medication.getName() + ". Current stock: " + stock.get(medication));
@@ -24,7 +24,7 @@ public class MedicationStock {
         }
     }
 	
-	public void removeStock(Medication medication, int amount) {
+	public void removeStock(MedicationName medication, int amount) {
         if (stock.containsKey(medication)) {
             int currentStock = stock.get(medication);
             if (amount <= currentStock) {
@@ -38,7 +38,7 @@ public class MedicationStock {
         }
     }
 	
-	public int getStock(Medication medication) {
+	public int getStock(MedicationName medication) {
         return stock.getOrDefault(medication, 0); // Returns 0 if not found
     }
 	
