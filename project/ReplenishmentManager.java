@@ -1,28 +1,45 @@
 package project;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class ReplenishmentManager {
-    private List<Medication> inventory;
+    private MedicationStock inventory;
 
-    public ReplenishmentManager(List<Medication> inventory) {
+    public ReplenishmentManager(MedicationStock inventory) {
         this.inventory = inventory;
     }
 
-    // Approve replenishment requests from pharmacists
-    public void approveReplenishmentRequest(String medicationName) {
-        for (Medication medication : inventory) {
-            if (medication.getName().equals(medicationName)) {
-                int restockedAmount = medication.getLowStockAlertLevel() + 50; // Example replenishment amount
-                medication.setStock(restockedAmount);
-                System.out.println("Replenishment approved for " + medicationName + ". New stock: " + restockedAmount);
-                return;
-            }
-            ArrayList<InventoryManager> list = InventoryManager.replenishmentRequest;
+    public void approveReplenishmentRequest(){
+        for (int i = 0; i < InventoryManager.replenishmentRequest.size(); i++){
+            System.out.println(InventoryManager.replenishmentRequest.get(i));
+            ReplenishmentRequest request = InventoryManager.replenishmentRequest.get(i);
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+            System.out.println("1. Approve   2. Reject");
+            switch (choice){
+                case 1: 
+                    System.out.println("Replenishment Approved.");
+                    String medicationName = request.getName();
+                    int replenishmentAmount = request.getQuantity();
+                    MedicationName medicationEnum = null;
+                    for (MedicationName medication : MedicationName.values()) {
+                        if (medication.getName().equals(medicationName)) {
+                            medicationEnum = medication;
+                            break;
+                        }
+                    }
+                    inventory.addStock(medicationEnum, replenishmentAmount);
+                    InventoryManager.replenishmentRequest.remove(i);
+                    break;
+                case 2:
+                    System.out.println("Replenishment Rejected.");
+                    InventoryManager.replenishmentRequest.remove(i);
+                    break;
+                default:
+                    System.out.println("Invalid Choice."); 
+                    break;
+                } 
         }
-        System.out.println("Replenishment request for " + medicationName + " not found.");
     }
 
 }
-

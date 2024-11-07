@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class InventoryManager {
     private MedicationStock inventory;
     private Medication medication;
-    static ArrayList<InventoryManager> replenishmentRequest = new ArrayList<>();
+    static ArrayList<ReplenishmentRequest> replenishmentRequest = new ArrayList<>();
     static final int lowStock = 10;
 
     public InventoryManager(MedicationStock inventory) {
@@ -26,10 +26,11 @@ public class InventoryManager {
         for (MedicationName medication : MedicationName.values()) {
             if (medication.getName().equals(medicationName) && inventory.getStock(medication) < lowStock) {
                 System.out.println("How much stock?");
+                Scanner scanner = new Scanner(System.in);
                 int amt = scanner.nextInt();
-                    
+                ReplenishmentRequest request = new ReplenishmentRequest(medicationName, amt);
+                replenishmentRequest.add(request);    
                 System.out.println("Replenishment request submitted for medication: " + medicationName);
-                return;
             }
         }
         System.out.println("Medication not found or stock is sufficient.");
