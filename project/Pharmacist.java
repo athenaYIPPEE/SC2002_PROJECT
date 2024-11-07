@@ -24,7 +24,7 @@ public class Pharmacist extends All_users {
     	
     	
     	
-    System.out.println("Menu: \n" 
+        System.out.println("Menu: \n" 
     		  
     		    + "1: View Appointment Outcome Record \n" 
     		    + "2: Update Prescription Status \n" 
