@@ -11,12 +11,16 @@ public class Doctor extends AllUsers{
 	private HashMap<String, Patient> patientsMap;
 	private List<Appointment> appointments; //appointment objects
 	private List<String> slots;
+	private int age;
+	private Character gender;
 	
-	public Doctor(String hospitalId, String password, String role) {
+	public Doctor(String hospitalId, String password, String role, int age, char gender) {
 		super(hospitalId, password, role);
 		this.patientsMap = new HashMap<>();
 		this.appointments = new ArrayList<>();
         	this.slots = new ArrayList<>();
+		this.age = age;
+		this.gender = gender;
 	}
 	
 	public void displaymenu() {
