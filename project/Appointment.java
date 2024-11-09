@@ -1,30 +1,28 @@
 package project;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Appointment {
     private String appointmentId;
     private String doctorName;
     private String patientId;
-    private LocalDate appointmentDate;
+    private LocalDateTime appointmentTime;
     private String status; // confirmed, canceled, completed, etc.
     private String serviceType;
     private Medication prescribedMedications; 
     protected ArrayList<Medication> prescribedMedicationList;
     private String consultationNotes;
-    private String timeSlot;
 
     // Constructor
-    public Appointment(String appointmentId, String doctorName, String patientId, LocalDate appointmentDate, String status, String serviceType, String timeSlot) {
+    public Appointment(String appointmentId, String doctorName, String patientId, LocalDateTime appointmentDate, String status, String serviceType, String timeSlot) {
         this.appointmentId = appointmentId;
         this.doctorName = doctorName;
         this.patientId = patientId;
-        this.appointmentDate = appointmentDate;
+        this.appointmentTime = appointmentTime;
         this.status = status;
         this.serviceType = serviceType;
         this.prescribedMedicationList = new ArrayList<>();
-        this.timeSlot = timeSlot;
     }
 
     // Getters and Setters
@@ -40,20 +38,12 @@ public class Appointment {
         return patientId;
     }
 
-    public LocalDate getAppointmentDate() {
-        return appointmentDate;
+    public LocalDateTime getAppointmentDate() {
+        return appointmentTime;
     }
 
-    public void setAppointmentDate(LocalDate appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
-
-    public String getTimeSlot() {
-        return timeSlot;
-    }
-
-    public void setTimeSlot(String timeSlot) {
-        this.timeSlot = timeSlot;
+    public void setAppointmentDate(LocalDateTime appointmentDate) {
+        this.appointmentTime= appointmentDate;
     }
 
     public String getStatus() {
@@ -67,8 +57,8 @@ public class Appointment {
     @Override
     public String toString() {
         return "Appointment [Appointment ID: " + appointmentId + ", Doctor: " + doctorName + 
-                ", Patient ID: " + patientId + ", Date: " + appointmentDate + 
-                ", Time Slot: " + timeSlot + ", Status: " + status + "]";
+                ", Patient ID: " + patientId + ", Date: " + appointmentTime + 
+                 ", Status: " + status + "]";
     }
 
     public void setServiceType(String serviceType){

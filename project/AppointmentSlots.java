@@ -8,41 +8,64 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class AppointmentSlots {
-    private static List<LocalDateTime> slots;
+    private List<LocalDateTime> slots;
         private String doctorName;
     
         public AppointmentSlots(String doctorName){
             this.doctorName = doctorName;
             this.slots = new ArrayList<>();
         }
-    
-        public static void viewAppointmentSlots(String doctorName){
-            for (int i = 0; i < Doctor.doctors.size(); i++){
-                if (doctorName.equals(Doctor.doctors.get(i).getName())){
-                    System.out.println("Available Appointment Slots: ");
-                    for (int j = 0; j < Doctor.appointmentSlots.size(); j++){
-                        System.out.println(Doctor.appointmentSlots.get(j));
-                    }
+
+        // Method to add a slot
+        public void addSlot(LocalDateTime slot) {
+            this.slots.add(slot);
+        }
+
+        // Get the slots for this doctor
+        public List<LocalDateTime> getSlots() {
+            return this.slots;
+        }
+
+        public List<LocalDateTime> getSlotsForDate(LocalDate date) {
+            List<LocalDateTime> slotsForDate = new ArrayList<>();
+            for (LocalDateTime slot : slots) {
+                if (slot.toLocalDate().isEqual(date)) {
+                    slotsForDate.add(slot);
                 }
             }
-    }
+            return slotsForDate;
+        }
+    
+        public static void viewAppointmentSlots(String doctorName) {
+            for (Doctor doctor : Doctor.doctors) {
+                if (doctorName.equals(doctor.getName())) {
+                    AppointmentSlots appointmentSlots = doctor.getAppointmentSlots(); // Get this doctor's AppointmentSlots
+                    System.out.println("Available Appointment Slots for " + doctorName + ": ");
+                    for (LocalDateTime slot : appointmentSlots.getSlots()) {
+                        System.out.println(slot); // Print each slot
+                    }
+                    return;
+                }
+            }
+            System.out.println("Doctor not found.");
+        }
 
-        public static void printTimeSlotsForDate(LocalDate date) {
+        public void printTimeSlotsForDate(LocalDateTime date) {
             boolean found = false;
-            
+    
             for (LocalDateTime slot : slots) {
                 // Compare the date part of LocalDateTime with the input date
-                if (slot.toLocalDate().isEqual(date)) {
+                if (slot.toLocalDate().isEqual(date.toLocalDate())) {
                     // Print the time (hours and minutes) part of LocalDateTime
                     System.out.println(slot.toLocalTime());
                     found = true;
                 }
             }
-
+    
             // If no slots found for the provided date
             if (!found) {
-                System.out.println("No time slots found for " + date);
+                System.out.println("No time slots found for " + date.toLocalDate());
             }
-    }
+        }
 
 }

@@ -13,7 +13,7 @@ public class Doctor extends AllUsers{
 		private HashMap<String, Patients> patientsMap;
 		private List<Appointment> appointments; //list of confirmed appts
 		private HashMap<Date, AppointmentSlots> personalSchedule; // personal schedule hashmap
-		protected static List<LocalDateTime> appointmentSlots; //list of avail appts
+		protected List<LocalDateTime> appointmentSlots; //list of avail appts
 		protected static List<String> doctorNames = new ArrayList<>();
 		protected static List<Doctor> doctors = new ArrayList<>();
 		
@@ -29,7 +29,27 @@ public class Doctor extends AllUsers{
 	
 		public static String getName() {
 			return name;
-	}
+		}
+
+		// Add availability for this doctor
+		public void setAvailability(Date date, List<LocalDateTime> availableSlots) {
+			AppointmentSlots appointmentSlots = new AppointmentSlots(name);
+			for (LocalDateTime slot : availableSlots) {
+				appointmentSlots.addSlot(slot);
+			}
+			personalSchedule.put(date, appointmentSlots);
+		}
+
+		// Get this doctor's AppointmentSlots for a given date
+		public AppointmentSlots getAppointmentSlots() {
+			// Retrieve the appointment slots for today's date (or a given date)
+			Date today = new Date(); // Today's date, for example
+			return personalSchedule.get(today); // Return the slots for today or specific date
+		}
+
+		public void addAppointment(Appointment appointment) {
+			this.appointments.add(appointment); // Add the appointment to the doctor's list
+		}
 	
 	public void displayMenu() {
 		System.out.println("Menu: \n"
