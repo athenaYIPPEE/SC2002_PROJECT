@@ -1,21 +1,22 @@
 package project;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Appointment {
     private String appointmentId;
     private String doctorName;
     private String patientId;
-    private LocalDateTime appointmentDate;
+    private LocalDate appointmentDate;
     private String status; // confirmed, canceled, completed, etc.
     private String serviceType;
     private Medication prescribedMedications; 
     protected ArrayList<Medication> prescribedMedicationList;
     private String consultationNotes;
+    private String timeSlot;
 
     // Constructor
-    public Appointment(String appointmentId, String doctorName, String patientId, LocalDateTime appointmentDate, String status, String serviceType) {
+    public Appointment(String appointmentId, String doctorName, String patientId, LocalDate appointmentDate, String status, String serviceType, String timeSlot) {
         this.appointmentId = appointmentId;
         this.doctorName = doctorName;
         this.patientId = patientId;
@@ -23,6 +24,7 @@ public class Appointment {
         this.status = status;
         this.serviceType = serviceType;
         this.prescribedMedicationList = new ArrayList<>();
+        this.timeSlot = timeSlot;
     }
 
     // Getters and Setters

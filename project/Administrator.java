@@ -28,7 +28,7 @@ public class Administrator extends AllUsers {
     { 
         case 1 -> addStaff(); 
         case 2 -> removeStaff(); 
-        case 3 -> viewAppointments(List<Appointment> appointment); 
+        case 3 -> viewAppointments(); 
         case 4 -> manageInventory(); 
         case 5 -> approveReplenishmentRequest(); 
         case 6 -> logout(); 
@@ -45,7 +45,7 @@ public class Administrator extends AllUsers {
          
     } 
  
-    public void viewAppointments(List<Appointment> appointments) { 
+    public void viewAppointments() { 
         System.out.println("Appointments List:"); 
         for (Appointment appointment : appointments) { 
             System.out.println(appointment); 
