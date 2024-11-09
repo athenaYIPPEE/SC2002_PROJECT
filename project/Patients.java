@@ -49,13 +49,22 @@ public class Patients extends AllUsers {
 			case 1 -> MedicalRecord.displayRecords(hospitalId);
 			case 2 -> {
                 Scanner scanner = new Scanner(System.in);
-                System.out.print("Enter new phone number: ");
-                String newPhone = scanner.nextLine();
-                System.out.print("Enter new email address: ");
-                String newEmail = scanner.nextLine();
-                PatientsContactInfo.updateContactInfo(this.name, newPhone, newEmail);
+                System.out.println("1. Update Phone Number   2. Update Email Address");
+                int choice = scanner.nextInt();
+                switch(choice){
+                    case 1: 
+                        PatientsContactInfo.updatePhoneNumber(contactInfo);
+                        break;
+                    case 2:
+                        PatientsContactInfo.updateEmailAddress(contactInfo);
+                        break;
+                    default:
+                        System.out.println("Invalid Choice.");
+                }
             }
-            case 3 -> 
+            case 3 -> {
+
+            }
 			default -> System.out.println("Invalid option. Please try again.");
 		}
     }
