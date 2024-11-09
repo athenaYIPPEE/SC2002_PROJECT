@@ -74,6 +74,7 @@ public class Administrator extends AllUsers {
     public void approveReplenishmentRequest() { 
         ReplenishmentManager.approveReplenishmentRequest(); 
     } 
+    //can add/remove stocks in 2 ways - inventorymanager(can add any amt they want) OR medicationstock(admin look at request made by pharmacist via replenishmentmanager and add the fixed amt of stock requested by pharma)
 
     public void logout()
     {
