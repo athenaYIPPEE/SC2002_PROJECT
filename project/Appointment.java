@@ -1,20 +1,22 @@
 package project;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Appointment {
     private String appointmentId;
     private String doctorName;
     private String patientId;
-    private Date appointmentDate;
+    private LocalDate appointmentDate;
     private String timeSlot;
     private String status; // confirmed, canceled, completed, etc.
     private String serviceType;
     private Medication prescribedMedications; 
+    protected ArrayList<Medication> prescribedMedicationList;
     private String consultationNotes;
 
     // Constructor
-    public Appointment(String appointmentId, String doctorName, String patientId, Date appointmentDate, String timeSlot, String status, String serviceType) {
+    public Appointment(String appointmentId, String doctorName, String patientId, LocalDate appointmentDate, String timeSlot, String status, String serviceType) {
         this.appointmentId = appointmentId;
         this.doctorName = doctorName;
         this.patientId = patientId;
@@ -22,6 +24,7 @@ public class Appointment {
         this.timeSlot = timeSlot;
         this.status = status;
         this.serviceType = serviceType;
+        this.prescribedMedicationList = new ArrayList<>();
     }
 
     // Getters and Setters
@@ -37,11 +40,11 @@ public class Appointment {
         return patientId;
     }
 
-    public Date getAppointmentDate() {
+    public LocalDate getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
+    public void setAppointmentDate(LocalDate appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 
@@ -72,9 +75,9 @@ public class Appointment {
         this.serviceType = serviceType;
     }
     
-    /*public void addMedication(Medication medication) {
-        this.prescribedMedications.add(medication);
-    } */
+    public void addMedication(Medication medication) {
+        prescribedMedicationList.add(medication);
+    } 
     
     public void recordConsultationNotes(String notes) {
     	if (this.consultationNotes.isEmpty()) {

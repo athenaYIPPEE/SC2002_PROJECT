@@ -1,7 +1,7 @@
 package project;
 
 import java.time.LocalDate;
-import java.util.Scanner;
+import java.util.*;
 
 public class DoctorAppointmentService {
 
@@ -55,11 +55,11 @@ public class DoctorAppointmentService {
         	String appointmentID = sc.nextLine();
 
         	for (Appointment appointment : appointments) {
-            		if (appointment.getID().equals(appointmentID)) {
+            		if (appointment.getAppointmentId().equals(appointmentID)) {
                 		//record date
             			LocalDate appointmentDate = LocalDate.now();
             			System.out.println(appointmentDate);
-            			appointment.setDate(appointmentDate);
+            			appointment.setAppointmentDate(appointmentDate);
             	
             			//service type
             			System.out.println("Select type of service provided:");
@@ -70,7 +70,8 @@ public class DoctorAppointmentService {
                 		sc.nextLine();
                 		if (serviceChoice >= 0 && serviceChoice < serviceType.values().length) {
                     			serviceType selectedService = serviceType.values()[serviceChoice];
-                    			appointment.setServiceType(selectedService); // ADD
+								String serviceTypeString = selectedService.name();
+                    			appointment.setServiceType(serviceTypeString); // ADD
                     			System.out.println("Service type recorded: " + selectedService);
                 		} else {
                     			System.out.println("Invalid service type selected.");
@@ -80,18 +81,20 @@ public class DoctorAppointmentService {
             			boolean addingMedications = true;
             			while (addingMedications) {
                     			System.out.println("Medication prescribed: ");
-                    			for (int i = 0; i < Medication.values().length; i++) {
-                    				System.out.println((i + 1) + ": " + Medication.values()[i].getName());
+                    			for (int i = 0; i < MedicationName.values().length; i++) {
+                    				System.out.println((i + 1) + ": " + MedicationName.values()[i].getName());
                 			}
-					int choice = scanner.nextInt();
-            				if (choice < 1 || choice > Medication.values().length) {
+						Scanner scanner = new Scanner(System.in);
+						int choice = scanner.nextInt();
+            				if (choice < 1 || choice > MedicationName.values().length) {
                 				System.out.println("Invalid choice. Please select a valid medication.");
                 				continue; // Restart the loop if the input is invalid
             				}
-					Medication medication = Medication.values()[choice - 1];
-                    			appointment.addMedication(medication); // Add the medication to the appointment
+					MedicationName medication = MedicationName.values()[choice - 1];
+                    		Medication prescribedMedication = new Medication(medication);
+							appointment.addMedication(prescribedMedication); // Add the medication to the appointment
 
-                    			System.out.println("Medication added: " + medicationName);    
+                    			System.out.println("Medication added: " + medication);    
 					System.out.println("Do you want to add another medication? (y/n)");
             				String response = scanner.next();
             				addingMedications = response.equalsIgnoreCase("y");

@@ -39,6 +39,7 @@ public class PatientsAppointments extends Patients {
     }
 
     // Method to view all appointments for the patient
+    @Override
     public void viewAppointments() {
         if (appointments.isEmpty()) {
             System.out.println("No appointments scheduled.");
