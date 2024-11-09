@@ -1,7 +1,7 @@
 package project;
 
 import java.util.HashMap;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,15 +9,26 @@ import java.util.List;
 
 public class Doctor extends AllUsers{
 
-	private HashMap<String, Patients> patientsMap;
-	private List<Appointment> appointments; //appointment objects
-	private HashMap<Date, AppointmentSlots> personalSchedule; // personal schedule hashmap
+	private static String name;
+		private HashMap<String, Patients> patientsMap;
+		private List<Appointment> appointments; //list of confirmed appts
+		private HashMap<Date, AppointmentSlots> personalSchedule; // personal schedule hashmap
+		protected static List<LocalDateTime> appointmentSlots; //list of avail appts
+		protected static List<String> doctorNames = new ArrayList<>();
+		protected static List<Doctor> doctors = new ArrayList<>();
+		
+		public Doctor(String hospitalId, String password, String role, String name) {
+			super(hospitalId, password, role);
+			this.patientsMap = new HashMap<>();
+			this.appointments = new ArrayList<>();
+			this.name = name;
+			this.appointmentSlots = new ArrayList<>();
+			doctors.add(this);
+			doctorNames.add(name);
+		}
 	
-	public Doctor(String hospitalId, String password, String role) {
-		super(hospitalId, password, role);
-		this.patientsMap = new HashMap<>();
-		this.appointments = new ArrayList<>();
-        	this.slots = new ArrayList<>();
+		public static String getName() {
+			return name;
 	}
 	
 	public void displayMenu() {
