@@ -62,6 +62,10 @@ public class Doctor extends AllUsers{
 			return appointments;  // Return the list of appointments
 		}
 
+		public void setPersonalSchedule(HashMap<Date, AppointmentSlots> schedule){
+			this.personalSchedule = schedule;
+		}
+
 	
 	public void displayMenu() {
 		System.out.println("Menu: \n"
