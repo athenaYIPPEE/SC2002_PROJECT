@@ -1,10 +1,11 @@
 package project;
 
 import java.util.Scanner;
+import java.util.*;
 
 public class DoctorMedicalRecord {
 
-	private HashMap<String, Patient> patientsMap;
+	private HashMap<String, Patients> patientsMap;
 	
 	public DoctorMedicalRecord() {
 		this.patientsMap = new HashMap<>();

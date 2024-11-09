@@ -1,6 +1,6 @@
 package project;
 
-public class PatientsContactInfo extends Patients {
+public class PatientsContactInfo {
 
     public PatientsContactInfo(String hospitalId, String password, String name, String dob, Character gender, String phoneNumber, String emailAddress, String bloodType) {
         super(hospitalId, password, name, dob, gender, phoneNumber, emailAddress, bloodType);

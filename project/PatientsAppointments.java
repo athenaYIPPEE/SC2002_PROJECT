@@ -3,16 +3,18 @@ package project;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class PatientsAppointments extends Patients {
+public class PatientsAppointments {
     
+    protected ArrayList<Appointment> PatientAppointmentList;
     // Constructor
+
     public PatientsAppointments(String phoneNumber, String emailAddress) {
-        super(phoneNumber, emailAddress, "Alice Brown", "1980-05-14", "Female", "1234567890", "alice.brown@example.com", "A+");
+        this.PatientAppointmentList = new ArrayList();
     }
 
     public void scheduleAppointment(Appointment appointment) {
-        this.appointments.add(appointment);
-        System.out.println("Appointment scheduled for " + this.getName());
+        PatientAppointmentList.add(appointment);
+        System.out.println("Appointment scheduled for " + appointment.getPatientId());
     }
 
     public void cancelAppointment(String appointmentId) {

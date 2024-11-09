@@ -1,15 +1,29 @@
 package project;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class MedicalRecord {
+    private String patientId;
+    private String patientName;
+    private String dob;
+    private Character gender;
     private String bloodType;
+    private String phoneNumber;
+    private String emailAddress;
     private ArrayList<String> diagnoses;
     private ArrayList<String> treatments;
+    
+    private static HashMap<String, MedicalRecord> patientRecordMap = new HashMap<>();
 
     // Constructor
-    public MedicalRecord(String bloodType) {
+    public MedicalRecord(String patientId, String patientName, String dob, char gender, String bloodType, String phoneNumber, String emailAddress) {
+        this.patientId = patientId;
         this.bloodType = bloodType;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.patientName = patientName;
+        this.dob = dob;
+        this.gender = gender;
         this.diagnoses = new ArrayList<>();
         this.treatments = new ArrayList<>();
     }
@@ -36,8 +50,25 @@ public class MedicalRecord {
         treatments.add(treatment);
     }
 
+    public static void addMedicalRecord(String patientId, MedicalRecord record) {
+        patientRecordMap.put(patientId, record);
+    }
+
+    // Static method to retrieve a medical record by patient ID
+    public static MedicalRecord getMedicalRecordById(String patientId) {
+        return patientRecordMap.get(patientId);
+    }
+
+    public static void displayAllRecords(String patientIdString) {
+        patientRecordMap.get(patientIdString).viewMedicalRecord();
+    }
+
     // Patients can view their medical record
     public void viewMedicalRecord() {
+        System.out.println("Patient ID: " + patientId);
+        System.out.println("Patient Name: " + patientName);
+        System.out.println("Patient DOB: " + dob);
+        System.out.println("Patient Gender: " + gender);
         System.out.println("Blood Type: " + bloodType);
         System.out.println("Diagnoses: " + diagnoses);
         System.out.println("Treatments: " + treatments);

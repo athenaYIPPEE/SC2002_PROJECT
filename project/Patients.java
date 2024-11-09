@@ -10,7 +10,8 @@ public class Patients extends AllUsers {
     protected String phoneNumber;
     protected String emailAddress;
     private Character gender;
-    private int age;
+    private String hospitalId;
+    private String bloodType;
     private MedicalRecord medicalRecord; // Encapsulated medical data
     private HashMap<String, Appointment> appointments; // List of appointments for the patient
 
@@ -18,14 +19,14 @@ public class Patients extends AllUsers {
     private static HashMap<String, Patients> patientList = new HashMap<>();
 
     // Constructor
-    public Patients(String hospitalId, String password, String name, String dob, Character gender, String phoneNumber, String emailAddress, String bloodType) {
+    public Patients(String hospitalId, String password) {
         super(hospitalId, password, "Patient");
         this.name = name;
         this.dob = dob;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
-        this.medicalRecord = new MedicalRecord(bloodType); // Initialize medical record
+        this.medicalRecord = new MedicalRecord(hospitalId, name, dob, gender, bloodType, phoneNumber, emailAddress); // Initialize medical record
         this.appointments = new HashMap<>(); // Initialize appointment map
     }
 
@@ -51,13 +52,13 @@ public class Patients extends AllUsers {
                 String newEmail = scanner.nextLine();
                 PatientsContactInfo.updateContactInfo(this.name, newPhone, newEmail);
             }
-			case 3 -> DoctorScheduleService.viewPersonalSchedule();
-			case 4 -> doctorScheduleService.setAvailability();
-			case 5 -> doctorAppointmentService.AppointmentRequest();
-			case 6 -> doctorAppointmentService.viewUpcomingAppointments();
-			case 7 -> doctorAppointmentService.recordAppointmentOutcome();
+            case 3 -> 
 			default -> System.out.println("Invalid option. Please try again.");
 		}
+    }
+
+    public String getPatientId(){
+        return hospitalId;
     }
 
     // Static method to initialize the patient list
@@ -72,11 +73,9 @@ public class Patients extends AllUsers {
         return patientList;
     }
 
-    // Method to find a patient by their name
-    public static Patients getPatientByName(String name) {
-        return patientList.get(name);
-    }
+    public void getMedicalRecord(){
 
+    }
     // Method to view the encapsulated medical record
     public void viewMedicalRecord() {
         System.out.println("Patient ID: " + this.getHospitalId());
