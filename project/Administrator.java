@@ -4,10 +4,12 @@ package project;
 import java.util.*; 
  
 public class Administrator extends AllUsers { 
+    private StaffManager staffManager;
  
     public Administrator(String hospitalId, String password) { 
         super(hospitalId, password, "Administrator");
-    } 
+        this.staffManager = new StaffManager(hospitalId, password, "Administrator");
+    }  
      
     public void displayMenu() 
     { 
@@ -34,12 +36,12 @@ public class Administrator extends AllUsers {
     } 
  
     public void addStaff() { 
-        StaffManager.addStaff(); 
+        staffManager.addStaff(); 
     } 
  
      
     public void removeStaff() { 
-        StaffManager.removeStaff(); 
+        staffManager.removeStaff(); 
          
     } 
  
