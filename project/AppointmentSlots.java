@@ -3,6 +3,7 @@
 
 package project;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -24,6 +25,24 @@ public class AppointmentSlots {
                     }
                 }
             }
+    }
+
+        public static void printTimeSlotsForDate(LocalDate date) {
+        boolean found = false;
+        
+        for (LocalDateTime slot : slots) {
+            // Compare the date part of LocalDateTime with the input date
+            if (slot.toLocalDate().isEqual(date)) {
+                // Print the time (hours and minutes) part of LocalDateTime
+                System.out.println(slot.toLocalTime());
+                found = true;
+            }
+        }
+
+        // If no slots found for the provided date
+        if (!found) {
+            System.out.println("No time slots found for " + date);
+        }
     }
 
 }

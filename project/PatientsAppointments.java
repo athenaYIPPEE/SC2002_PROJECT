@@ -4,8 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class PatientsAppointments {
-    
-    protected ArrayList<Appointment> PatientAppointmentList;
+
     // Constructor
 
     public PatientsAppointments(String phoneNumber, String emailAddress) {
