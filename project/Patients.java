@@ -9,25 +9,28 @@ public class Patients extends AllUsers {
     private String dob;
     protected String phoneNumber;
     protected String emailAddress;
-    private Character gender;
+    private String gender;
     private String hospitalId;
     private String bloodType;
     private MedicalRecord medicalRecord; // Encapsulated medical data
+    private PatientsContactInfo contactInfo;
     private HashMap<String, Appointment> appointments; // List of appointments for the patient
 
     // Static HashMap of all patients (name -> Patients object)
     private static HashMap<String, Patients> patientList = new HashMap<>();
 
     // Constructor
-    public Patients(String hospitalId, String password) {
+    public Patients(String hospitalId, String password, String role, String name, String dob, String gender, String phoneNumber, String emailAddress, String bloodType) {
         super(hospitalId, password, "Patient");
+        this.hospitalId = hospitalId;
         this.name = name;
         this.dob = dob;
         this.gender = gender;
+        this.bloodType = bloodType;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.medicalRecord = new MedicalRecord(hospitalId, name, dob, gender, bloodType, phoneNumber, emailAddress); // Initialize medical record
-        this.appointments = new HashMap<>(); // Initialize appointment map
+        this.contactInfo = new PatientsContactInfo(phoneNumber, emailAddress);
     }
 
     public void displayMenu(){
@@ -43,7 +46,7 @@ public class Patients extends AllUsers {
 		Scanner sc = new Scanner(System.in);
 		int option = sc.nextInt();
 		switch(option) {
-			case 1 -> DoctorMedicalRecord.viewMedicalRecords();
+			case 1 -> MedicalRecord.displayRecords(hospitalId);
 			case 2 -> {
                 Scanner scanner = new Scanner(System.in);
                 System.out.print("Enter new phone number: ");
@@ -73,18 +76,4 @@ public class Patients extends AllUsers {
         return patientList;
     }
 
-    public void getMedicalRecord(){
-
-    }
-    // Method to view the encapsulated medical record
-    public void viewMedicalRecord() {
-        System.out.println("Patient ID: " + this.getHospitalId());
-        System.out.println("Name: " + this.name);
-        System.out.println("Date of Birth: " + this.dob);
-        System.out.println("Gender: " + this.gender);
-        System.out.println("Phone Number: " + this.phoneNumber);
-        System.out.println("Email Address: " + this.emailAddress);
-        System.out.println("Medical Record:");
-        medicalRecord.viewMedicalRecord(); // Call method to display medical record details
-    }
 }

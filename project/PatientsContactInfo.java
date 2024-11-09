@@ -1,20 +1,32 @@
 package project;
 
-public class PatientsContactInfo {
+import java.util.*;
 
-    public PatientsContactInfo(String hospitalId, String password, String name, String dob, Character gender, String phoneNumber, String emailAddress, String bloodType) {
-        super(hospitalId, password, name, dob, gender, phoneNumber, emailAddress, bloodType);
+public class PatientsContactInfo {
+    private String phoneNumber;
+    private String emailAddress;
+    private HashMap<String, PatientsContactInfo> contactInfoMap = new HashMap<>();
+
+    public PatientsContactInfo(String phoneNumber, String emailAddress) {
+       this.phoneNumber = phoneNumber;
+       this.emailAddress = emailAddress;
     }
 
     // Static method to update contact information for a specific patient by name
-    public static void updateContactInfo(String name, String newPhoneNumber, String newEmailAddress) {
-        Patients patient = Patients.getPatientByName(name);
-        if (patient != null) {
-            patient.phoneNumber = newPhoneNumber;
-            patient.emailAddress = newEmailAddress;
+    public static void updatePhoneNumber() {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("New Phone Number: ");
+            String newPhoneNumber = scanner.nextLine();
+            this.phoneNumber = newPhoneNumber;
             System.out.println("Contact information updated for " + patient.name);
         } else {
             System.out.println("Patient with name " + name + " not found.");
         }
+    
+
+    public static void updateEmailAddress(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("New Email Address: ");
+        String newEmailAddress = scanner.nextLine();
     }
 }

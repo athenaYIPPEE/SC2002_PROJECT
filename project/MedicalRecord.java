@@ -6,7 +6,7 @@ public class MedicalRecord {
     private String patientId;
     private String patientName;
     private String dob;
-    private Character gender;
+    private String gender;
     private String bloodType;
     private String phoneNumber;
     private String emailAddress;
@@ -16,7 +16,7 @@ public class MedicalRecord {
     private static HashMap<String, MedicalRecord> patientRecordMap = new HashMap<>();
 
     // Constructor
-    public MedicalRecord(String patientId, String patientName, String dob, char gender, String bloodType, String phoneNumber, String emailAddress) {
+    public MedicalRecord(String patientId, String patientName, String dob, String gender, String bloodType, String phoneNumber, String emailAddress) {
         this.patientId = patientId;
         this.bloodType = bloodType;
         this.phoneNumber = phoneNumber;
@@ -59,7 +59,7 @@ public class MedicalRecord {
         return patientRecordMap.get(patientId);
     }
 
-    public static void displayAllRecords(String patientIdString) {
+    public static void displayRecords(String patientIdString) {
         patientRecordMap.get(patientIdString).viewMedicalRecord();
     }
 
@@ -69,6 +69,8 @@ public class MedicalRecord {
         System.out.println("Patient Name: " + patientName);
         System.out.println("Patient DOB: " + dob);
         System.out.println("Patient Gender: " + gender);
+        System.out.println("Phone Number: " + phoneNumber);
+        System.out.println("Email Address: " + emailAddress);
         System.out.println("Blood Type: " + bloodType);
         System.out.println("Diagnoses: " + diagnoses);
         System.out.println("Treatments: " + treatments);
