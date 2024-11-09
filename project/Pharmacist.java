@@ -1,7 +1,5 @@
 package project;
 
-
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,12 +15,9 @@ public class Pharmacist extends AllUsers {
     
     public void DisplayMenu()
     {
-    	
     	System.out.print("Select an Appointment");
     	Scanner sc = new Scanner(System.in);
     	int choice = sc.nextInt();
-    	
-    	
     	
         System.out.println("Menu: \n" 
     		  
@@ -32,13 +27,12 @@ public class Pharmacist extends AllUsers {
     		    + "4: Submit Replenishment Request \n"
     		    + "5: Logout \n"); 
         
-    	Scanner sc = new Scanner(System.in);
     	int option = sc.nextInt();
     	
     	switch(option)
     	{
-    	case 1 -> viewAppointmentOutcome(Appointment appointment);
-    	case 2 -> updatePrescriptionStatus(Appointment appointment, String medicationName);
+    	case 1 -> viewAppointmentOutcome();
+    	case 2 -> updatePrescriptionStatus();
     	case 3 -> viewInventory();
     	case 4 -> submitReplenishmentRequest(String medicationName);
     	case 5 -> logout();
@@ -47,12 +41,12 @@ public class Pharmacist extends AllUsers {
     	
     }
 
-    public void viewAppointmentOutcome(Appointment appointment) {
-        appointmentManager.viewAppointmentOutcome(appointment);
+    public void viewAppointmentOutcome() {
+        appointmentManager.viewAppointmentOutcome();
     }
 
-    public void updatePrescriptionStatus(Appointment appointment, String medicationName) {
-        appointmentManager.updatePrescriptionStatus(appointment, medicationName);
+    public void updatePrescriptionStatus() {
+        appointmentManager.updatePrescriptionStatus();
     }
 
     public void viewInventory() {
@@ -64,5 +58,10 @@ public class Pharmacist extends AllUsers {
         Scanner sc = new Scanner(System.in);
         String medicationName = sc.nextLine();
         InventoryMonitor.submitReplenishmentRequest(medicationName);
+    }
+
+    public void logout()
+    {
+
     }
 }
