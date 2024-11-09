@@ -23,14 +23,16 @@ public class InventoryMonitor {
         }
     
         // Submit replenishment request
-        public static void submitReplenishmentRequest(String medicationName) {
+        public static void submitReplenishmentRequest() {
+            System.out.print("Enter Mediaction Name");
+            Scanner sc = new Scanner(System.in);
+            String medicationName = sc.nextLine();
             boolean found = false;
             for (MedicationName medication : MedicationName.values()) {
                 if (medication.getName().equals(medicationName) && inventory.getStock(medication) < inventory.getAlert(medication)) {
                 found = true;
             	System.out.println("How much stock to add to " + medicationName);
-                Scanner scanner = new Scanner(System.in);
-                int amt = scanner.nextInt();
+                int amt = sc.nextInt();
                 ReplenishmentRequest request = new ReplenishmentRequest(medicationName, amt);
                 replenishmentRequest.add(request);    
                 System.out.println("Replenishment request submitted for medication: " + medicationName);
