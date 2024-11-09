@@ -19,6 +19,8 @@ public class PatientsContactInfo {
         String newPhoneNumber = scanner.nextLine();
         patient.phoneNumber = newPhoneNumber;
         MedicalRecord.updatePhoneNumber(newPhoneNumber);
+        System.out.println("Updated Phone Number: "+ newPhoneNumber);
+        System.out.println("Email Address" + patient.emailAddress);
 }
     public static void updateEmailAddress(PatientsContactInfo patient){
         Scanner scanner = new Scanner(System.in);
@@ -26,5 +28,7 @@ public class PatientsContactInfo {
         String newEmailAddress = scanner.nextLine();
         patient.emailAddress = newEmailAddress;
         MedicalRecord.updateEmailAddress(newEmailAddress);
+        System.out.println("Updated Email Address: "+ newEmailAddress);
+        System.out.println("Phone Number: " + patient.phoneNumber);
     }
 }

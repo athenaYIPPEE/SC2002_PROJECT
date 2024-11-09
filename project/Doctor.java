@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Doctor extends AllUsers{
 
-	private static String name;
+	private String name;
 		private HashMap<String, Patients> patientsMap;
 		protected List<Appointment> appointments; //list of confirmed appts
 		private HashMap<Date, AppointmentSlots> personalSchedule; // personal schedule hashmap
@@ -27,11 +27,14 @@ public class Doctor extends AllUsers{
 			this.appointments = new ArrayList<>();
 			this.name = name;
 			this.appointmentSlots = new ArrayList<>();
+			this.personalSchedule = new HashMap<>();
+			this.doctorScheduleService = new DoctorScheduleService(this);  
+			this.doctorAppointmentService = new DoctorAppointmentService();
 			doctors.add(this);
 			doctorNames.add(name);
 		}
 	
-		public static String getName() {
+		public String getName() {
 			return name;
 		}
 

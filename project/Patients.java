@@ -1,7 +1,5 @@
 package project;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Patients extends AllUsers {
@@ -17,7 +15,7 @@ public class Patients extends AllUsers {
     private List<Appointment> appointments; // List of appointments for the patient
 
     // Static HashMap of all patients (name -> Patients object)
-    private static HashMap<String, Patients> patientList = new HashMap<>();
+    protected static HashMap<String, Patients> patientList = new HashMap<>();
 
     // Constructor
     public Patients(String hospitalId, String password, String role, String name, String dob, String gender, String phoneNumber, String emailAddress, String bloodType) {
@@ -66,14 +64,14 @@ public class Patients extends AllUsers {
             }
             case 3 -> {
                 System.out.println("Select a Doctor: ");
-                for (int i = 0; i < Doctor.doctors.size(); i++) {
+                for (int i = 0; i < Doctor.doctorNames.size(); i++) {
                     // Print the doctor number along with the doctor name
-                    System.out.println((i + 1) + ". " + Doctor.doctors.get(i));
+                    System.out.println((i + 1) + ". " + Doctor.doctorNames.get(i));
                 }
                 Scanner scanner = new Scanner(System.in);
                 int choose = scanner.nextInt()-1;
-                String chosenDoctor = Doctor.doctorNames.get(choose);
-                AppointmentSlots.viewAppointmentSlots(chosenDoctor);
+                Doctor selectedDoctor = Doctor.doctors.get(choose);
+                AppointmentSlots.viewAppointmentSlots(selectedDoctor.getName());
             }
             case 4 -> {
                 PatientsAppointments.scheduleAppointment();
@@ -118,11 +116,11 @@ public class Patients extends AllUsers {
     }
 
     // Static method to initialize the patient list
-    public static void initializePatientList() {
+    /*public static void initializePatientList() {
         patientList.put("Alice Brown", new Patients("P1001", "password1", "Alice Brown", "1980-05-14", 'F', "1234567890", "alice.brown@example.com", "A+"));
         patientList.put("Bob Stone", new Patients("P1002", "password2", "Bob Stone", "1975-11-22", 'M', "9876543210", "bob.stone@example.com", "B+"));
         patientList.put("Charlie White", new Patients("P1003", "password3", "Charlie White", "1990-07-08", 'M', "4567891230", "charlie.white@example.com", "O-"));
-    }
+    }*/
 
     // Method to get all patients
     public static HashMap<String, Patients> getPatientList() {
