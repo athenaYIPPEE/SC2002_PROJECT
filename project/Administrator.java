@@ -89,6 +89,7 @@ public class Administrator extends AllUsers {
         
         if (!found) {
             System.out.println("No appointments found for Dr. " + doctorName);
+            return;
         }
         
         System.out.println("Please enter the Appointment ID to view details:");
