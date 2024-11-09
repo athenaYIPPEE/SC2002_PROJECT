@@ -10,7 +10,6 @@ public class Pharmacist extends AllUsers {
     public Pharmacist(String hospitalId, String password, List<Medication> inventory) {
         super(hospitalId, password, "Pharmacist");
         this.appointmentManager = new AppointmentManager();
-        this.inventoryManager = new InventoryManager(inventory);
     }
     
     public void DisplayMenu()
@@ -34,7 +33,7 @@ public class Pharmacist extends AllUsers {
     	case 1 -> viewAppointmentOutcome();
     	case 2 -> updatePrescriptionStatus();
     	case 3 -> viewInventory();
-    	case 4 -> submitReplenishmentRequest(String medicationName);
+    	case 4 -> submitReplenishmentRequest();
     	case 5 -> logout();
     	}
     			
@@ -54,10 +53,7 @@ public class Pharmacist extends AllUsers {
     }
 
     public void submitReplenishmentRequest() {
-        System.out.print("Enter Mediaction Name");
-        Scanner sc = new Scanner(System.in);
-        String medicationName = sc.nextLine();
-        InventoryMonitor.submitReplenishmentRequest(medicationName);
+        InventoryMonitor.submitReplenishmentRequest();
     }
 
     public void logout()
