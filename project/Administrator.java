@@ -4,13 +4,9 @@ package project;
 import java.util.*; 
  
 public class Administrator extends AllUsers { 
-    private StaffManager staffManager; 
-    private InventoryManager inventoryManager; 
  
-    public Administrator(String hospitalId, String password, List<Medication> inventory) { 
-        super(hospitalId, password, "Administrator"); 
-        this.staffManager = new StaffManager(); 
-        this.inventoryManager = new InventoryManager(inventory); 
+    public Administrator(String hospitalId, String password) { 
+        super(hospitalId, password, "Administrator");
     } 
      
     public void displayMenu() 
@@ -38,13 +34,12 @@ public class Administrator extends AllUsers {
     } 
  
     public void addStaff() { 
-        staffManager.addStaff(); 
+        StaffManager.addStaff(); 
     } 
  
      
     public void removeStaff() { 
-     staffManager.removeStaff(); 
-         
+        StaffManager.removeStaff(); 
          
     } 
  
@@ -59,20 +54,19 @@ public class Administrator extends AllUsers {
         System.out.print("Would you like to: \n"  
           + "1: View Inventory \n"  
           + "2: Add Stock \n"  
-          + "3: Remove Stock \n"  
+          + "3: Remove Stock \n" 
           + "4: Update Medication Alert Level \n"  
           + "5: Show Medication Alert Level \n");
         Scanner sc = new Scanner(System.in);
         int option = sc.nextInt(); 
         switch(option) 
         { 
-            case 1 -> inventoryManager.viewInventory(); 
-            case 2 -> inventoryManager.addingStock(); 
-            case 3 -> inventoryManager.removingStock();
-            case 4 -> inventoryManager.alertUpdate(); 
-            case 5 -> inventoryManager.showAlert();
+            case 1 -> InventoryManager.viewInventory(); 
+            case 2 -> InventoryManager.addingStock(); 
+            case 3 -> InventoryManager.removingStock();
+            case 4 -> InventoryManager.alertUpdate(); 
+            case 5 -> InventoryManager.showAlert();
         }
-        inventoryManager.viewInventory(); 
     } 
  
     public void approveReplenishmentRequest() { 
