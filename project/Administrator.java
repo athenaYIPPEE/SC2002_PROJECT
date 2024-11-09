@@ -74,4 +74,9 @@ public class Administrator extends AllUsers {
     public void approveReplenishmentRequest() { 
         ReplenishmentManager.approveReplenishmentRequest(); 
     } 
+
+    public void logout()
+    {
+        
+    }
 }
