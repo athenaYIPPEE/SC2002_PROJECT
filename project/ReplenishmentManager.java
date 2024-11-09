@@ -3,13 +3,13 @@ package project;
 import java.util.Scanner;
 
 public class ReplenishmentManager {
-    private MedicationStock inventory;
+    private static MedicationStock inventory;
 
     public ReplenishmentManager(MedicationStock inventory) {
         this.inventory = inventory;
     }
 
-    public void approveReplenishmentRequest(){
+    public static void approveReplenishmentRequest(){
         for (int i = 0; i < InventoryMonitor.replenishmentRequest.size(); i++){
             System.out.println(InventoryMonitor.replenishmentRequest.get(i));
             ReplenishmentRequest request = InventoryMonitor.replenishmentRequest.get(i);

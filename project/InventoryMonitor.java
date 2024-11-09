@@ -26,7 +26,7 @@ public class InventoryMonitor {
     public void submitReplenishmentRequest(String medicationName) {
         boolean found = false;
     	for (MedicationName medication : MedicationName.values()) {
-            if (medication.getName().equals(medicationName) && inventory.getStock(medication) < lowStock) {
+            if (medication.getName().equals(medicationName) && inventory.getStock(medication) < inventory.getAlert(medication)) {
                 found = true;
             	System.out.println("How much stock to add to " + medicationName);
                 Scanner scanner = new Scanner(System.in);
