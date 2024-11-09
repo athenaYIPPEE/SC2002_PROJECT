@@ -11,7 +11,7 @@ public class Appointment {
     private String status; // confirmed, canceled, completed, etc.
     private String serviceType;
     private Medication prescribedMedications; 
-    protected static ArrayList<Medication> prescribedMedicationList;
+    protected ArrayList<Medication> prescribedMedicationList;
         private String consultationNotes;
         public static List<Appointment> allAppointments = new ArrayList<>();
             
