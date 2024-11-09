@@ -13,6 +13,7 @@ public class Appointment {
     private Medication prescribedMedications; 
     protected ArrayList<Medication> prescribedMedicationList;
     private String consultationNotes;
+    public static List<Appointment> allAppointments = new ArrayList<>();
 
     // Constructor
     public Appointment(String appointmentId, String doctorName, String patientId, LocalDateTime appointmentDate, String status, String serviceType) {
@@ -23,6 +24,7 @@ public class Appointment {
         this.status = status;
         this.serviceType = serviceType;
         this.prescribedMedicationList = new ArrayList<>();
+        allAppointments.add(this);
     }
 
     // Getters and Setters
@@ -97,5 +99,9 @@ public class Appointment {
         
         // Print consultation notes
         System.out.println(getConsultationNotes());
+    }
+
+    public static List<Appointment> getAllAppointments() {
+        return allAppointments;
     }
 }
