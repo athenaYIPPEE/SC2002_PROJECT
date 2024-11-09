@@ -91,16 +91,13 @@ public class Patients extends AllUsers {
                 PatientsAppointments.cancelAppointment(id);
             }
             case 7->{
-                System.out.println("Enter Appointment ID to cancel: ");
-                Scanner scanner = new Scanner(System.in);
-                String id = scanner.nextLine();
-                PatientsAppointments.viewScheduledAppointments(id);
+                PatientsAppointments.viewScheduledAppointments();
             }
             case 8->{
-                System.out.println("Enter Appointment ID to cancel: ");
-                Scanner scanner = new Scanner(System.in);
-                String id = scanner.nextLine();
-                PatientsAppointments.viewPastRecords(id);
+                PatientsAppointments.viewPastRecords();
+            }
+            case 9->{
+                logout();
             }
 			default -> System.out.println("Invalid option. Please try again.");
 		}

@@ -1,14 +1,15 @@
 package project;
 
-import java.util.Scanner;
 import java.util.*;
 
 public class DoctorMedicalRecord {
 
 	private HashMap<String, Patients> patientsMap;
+	private HashMap<Patients, MedicalRecord> doctorRecord;
 	
 	public DoctorMedicalRecord() {
 		this.patientsMap = new HashMap<>();
+		this.doctorRecord = new HashMap<>();
 	}
 	
 	public static void viewMedicalRecords() {
@@ -38,6 +39,13 @@ public class DoctorMedicalRecord {
             		System.out.println("Patient not found.");
             		return;
         	}
+
+			MedicalRecord medicalRecord = doctorRecord.get(patient);
+			if (medicalRecord == null) {
+				System.out.println("Medical record not found for this patient.");
+				return;
+			}
+
         
         	boolean updating = true;
         	while (updating) {
@@ -53,21 +61,21 @@ public class DoctorMedicalRecord {
             		case 1:
                 		System.out.println("Enter new diagnosis: ");
                 		String diagnosis = sc.nextLine();
-                		MedicalRecord.addDiagnosis(diagnosis); 
+                		medicalRecord.addDiagnosis(diagnosis);
                 		System.out.println("Diagnosis added.");
                 		break;
 
             		case 2:
                 		System.out.println("Enter new prescription: ");
                 		String prescription = sc.nextLine();
-                		MedicalRecord.addPrescription(prescription); 
+                		medicalRecord.addPrescription(prescription); 
                 		System.out.println("Prescription added.");
                 		break;
 
             		case 3:
                 		System.out.println("Enter new treatment plan: ");
                 		String treatmentPlan = sc.nextLine();
-                		MedicalRecord.addTreatmentPlan(treatmentPlan); 
+                		medicalRecord.addTreatment(treatmentPlan); 
                 		System.out.println("Treatment plan added.");
                 		break;
 

@@ -193,18 +193,16 @@ public class PatientsAppointments {
                        + newAppointmentDateTime.toLocalDate() + " at " + newAppointmentDateTime.toLocalTime());
     }
 
-    public static void viewScheduledAppointments(String appointmentId) {
+    public static void viewScheduledAppointments() {
         // Assuming currentPatient.getAppointments() returns a list of appointments
         for (Appointment appointment : currentPatient.getAppointments()) {
             // Check if the status of the appointment is "Confirmed"
-            if (appointment.getStatus().equals("Confirmed")) {
                 // Print the appointment details (you may need to use toString() or customize the print output)
-                System.out.println(appointment);  // Assuming toString() method in Appointment handles the print
+                System.out.println(appointment.getStatus());  // Assuming toString() method in Appointment handles the print
             }
         }
-    }
     
-    public static void viewPastRecords(String id) {
+    public static void viewPastRecords() {
         for (Appointment appointment : currentPatient.getAppointments()) {
             // Check if the status of the appointment is "Completed"
             if (appointment.getStatus().equals("Completed")) {

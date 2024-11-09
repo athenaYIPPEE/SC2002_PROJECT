@@ -12,39 +12,46 @@ public class MedicalRecord {
     private static String emailAddress;
     private ArrayList<String> diagnoses;
     private ArrayList<String> treatments;
+    private ArrayList<String> prescription;
+        
+        private static HashMap<String, MedicalRecord> patientRecordMap = new HashMap<>();
     
-    private static HashMap<String, MedicalRecord> patientRecordMap = new HashMap<>();
+        // Constructor
+        public MedicalRecord(String patientId, String patientName, String dob, String gender, String bloodType, String phoneNumber, String emailAddress) {
+            this.patientId = patientId;
+            this.bloodType = bloodType;
+            this.phoneNumber = phoneNumber;
+            this.emailAddress = emailAddress;
+            this.patientName = patientName;
+            this.dob = dob;
+            this.gender = gender;
+            this.diagnoses = new ArrayList<>();
+            this.treatments = new ArrayList<>();
+            this.prescription = new ArrayList<>();
+        }
+    
+        // Getter methods
+        public String getBloodType() {
+            return bloodType;
+        }
+    
+        public ArrayList<String> getDiagnoses() {
+            return diagnoses;
+        }
+    
+        public ArrayList<String> getTreatments() {
+            return treatments;
+        }
+    
+        // Methods to add diagnosis and treatment (only accessible by Doctor)
+        protected void addDiagnosis(String diagnosis) {
+            diagnoses.add(diagnosis);
+        }
 
-    // Constructor
-    public MedicalRecord(String patientId, String patientName, String dob, String gender, String bloodType, String phoneNumber, String emailAddress) {
-        this.patientId = patientId;
-        this.bloodType = bloodType;
-        this.phoneNumber = phoneNumber;
-        this.emailAddress = emailAddress;
-        this.patientName = patientName;
-        this.dob = dob;
-        this.gender = gender;
-        this.diagnoses = new ArrayList<>();
-        this.treatments = new ArrayList<>();
-    }
+        protected void addPrescription(String prescription){
+            prescription.add(prescription);
+        }
 
-    // Getter methods
-    public String getBloodType() {
-        return bloodType;
-    }
-
-    public ArrayList<String> getDiagnoses() {
-        return diagnoses;
-    }
-
-    public ArrayList<String> getTreatments() {
-        return treatments;
-    }
-
-    // Methods to add diagnosis and treatment (only accessible by Doctor)
-    protected void addDiagnosis(String diagnosis) {
-        diagnoses.add(diagnosis);
-    }
 
     protected void addTreatment(String treatment) {
         treatments.add(treatment);
