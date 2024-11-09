@@ -60,6 +60,7 @@ public class Patients extends AllUsers {
                         break;
                     default:
                         System.out.println("Invalid Choice.");
+                        break;
                 }
             }
             case 3 -> {

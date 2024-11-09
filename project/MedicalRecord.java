@@ -63,6 +63,14 @@ public class MedicalRecord {
         patientRecordMap.get(patientIdString).viewMedicalRecord();
     }
 
+    public static void updatePhoneNumber(String newPhoneNumber) {
+    	phoneNumber = newPhoneNumber;
+    }
+    
+    public static void updateEmailAddress(String newEmailAddress) {
+    	emailAddress= newEmailAddress;
+    }
+
     // Patients can view their medical record
     public void viewMedicalRecord() {
         System.out.println("Patient ID: " + patientId);
