@@ -1,5 +1,7 @@
 package project;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -48,8 +50,8 @@ public class Patients extends AllUsers {
 		switch(option) {
 			case 1 -> MedicalRecord.displayRecords(hospitalId);
 			case 2 -> {
-                Scanner scanner = new Scanner(System.in);
                 System.out.println("1. Update Phone Number   2. Update Email Address");
+                Scanner scanner = new Scanner(System.in);
                 int choice = scanner.nextInt();
                 switch(choice){
                     case 1: 
@@ -64,7 +66,18 @@ public class Patients extends AllUsers {
                 }
             }
             case 3 -> {
-
+                System.out.println("Select a Doctor: ");
+                for (int i = 0; i < Doctor.doctors.size(); i++) {
+                    // Print the doctor number along with the doctor name
+                    System.out.println((i + 1) + ". " + Doctor.doctors.get(i));
+                }
+                Scanner scanner = new Scanner(System.in);
+                int choose = scanner.nextInt()-1;
+                String chosenDoctor = Doctor.doctorNames.get(choose);
+                AppointmentSlots.viewAppointmentSlots(chosenDoctor);
+            }
+            case 4 -> {
+                
             }
 			default -> System.out.println("Invalid option. Please try again.");
 		}

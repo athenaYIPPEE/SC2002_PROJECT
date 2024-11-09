@@ -33,7 +33,7 @@ public class DoctorMedicalRecord {
 		System.out.println("Enter the patient's ID: ");
         	String patientID = sc.next();
         
-        	Patient patient = patientsMap.get(patientID);
+        	Patients patient = patientsMap.get(patientID);
         	if (patient == null) {
             		System.out.println("Patient not found.");
             		return;
