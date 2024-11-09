@@ -1,23 +1,24 @@
 package project;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Patients extends AllUsers {
-    private String name;
+    protected String name;
     private String dob;
-    private String gender;
-    private String phoneNumber;
-    private String emailAddress;
+    protected String phoneNumber;
+    protected String emailAddress;
+    private Character gender;
+    private int age;
     private MedicalRecord medicalRecord; // Encapsulated medical data
-    private ArrayList<Appointment> appointments; // List of appointments for the patient
+    private HashMap<String, Appointment> appointments; // List of appointments for the patient
 
-    // Static list of all patients
-    private static ArrayList<Patients> patientList = new ArrayList<>();
+    // Static HashMap of all patients (name -> Patients object)
+    private static HashMap<String, Patients> patientList = new HashMap<>();
 
     // Constructor
-    public Patients(String hospitalId, String password, String name, String dob, String gender, String phoneNumber, String emailAddress, String bloodType) {
+    public Patients(String hospitalId, String password, String name, String dob, Character gender, String phoneNumber, String emailAddress, String bloodType) {
         super(hospitalId, password, "Patient");
         this.name = name;
         this.dob = dob;
@@ -25,9 +26,8 @@ public class Patients extends AllUsers {
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.medicalRecord = new MedicalRecord(bloodType); // Initialize medical record
-        this.appointments = new ArrayList<>(); // Initialize appointment list
+        this.appointments = new HashMap<>(); // Initialize appointment map
     }
-    
 
     public void displayMenu(){
         System.out.println("Menu: \n"
@@ -43,13 +43,38 @@ public class Patients extends AllUsers {
 		int option = sc.nextInt();
 		switch(option) {
 			case 1 -> DoctorMedicalRecord.viewMedicalRecords();
-			case 2 -> DoctorMedicalRecord.updateMedicalRecords();
+			case 2 -> {
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Enter new phone number: ");
+                String newPhone = scanner.nextLine();
+                System.out.print("Enter new email address: ");
+                String newEmail = scanner.nextLine();
+                PatientsContactInfo.updateContactInfo(this.name, newPhone, newEmail);
+            }
 			case 3 -> DoctorScheduleService.viewPersonalSchedule();
 			case 4 -> doctorScheduleService.setAvailability();
 			case 5 -> doctorAppointmentService.AppointmentRequest();
 			case 6 -> doctorAppointmentService.viewUpcomingAppointments();
 			case 7 -> doctorAppointmentService.recordAppointmentOutcome();
-			default -> System.out.println("Invalid option. Please try again."); 
+			default -> System.out.println("Invalid option. Please try again.");
+		}
+    }
+
+    // Static method to initialize the patient list
+    public static void initializePatientList() {
+        patientList.put("Alice Brown", new Patients("P1001", "password1", "Alice Brown", "1980-05-14", 'F', "1234567890", "alice.brown@example.com", "A+"));
+        patientList.put("Bob Stone", new Patients("P1002", "password2", "Bob Stone", "1975-11-22", 'M', "9876543210", "bob.stone@example.com", "B+"));
+        patientList.put("Charlie White", new Patients("P1003", "password3", "Charlie White", "1990-07-08", 'M', "4567891230", "charlie.white@example.com", "O-"));
+    }
+
+    // Method to get all patients
+    public static HashMap<String, Patients> getPatientList() {
+        return patientList;
+    }
+
+    // Method to find a patient by their name
+    public static Patients getPatientByName(String name) {
+        return patientList.get(name);
     }
 
     // Method to view the encapsulated medical record
@@ -62,67 +87,5 @@ public class Patients extends AllUsers {
         System.out.println("Email Address: " + this.emailAddress);
         System.out.println("Medical Record:");
         medicalRecord.viewMedicalRecord(); // Call method to display medical record details
-    }
-
-    // Static method to initialize the patient list
-    public static void initializePatientList() {
-        patientList.add(new Patients("P1001", "password1", "Alice Brown", "1980-05-14", "Female", "1234567890", "alice.brown@example.com", "A+"));
-        patientList.add(new Patients("P1002", "password2", "Bob Stone", "1975-11-22", "Male", "9876543210", "bob.stone@example.com", "B+"));
-        patientList.add(new Patients("P1003", "password3", "Charlie White", "1990-07-08", "Male", "4567891230", "charlie.white@example.com", "O-"));
-    }
-
-    // Method to get all patients
-    public static ArrayList<Patients> getPatientList() {
-        return patientList;
-    }
-
-    // Method to find a patient by their ID
-    public static Patients getPatientById(String id) {
-        for (Patients patient : patientList) {
-            if (patient.getHospitalId().equals(id)) {
-                return patient;
-            }
-        }
-        return null;
-    }
-
-    // Appointment Methods (Patients can schedule, cancel, and reschedule appointments)
-    public void scheduleAppointment(Appointment appointment) {
-        this.appointments.add(appointment);
-        System.out.println("Appointment scheduled for " + this.name);
-    }
-
-    public void cancelAppointment(String appointmentId) {
-        for (Appointment appointment : appointments) {
-            if (appointment.getAppointmentId().equals(appointmentId)) {
-                appointment.setStatus("Canceled");
-                System.out.println("Appointment " + appointmentId + " has been canceled.");
-                return;
-            }
-        }
-        System.out.println("Appointment not found.");
-    }
-
-    public void rescheduleAppointment(String appointmentId, Date newDate, String newTimeSlot) {
-        for (Appointment appointment : appointments) {
-            if (appointment.getAppointmentId().equals(appointmentId)) {
-                appointment.setAppointmentDate(newDate);
-                appointment.setTimeSlot(newTimeSlot);
-                System.out.println("Appointment " + appointmentId + " has been rescheduled.");
-                return;
-            }
-        }
-        System.out.println("Appointment not found.");
-    }
-
-    // Method to view all appointments for the patient
-    public void viewAppointments() {
-        if (appointments.isEmpty()) {
-            System.out.println("No appointments scheduled.");
-        } else {
-            for (Appointment appointment : appointments) {
-                System.out.println(appointment.toString());
-            }
-        }
     }
 }
