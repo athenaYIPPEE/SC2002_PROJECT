@@ -1,7 +1,5 @@
 package project;
 
-
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,12 +15,9 @@ public class Pharmacist extends AllUsers {
     
     public void DisplayMenu()
     {
-    	
     	System.out.print("Select an Appointment");
     	Scanner sc = new Scanner(System.in);
     	int choice = sc.nextInt();
-    	
-    	
     	
         System.out.println("Menu: \n" 
     		  
@@ -47,11 +42,11 @@ public class Pharmacist extends AllUsers {
     	
     }
 
-    public void viewAppointmentOutcome(Appointment appointment) {
+    public void viewAppointmentOutcome() {
         appointmentManager.viewAppointmentOutcome(appointment);
     }
 
-    public void updatePrescriptionStatus(Appointment appointment, String medicationName) {
+    public void updatePrescriptionStatus() {
         appointmentManager.updatePrescriptionStatus(appointment, medicationName);
     }
 
