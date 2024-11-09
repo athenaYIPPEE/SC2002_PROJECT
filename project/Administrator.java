@@ -5,6 +5,9 @@ import java.util.*;
  
 public class Administrator extends AllUsers { 
     private StaffManager staffManager;
+	private Appointment[] appointments;//List to hold all Appointments
+	
+	private List<Appointment> appointmentList;
  
     public Administrator(String hospitalId, String password) { 
         super(hospitalId, password, "Administrator");
@@ -17,9 +20,9 @@ public class Administrator extends AllUsers {
      System.out.println("Menu: \n"  
           + "1: Add Staff \n"  
           + "2: Remove Staff \n"  
-          + "3: View Appointments details \n"  
-          + "4: View and Manage Medication Inventory  \n"  
-          + "5: Approve Replenishment Requests \n"  
+          + "3: View Doctor's Appointments details \n"  
+          + "4: Manage Inventory \n"  
+          + "5: Approve Replenishment Requests \n"
           + "6: Logout \n");  
      
     Scanner sc = new Scanner(System.in); 
@@ -28,14 +31,20 @@ public class Administrator extends AllUsers {
     { 
         case 1 -> addStaff(); 
         case 2 -> removeStaff(); 
-        case 3 -> viewAppointments(); 
-        case 4 -> manageInventory(); 
-        case 5 -> approveReplenishmentRequest(); 
+        case 3 -> viewDoctorAppointments();
+        case 4 -> manageInventory();
+     	case 5 -> approveReplenishmentRequest(); 
         case 6 -> logout(); 
     } 
     } 
  
-    public void addStaff() { 
+    private Object logout() 
+    {
+	
+		return null;
+	}
+
+	public void addStaff() { 
         staffManager.addStaff(); 
     } 
  
@@ -44,13 +53,7 @@ public class Administrator extends AllUsers {
         staffManager.removeStaff(); 
          
     } 
- 
-    public void viewAppointments() { 
-        System.out.println("Appointments List:"); 
-        for (Appointment appointment : appointments) { 
-            System.out.println(appointment); 
-        } 
-    } 
+
  
     public void manageInventory() {
         System.out.print("Would you like to: \n"  
@@ -70,14 +73,52 @@ public class Administrator extends AllUsers {
             case 5 -> InventoryManager.showAlert();
         }
     } 
- 
-    public void approveReplenishmentRequest() { 
-        ReplenishmentManager.approveReplenishmentRequest(); 
-    } 
-    //can add/remove stocks in 2 ways - inventorymanager(can add any amt they want) OR medicationstock(admin look at request made by pharmacist via replenishmentmanager and add the fixed amt of stock requested by pharma)
+    
+    //View Appointment for specific Doctors
+    public void viewDoctorAppointments() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the doctor's name to view appointments: ");
+        String doctorName = sc.nextLine();  // Get the doctor's name
 
-    public void logout()
-    {
+        // Check if there are appointments for this doctor
+        boolean found = false;
+        for (Appointment appointment : appointmentList) {
+            if (appointment.getDoctorName().equalsIgnoreCase(doctorName)) {
+                System.out.println(appointment.getAppointmentId());  // Display appointmentId detail
+                found = true;
+            }
+        }
+        
+        if (!found) {
+            System.out.println("No appointments found for Dr. " + doctorName);
+        }
+        
+        System.out.println("Please enter the Appointment ID to view details:");
+        String chosenAppointmentId = sc.nextLine();
+
+        Appointment selectedAppointment = null;
+        for (Appointment appointment : appointments) {
+            if (appointment.getAppointmentId().equals(chosenAppointmentId)) {
+                selectedAppointment = appointment;
+                break;  // Exit loop once the appointment is found
+            }
+        }
+
+        if (selectedAppointment != null) {
+            System.out.println("Details of the selected appointment:");
+            System.out.println(selectedAppointment); // Print all details using toString()
+        } else {
+            System.out.println("Appointment ID not found.");
+        }
         
     }
+    
+ 
+    public static void approveReplenishmentRequest() { 
+       ReplenishmentManager.approveReplenishmentRequest(); 
+ /*// can add/remove stocks in 2 ways - 
+  * inventorymanager(can add any amt they want) OR 
+  * medicationstock (admin look at request made by pharmacist via replenishmentmanager and add the fixed amt of stock requested by pharmacist)
+   */
+    } 
 }
