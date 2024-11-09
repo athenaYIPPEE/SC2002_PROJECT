@@ -2,9 +2,7 @@ package project;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Patients extends AllUsers {
     protected String name;
@@ -16,7 +14,7 @@ public class Patients extends AllUsers {
     private String bloodType;
     private MedicalRecord medicalRecord; // Encapsulated medical data
     private PatientsContactInfo contactInfo;
-    private HashMap<String, Appointment> appointments; // List of appointments for the patient
+    private List<Appointment> appointments; // List of appointments for the patient
 
     // Static HashMap of all patients (name -> Patients object)
     private static HashMap<String, Patients> patientList = new HashMap<>();
@@ -33,6 +31,7 @@ public class Patients extends AllUsers {
         this.emailAddress = emailAddress;
         this.medicalRecord = new MedicalRecord(hospitalId, name, dob, gender, bloodType, phoneNumber, emailAddress); // Initialize medical record
         this.contactInfo = new PatientsContactInfo(phoneNumber, emailAddress);
+        this.appointments = new ArrayList<>();
     }
 
     public void displayMenu(){
@@ -77,7 +76,31 @@ public class Patients extends AllUsers {
                 AppointmentSlots.viewAppointmentSlots(chosenDoctor);
             }
             case 4 -> {
-                
+                PatientsAppointments.scheduleAppointment();
+            }
+            case 5 ->{
+                System.out.println("Enter Appointment ID to reschedule: ");
+                Scanner scanner = new Scanner(System.in);
+                String id = scanner.nextLine();
+                PatientsAppointments.rescheduleAppointment(id);
+            }
+            case 6 ->{
+                System.out.println("Enter Appointment ID to cancel: ");
+                Scanner scanner = new Scanner(System.in);
+                String id = scanner.nextLine();
+                PatientsAppointments.cancelAppointment(id);
+            }
+            case 7->{
+                System.out.println("Enter Appointment ID to cancel: ");
+                Scanner scanner = new Scanner(System.in);
+                String id = scanner.nextLine();
+                PatientsAppointments.viewScheduledAppointments(id);
+            }
+            case 8->{
+                System.out.println("Enter Appointment ID to cancel: ");
+                Scanner scanner = new Scanner(System.in);
+                String id = scanner.nextLine();
+                PatientsAppointments.viewPastRecords(id);
             }
 			default -> System.out.println("Invalid option. Please try again.");
 		}
@@ -85,6 +108,15 @@ public class Patients extends AllUsers {
 
     public String getPatientId(){
         return hospitalId;
+    }
+
+    public void addAppointment(Appointment appointment) {
+		this.appointments.add(appointment); // Add the appointment to the doctor's list
+    }
+
+    
+    public List<Appointment> getAppointments() {
+        return appointments;  // Return the list of appointments
     }
 
     // Static method to initialize the patient list

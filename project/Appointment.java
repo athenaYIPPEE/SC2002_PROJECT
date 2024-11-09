@@ -15,7 +15,7 @@ public class Appointment {
     private String consultationNotes;
 
     // Constructor
-    public Appointment(String appointmentId, String doctorName, String patientId, LocalDateTime appointmentDate, String status, String serviceType, String timeSlot) {
+    public Appointment(String appointmentId, String doctorName, String patientId, LocalDateTime appointmentDate, String status, String serviceType) {
         this.appointmentId = appointmentId;
         this.doctorName = doctorName;
         this.patientId = patientId;
@@ -42,7 +42,7 @@ public class Appointment {
         return appointmentTime;
     }
 
-    public void setAppointmentDate(LocalDateTime appointmentDate) {
+    public void setAppointmentDateTime(LocalDateTime appointmentDate) {
         this.appointmentTime= appointmentDate;
     }
 
@@ -50,8 +50,16 @@ public class Appointment {
         return status;
     }
 
+    public String getServiceType(){
+        return serviceType;
+    }
+
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getConsultationNotes(){
+        return consultationNotes;
     }
 
     @Override
@@ -75,5 +83,19 @@ public class Appointment {
         } else {
             this.consultationNotes += "\n" + notes; // Append new notes with a newline
         }
+    }
+
+    public void getOutcome() {
+        // Print appointment date and service type
+        System.out.println(getAppointmentDate());
+        System.out.println(getServiceType());
+        
+        // Print each prescribed medication in the list
+        for (int i = 0; i < prescribedMedicationList.size(); i++) {
+            System.out.println(prescribedMedicationList.get(i));  // Corrected this line
+        }
+        
+        // Print consultation notes
+        System.out.println(getConsultationNotes());
     }
 }

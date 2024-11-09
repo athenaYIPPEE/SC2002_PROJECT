@@ -50,6 +50,10 @@ public class Doctor extends AllUsers{
 		public void addAppointment(Appointment appointment) {
 			this.appointments.add(appointment); // Add the appointment to the doctor's list
 		}
+
+		public List<Appointment> getAppointments() {
+			return appointments;  // Return the list of appointments
+		}
 	
 	public void displayMenu() {
 		System.out.println("Menu: \n"
