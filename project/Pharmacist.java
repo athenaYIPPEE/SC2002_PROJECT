@@ -59,7 +59,10 @@ public class Pharmacist extends AllUsers {
         inventoryManager.viewInventory();
     }
 
-    public void submitReplenishmentRequest(String medicationName) {
-        inventoryManager.submitReplenishmentRequest(medicationName);
+    public void submitReplenishmentRequest() {
+        System.out.print("Enter Mediaction Name");
+        Scanner sc = new Scanner(System.in);
+        String medicationName = sc.nextLine();
+        InventoryMonitor.submitReplenishmentRequest(medicationName);
     }
 }
