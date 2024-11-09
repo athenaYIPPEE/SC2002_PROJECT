@@ -12,7 +12,7 @@ public class MedicalRecord {
     private static String emailAddress;
     private ArrayList<String> diagnoses;
     private ArrayList<String> treatments;
-    private ArrayList<String> prescription;
+    private ArrayList<String> prescriptions;
         
         private static HashMap<String, MedicalRecord> patientRecordMap = new HashMap<>();
     
@@ -27,7 +27,7 @@ public class MedicalRecord {
             this.gender = gender;
             this.diagnoses = new ArrayList<>();
             this.treatments = new ArrayList<>();
-            this.prescription = new ArrayList<>();
+            this.prescriptions = new ArrayList<>();
         }
     
         // Getter methods
@@ -49,7 +49,7 @@ public class MedicalRecord {
         }
 
         protected void addPrescription(String prescription){
-            prescription.add(prescription);
+            prescriptions.add(prescription);
         }
 
 

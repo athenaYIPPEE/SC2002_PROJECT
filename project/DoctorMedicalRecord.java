@@ -12,7 +12,7 @@ public class DoctorMedicalRecord {
 		this.doctorRecord = new HashMap<>();
 	}
 	
-	public static void viewMedicalRecords() {
+	public void viewMedicalRecords() {
 		if (patientsMap.isEmpty()) {
 			System.out.println("No patients available.");
 			return;
@@ -21,9 +21,10 @@ public class DoctorMedicalRecord {
         	System.out.println("Enter the patient's ID: ");
         	String patientID = sc.next();
         
-        	Patient patient = patientsMap.get(patientID);
+        	Patients patient = patientsMap.get(patientID);
+			MedicalRecord medicalRecord = doctorRecord.get(patient);
         	if (patient != null) {
-            		patient.getMedicalRecord(); //get
+				MedicalRecord.displayRecords(patientID);
         	} else {
             		System.out.println("Patient not found.");
         	}
