@@ -32,8 +32,8 @@ public class Pharmacist extends AllUsers {
     	
     	switch(option)
     	{
-    	case 1 -> viewAppointmentOutcome(Appointment appointment);
-    	case 2 -> updatePrescriptionStatus(Appointment appointment, String medicationName);
+    	case 1 -> viewAppointmentOutcome();
+    	case 2 -> updatePrescriptionStatus();
     	case 3 -> viewInventory();
     	case 4 -> submitReplenishmentRequest(String medicationName);
     	case 5 -> logout();
@@ -43,11 +43,11 @@ public class Pharmacist extends AllUsers {
     }
 
     public void viewAppointmentOutcome() {
-        appointmentManager.viewAppointmentOutcome(appointment);
+        appointmentManager.viewAppointmentOutcome();
     }
 
     public void updatePrescriptionStatus() {
-        appointmentManager.updatePrescriptionStatus(appointment, medicationName);
+        appointmentManager.updatePrescriptionStatus();
     }
 
     public void viewInventory() {
@@ -59,5 +59,10 @@ public class Pharmacist extends AllUsers {
         Scanner sc = new Scanner(System.in);
         String medicationName = sc.nextLine();
         InventoryMonitor.submitReplenishmentRequest(medicationName);
+    }
+
+    public void logout()
+    {
+        
     }
 }
