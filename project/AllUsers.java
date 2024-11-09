@@ -68,7 +68,7 @@ public class AllUsers {
                 ((Doctor) this).displayMenu();
                 break;
             case "Pharmacist":
-                ((Pharmacist) this).displayMenu();
+                ((Pharmacist) this).DisplayMenu();
                 break;
             case "Administrator":
                 ((Administrator) this).displayMenu();

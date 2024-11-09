@@ -31,7 +31,7 @@ public class Administrator extends AllUsers {
         case 1 -> addStaff(); 
         case 2 -> removeStaff(); 
         case 3 -> viewAppointments(List<Appointment> appointment); 
-        case 4 -> Pharmacist.manageInventory(String medicationName, int newStock); 
+        case 4 -> manageInventory(); 
         case 5 -> approveReplenishmentRequest(); 
         case 6 -> logout(); 
     } 
@@ -55,8 +55,24 @@ public class Administrator extends AllUsers {
         } 
     } 
  
-    public void manageInventory(String medicationName, int newStock) { 
-        inventoryManager.manageInventory(medicationName, newStock); 
+    public void manageInventory() {
+        System.out.print("Would you like to: \n"  
+          + "1: View Inventory \n"  
+          + "2: Add Stock \n"  
+          + "3: Remove Stock \n"  
+          + "4: Update Medication Alert Level \n"  
+          + "5: Show Medication Alert Level \n");
+        Scanner sc = new Scanner(System.in);
+        int option = sc.nextInt(); 
+        switch(option) 
+        { 
+            case 1 -> inventoryManager.viewInventory(); 
+            case 2 -> inventoryManager.addingStock(); 
+            case 3 -> inventoryManager.removingStock();
+            case 4 -> inventoryManager.alertUpdate(); 
+            case 5 -> inventoryManager.showAlert();
+        }
+        inventoryManager.viewInventory(); 
     } 
  
     public void approveReplenishmentRequest() { 
