@@ -2,6 +2,7 @@ package project;
 
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.Map;
 
 public class AllUsers {
     private String hospitalId;
@@ -15,6 +16,7 @@ public class AllUsers {
     }
     
     protected static HashMap<String, String> user = new HashMap<>(); //smth like a dictionary, <id, password>
+    protected static Map<String, StaffInfo> userInfoMap = new HashMap<>(); // <hospitalId, StaffInfo>
 
     public String getHospitalId() {
         return hospitalId;
