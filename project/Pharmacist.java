@@ -27,7 +27,6 @@ public class Pharmacist extends AllUsers {
     		    + "4: Submit Replenishment Request \n"
     		    + "5: Logout \n"); 
         
-    	Scanner sc = new Scanner(System.in);
     	int option = sc.nextInt();
     	
     	switch(option)
@@ -63,6 +62,6 @@ public class Pharmacist extends AllUsers {
 
     public void logout()
     {
-        
+
     }
 }
