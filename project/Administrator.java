@@ -5,9 +5,7 @@ import java.util.*;
  
 public class Administrator extends AllUsers { 
     private StaffManager staffManager;
-	private Appointment[] appointments;//List to hold all Appointments
-	
-	private List<Appointment> appointmentList;
+	private List<Appointment> appointments = Appointment.getAllAppointments();
  
     public Administrator(String hospitalId, String password) { 
         super(hospitalId, password, "Administrator");
@@ -82,7 +80,7 @@ public class Administrator extends AllUsers {
 
         // Check if there are appointments for this doctor
         boolean found = false;
-        for (Appointment appointment : appointmentList) {
+        for (Appointment appointment : appointments) {
             if (appointment.getDoctorName().equalsIgnoreCase(doctorName)) {
                 System.out.println(appointment.getAppointmentId());  // Display appointmentId detail
                 found = true;
