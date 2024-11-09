@@ -97,7 +97,8 @@ public class Patients extends AllUsers {
                 PatientsAppointments.viewPastRecords();
             }
             case 9->{
-                logout();
+                System.out.println("Logging out...");
+                return; // Exit the loop and terminate the method
             }
 			default -> System.out.println("Invalid option. Please try again.");
 		}

@@ -1,21 +1,25 @@
 package project;
 
-import java.util.HashMap;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class Doctor extends AllUsers{
 
 	private static String name;
 		private HashMap<String, Patients> patientsMap;
-		private List<Appointment> appointments; //list of confirmed appts
+		protected List<Appointment> appointments; //list of confirmed appts
 		private HashMap<Date, AppointmentSlots> personalSchedule; // personal schedule hashmap
 		protected List<LocalDateTime> appointmentSlots; //list of avail appts
 		protected static List<String> doctorNames = new ArrayList<>();
 		protected static List<Doctor> doctors = new ArrayList<>();
+
+		private DoctorMedicalRecord doctorMedicalRecord;
+		private DoctorScheduleService doctorScheduleService;
+		private DoctorAppointmentService doctorAppointmentService;
 		
 		public Doctor(String hospitalId, String password, String role, String name) {
 			super(hospitalId, password, role);
@@ -54,6 +58,7 @@ public class Doctor extends AllUsers{
 		public List<Appointment> getAppointments() {
 			return appointments;  // Return the list of appointments
 		}
+
 	
 	public void displayMenu() {
 		System.out.println("Menu: \n"
@@ -63,17 +68,23 @@ public class Doctor extends AllUsers{
 				+ "4: Set Availability for Appointments \n"
 				+ "5: Accept or Decline Appointment Requests \n"
 				+ "6: View Upcoming Appointments \n"
-				+ "7: Record Appointment Outcome");
+				+ "7: Record Appointment Outcome \n"
+				+ "8: Logout");
 		Scanner sc = new Scanner(System.in);
 		int option = sc.nextInt();
+		
 		switch(option) {
-			case 1 -> DoctorMedicalRecord.viewMedicalRecords();
-			case 2 -> DoctorMedicalRecord.updateMedicalRecords();
-			case 3 -> DoctorScheduleService.viewPersonalSchedule();
+			case 1 -> doctorMedicalRecord.viewMedicalRecords();
+			case 2 -> doctorMedicalRecord.updateMedicalRecords();
+			case 3 -> doctorScheduleService.viewPersonalSchedule();
 			case 4 -> doctorScheduleService.setAvailability();
-			case 5 -> doctorAppointmentService.AppointmentRequest();
+			case 5 -> doctorAppointmentService.appointmentRequest();
 			case 6 -> doctorAppointmentService.viewUpcomingAppointments();
 			case 7 -> doctorAppointmentService.recordAppointmentOutcome();
+			case 8 -> {
+				System.out.println("Logging out...");
+				return; // Exit the loop and terminate the method
+			}
 			default -> System.out.println("Invalid option. Please try again."); 
 		}
 	}	

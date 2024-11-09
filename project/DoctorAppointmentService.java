@@ -1,6 +1,6 @@
 package project;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class DoctorAppointmentService {
@@ -13,33 +13,29 @@ public class DoctorAppointmentService {
 	
 	public void appointmentRequest() {
 		Scanner sc = new Scanner(System.in);
-        	System.out.println("Enter the appointment ID to review: ");
-        	String appointmentID = sc.nextLine();
-
-        	for (Appointment appointment : appointments) {
-            		if (appointment.getAppointmentId().equals(appointmentID)) {
-                		System.out.println("Do you want to accept or decline this appointment? (Enter 'accept' or 'decline')");
-                		String decision = sc.nextLine();
-                		if (decision.equalsIgnoreCase("accept")) {
-                    			appointment.setStatus("confirmed");
-                    			System.out.println("Appointment confirmed.");
-                		} else if (decision.equalsIgnoreCase("decline")) {
-                    			appointment.setStatus("cancelled");
-                    			System.out.println("Appointment declined.");
-                		} else {
-                    			System.out.println("Invalid choice.");
-                		}
-                		return;
-            		}
-        	}
-        	System.out.println("Appointment not found.");
+        for (Appointment appointment : appointments) {
+            if (appointment.getStatus().equals("Pending")) {
+                System.out.println("Do you want to accept or decline this appointment? (1. Accept 2.Decline)");
+                int decision = sc.nextInt();
+                if (decision == 1) {
+                    appointment.setStatus("confirmed");
+                    System.out.println("Appointment confirmed.");
+                } else if (decision == 2) {
+                    appointment.setStatus("cancelled");
+                    System.out.println("Appointment declined.");
+                } else {
+                    System.out.println("Invalid choice.");
+                }
+                return;
+            }
+        }
 	}
 	
 	public void viewUpcomingAppointments() {
 		System.out.println("Upcoming confirmed appointments:");
     		boolean hasConfirmedAppointments = false;
         	for (Appointment appointment : appointments) {
-            		if (appointment.getStatus().equals("confirmed")) {
+            		if (appointment.getStatus().equals("Confirmed")) {
                 		System.out.println(appointment);
                 		hasConfirmedAppointments = true;
             		}
@@ -57,9 +53,9 @@ public class DoctorAppointmentService {
         	for (Appointment appointment : appointments) {
             		if (appointment.getAppointmentId().equals(appointmentID)) {
                 		//record date
-            			LocalDate appointmentDate = LocalDate.now();
+            			LocalDateTime appointmentDate = LocalDateTime.now();
             			System.out.println(appointmentDate);
-            			appointment.setAppointmentDate(appointmentDate);
+            			appointment.setAppointmentDateTime(appointmentDate);
             	
             			//service type
             			System.out.println("Select type of service provided:");
@@ -103,13 +99,13 @@ public class DoctorAppointmentService {
             			//consultation
             			boolean addingNotes = true;
             			while (addingNotes) {
-		                    	System.out.println("Enter consultation note (or type 'exit' to stop adding notes): ");
-                    			String consultationNote = sc.nextLine();
-                    			appointment.recordConsultationNotes(consultationNote);
-                    			if (consultationNote.equalsIgnoreCase("exit")) {
-                        			addingNotes = false;
-                        			continue;
-                    			}
+							System.out.println("Enter consultation note (or type 'exit' to stop adding notes): ");
+							String consultationNote = sc.nextLine();
+							appointment.recordConsultationNotes(consultationNote);
+							if (consultationNote.equalsIgnoreCase("exit")) {
+								addingNotes = false;
+								continue;
+							}
 
             			} System.out.println("Appointment outcome recorded.");
             		} 
