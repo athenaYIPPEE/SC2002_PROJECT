@@ -8,8 +8,8 @@ public class MedicalRecord {
     private String dob;
     private String gender;
     private String bloodType;
-    private String phoneNumber;
-    private String emailAddress;
+    private static String phoneNumber;
+    private static String emailAddress;
     private ArrayList<String> diagnoses;
     private ArrayList<String> treatments;
     

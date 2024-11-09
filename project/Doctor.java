@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Doctor extends AllUsers{
 
-	private HashMap<String, Patient> patientsMap;
+	private HashMap<String, Patients> patientsMap;
 	private List<Appointment> appointments; //appointment objects
-	private List<String> slots;
+	private HashMap<Date, AppointmentSlots> personalSchedule; // personal schedule hashmap
 	
 	public Doctor(String hospitalId, String password, String role) {
 		super(hospitalId, password, role);

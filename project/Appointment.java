@@ -1,14 +1,13 @@
 package project;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Appointment {
     private String appointmentId;
     private String doctorName;
     private String patientId;
-    private LocalDate appointmentDate;
-    private String timeSlot;
+    private LocalDateTime appointmentDate;
     private String status; // confirmed, canceled, completed, etc.
     private String serviceType;
     private Medication prescribedMedications; 
@@ -16,12 +15,11 @@ public class Appointment {
     private String consultationNotes;
 
     // Constructor
-    public Appointment(String appointmentId, String doctorName, String patientId, LocalDate appointmentDate, String timeSlot, String status, String serviceType) {
+    public Appointment(String appointmentId, String doctorName, String patientId, LocalDateTime appointmentDate, String status, String serviceType) {
         this.appointmentId = appointmentId;
         this.doctorName = doctorName;
         this.patientId = patientId;
         this.appointmentDate = appointmentDate;
-        this.timeSlot = timeSlot;
         this.status = status;
         this.serviceType = serviceType;
         this.prescribedMedicationList = new ArrayList<>();
