@@ -1,12 +1,35 @@
-H1001|HEHE|DOCTOR|JAMES SMITH
-H1002|HEHE|DOCTOR|PETER JOHNSON
-H1003|HAHA|DOCTOR|BARTHOLEMEW WILLAIMS
-Doctor: John Doe
-HospitalId=H12345
+Doctor: John Smith
+HospitalId=D001
 Password=securePassword
 Role=Doctor
+Gender=Male
+Age=45
 Availability:
 2024-11-09T09:00
 2024-11-09T10:00
 2024-11-09T11:00
 
+Doctor: Emily Clarke
+HospitalId=D002
+Password=securePassword
+Role=Doctor
+Gender=Female
+Age=38
+Availability:
+2024-11-09T09:00
+2024-11-09T10:00
+2024-11-09T11:00
+
+Pharmacist: Mark Lee
+HospitalId=P001
+Password=securePassword
+Role=Pharmacist
+Gender=Male
+Age=29
+
+Administrator: Mark Lee
+HospitalId=A001
+Password=securePassword
+Role=Administrator
+Gender=Female
+Age=40

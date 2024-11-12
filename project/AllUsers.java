@@ -1,8 +1,8 @@
 package project;
 
-import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class AllUsers {
     private String hospitalId;

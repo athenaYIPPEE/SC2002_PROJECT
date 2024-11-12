@@ -1,34 +1,51 @@
 package project;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class main {
-
     public static void main(String[] args) {
-        String fileName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\doctor_data.txt";
-        
-        // Sample data to write to the file
-        String sampleData = "Doctor: John Doe\n"
-                          + "HospitalId=H12345\n"
-                          + "Password=securePassword\n"
-                          + "Role=Doctor\n"
-                          + "Availability:\n"
-                          + "2024-11-09T09:00\n"
-                          + "2024-11-09T10:00\n"
-                          + "2024-11-09T11:00\n";
+        String fileName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\doctor_data.txt"; // specify your file path
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
+            String line;
+            String name = "";
+            String hospitalId = "";
+            String password = "";
+            String role = "";
+            List<LocalDateTime> availability = new ArrayList<>();
 
-        // Write the sample data to the file
-        writeToFile(fileName, sampleData);
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 
-        System.out.println("Data written to the file successfully.");
-    }
-    
-    public static void writeToFile(String fileName, String data) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
-            writer.write(data);
-            writer.newLine();
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith("Doctor: ")) {
+                    name = line.substring("Doctor: ".length()).trim();
+                } else if (line.startsWith("HospitalId=")) {
+                    hospitalId = line.substring("HospitalId=".length()).trim();
+                } else if (line.startsWith("Password=")) {
+                    password = line.substring("Password=".length()).trim();
+                } else if (line.startsWith("Role=")) {
+                    role = line.substring("Role=".length()).trim();
+                } else if (line.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}")) { // Availability format
+                    availability.add(LocalDateTime.parse(line.trim(), formatter));
+                }
+            }
+
+            // Create a new Doctor object with the read data
+            Doctor doctor = new Doctor(hospitalId, password, role, name);
+            doctor.setAvailability(new java.util.Date(), availability);  // Example using today's date
+            System.out.println("Doctor created: " + doctor.getName());
+
+            
+            while (1) {
+            doctor.displayMenu();}
+
         } catch (IOException e) {
-            System.out.println("Error writing to the file: " + e.getMessage());
             e.printStackTrace();
         }
     }
