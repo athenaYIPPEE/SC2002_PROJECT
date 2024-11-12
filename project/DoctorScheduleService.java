@@ -5,12 +5,10 @@ import java.util.*;
 
 public class DoctorScheduleService {
 
-	private List<String> availableSlots;
 	private Doctor doctor;
 	
 	public DoctorScheduleService(Doctor doctor) {
 		this.doctor = doctor;
-		this.availableSlots = new ArrayList<>();
 	}
 	
 	public void viewPersonalSchedule() {
@@ -36,7 +34,7 @@ public class DoctorScheduleService {
             LocalDateTime slot = LocalDateTime.parse(slotString);
             doctor.appointmentSlots.add(slot);
         }
-        System.out.println("Slots added successfully for Dr. " + Doctor.getName());
+        System.out.println("Slots added successfully for Dr. " + doctor.getName());
     }
 	
 	}
