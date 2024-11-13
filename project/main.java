@@ -42,7 +42,7 @@ public class main {
             System.out.println("Doctor created: " + doctor.getName());
 
             
-            while (1) {
+            while (true) {
             doctor.displayMenu();}
 
         } catch (IOException e) {
