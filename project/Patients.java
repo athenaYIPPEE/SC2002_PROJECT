@@ -122,6 +122,30 @@ public class Patients extends AllUsers {
         return hospitalId;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public String getDob(){
+        return dob;
+    }
+
+    public String getGender(){
+        return gender;
+    }
+
+    public String getEmail(){
+        return emailAddress;
+    }
+
+    public String getPhone(){
+        return phoneNumber;
+    }
+
+    public String getBlood(){
+        return bloodType;
+    }
+
     public void addAppointment(Appointment appointment) {
 		this.appointments.add(appointment); // Add the appointment to the doctor's list
     }

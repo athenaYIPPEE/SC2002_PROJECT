@@ -12,7 +12,7 @@ public class Doctor extends AllUsers{
 	private String name;
 		private HashMap<String, Patients> patientsMap;
 		protected List<Appointment> appointments; //list of confirmed appts
-		private HashMap<Date, AppointmentSlots> personalSchedule; // personal schedule hashmap
+		private static HashMap<Date, AppointmentSlots> personalSchedule; // personal schedule hashmap
 		protected List<LocalDateTime> appointmentSlots; //list of avail appts
 		protected static List<String> doctorNames = new ArrayList<>();
 		protected static List<Doctor> doctors = new ArrayList<>();
@@ -39,19 +39,23 @@ public class Doctor extends AllUsers{
 		}
 
 		// Add availability for this doctor
-		public void setAvailability(Date date, List<LocalDateTime> availableSlots) {
+		/*public void setAvailability(Date date, List<LocalDateTime> availableSlots) {
 			AppointmentSlots appointmentSlots = new AppointmentSlots(name);
 			for (LocalDateTime slot : availableSlots) {
 				appointmentSlots.addSlot(slot);
 			}
 			personalSchedule.put(date, appointmentSlots);
-		}
+		}*/
 
 		// Get this doctor's AppointmentSlots for a given date
 		public AppointmentSlots getAppointmentSlots() {
 			// Retrieve the appointment slots for today's date (or a given date)
 			Date today = new Date(); // Today's date, for example
 			return personalSchedule.get(today); // Return the slots for today or specific date
+		}
+
+		public List<LocalDateTime> returnAppointmentSlots(){
+			return appointmentSlots;
 		}
 
 		public void addAppointment(Appointment appointment) {

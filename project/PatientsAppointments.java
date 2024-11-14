@@ -20,7 +20,7 @@ public class PatientsAppointments {
             System.out.println("Select a Doctor: ");
             for (int i = 0; i < Doctor.doctorNames.size(); i++) {
                 // Print the doctor number along with the doctor name
-                System.out.println((i + 1) + ". " + Doctor.doctorNames.get(i));
+                System.out.println((i + 1) + ". Dr." + Doctor.doctorNames.get(i));
             }
             Scanner scanner = new Scanner(System.in);
             int choose = scanner.nextInt()-1;
