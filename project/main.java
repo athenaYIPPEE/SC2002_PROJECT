@@ -27,43 +27,19 @@ blood8 */
 
 public class main {
     public static void main(String[] args) {
-        boolean isLoggedIn = true;
         String staffListName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\StaffList.txt"; // specify your file path
         String patientListName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\PatientList.txt"; // specify your file path
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(staffListName)))) {
-            String line;
+        FileRead.helppls();
+        int choice;
 
-            while ((line = br.readLine()) != null){
-                String[] userData = line.split("\\|");
-                AllUsers.user.put(userData[0], userData[1]);
-                int age = Integer.parseInt(userData[3]);
-                StaffInfo staffInfo = new StaffInfo(userData[0], age, userData[6], userData[2], userData[5], userData[4]);
-                AllUsers.userInfoMap.put(userData[0], staffInfo);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try (BufferedReader br3 = new BufferedReader(new InputStreamReader(new FileInputStream(patientListName)))) {
-            String line3;
-
-            while ((line3 = br3.readLine()) != null){
-                String[] patientData = line3.split("\\|");
-                Patients patient = new Patients(patientData[0], patientData[1], patientData[2], patientData[3], patientData[4], patientData[5], patientData[6], patientData[7], patientData[8]);
-                Patients.patientList.put(patientData[0], patient);
-                AllUsers.user.put(patientData[0], patientData[1]);
-                MedicalRecord medicalRecord = new MedicalRecord(patientData[0], patientData[3], patientData[4], patientData[5], patientData[8], patientData[6], patientData[7]);
-                MedicalRecord.patientRecordMap.put(patientData[0], medicalRecord);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        do{
         System.out.println("Menu: 1. Login 2. Shut down");
         Scanner sc = new Scanner(System.in);
-        int choice;
-        
-        do{ choice = sc.nextInt();
-            String thisUserId= AllUsers.login();
-            try (BufferedReader br2 = new BufferedReader(new InputStreamReader(new FileInputStream(staffListName)))) {
+        choice = sc.nextInt();
+            switch(choice){
+                case 1:{
+                    String thisUserId= AllUsers.login();
+                    try (BufferedReader br2 = new BufferedReader(new InputStreamReader(new FileInputStream(staffListName)))) {
                 if (thisUserId.charAt(0) != 'P' && thisUserId.charAt(1) != '1'){
                     String line2;
                     while ((line2 = br2.readLine()) != null){
@@ -111,7 +87,15 @@ public class main {
             }catch (IOException e) {
                     e.printStackTrace();
                 }
-    } while (choice == 1);
+            }
+        
+            case 2: System.out.println("Shut down");
+            
+            default: System.out.println("Shut down");
+    } while (choice != 2);
 
-    }
+    
+        
+    
 }
+
