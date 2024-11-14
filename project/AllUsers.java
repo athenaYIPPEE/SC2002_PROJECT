@@ -30,7 +30,7 @@ public class AllUsers {
         return role;
     }
 	
-	public void login()
+	public static String login()
 	{
 		Scanner obj = new Scanner(System.in);
 		
@@ -38,20 +38,24 @@ public class AllUsers {
 		String hospital_id = obj.next();
 		System.out.print("Enter your password: ");
 		String password = obj.next(); //default password is 'password'. this is done by staff management under administrator(so no need initialise as pw=password)
-		
+        String noUser = "lmfaohaha";
+
 		if (!user.containsKey(hospital_id))
 		{
 			System.out.println("User does not exist.");
+            System.exit(0);
 		}
 		else if (user.get(hospital_id).equals(password)) 
 		{
             System.out.println("Login successful!");
+            return user.get(hospital_id);
         } 
 		else 
 		{
             System.out.println("Invalid password. Please try again.");
+            System.exit(0);
         }
-		
+        return null;
 	}
 	
 	public void resetPassword() //soliD, abstraction

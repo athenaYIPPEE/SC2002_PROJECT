@@ -4,47 +4,52 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+
+// 0 = hospitalid
+// 1 = password
+// 2 = name
+// 3= age
+// 4 = gender
+// 5 = dob 
+// 6 = role
+
 
 public class main {
     public static void main(String[] args) {
-        String fileName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\doctor_data.txt"; // specify your file path
+        String fileName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\Users.txt"; // specify your file path
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
             String line;
-            String name = "";
-            String hospitalId = "";
-            String password = "";
-            String role = "";
-            List<LocalDateTime> availability = new ArrayList<>();
+            while ((line = br.readLine()) != null){
+                String[] userData = line.split("\\|");
+                AllUsers.user.put(userData[0], userData[1]);
+                int age = Integer.parseInt(userData[3]);
+                StaffInfo staffInfo = new StaffInfo(userData[0], age, userData[6], userData[2], userData[5], userData[4]);
+                AllUsers.userInfoMap.put(userData[0], staffInfo);
+            }
 
-            DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+            String thisUserId= AllUsers.login();
+            while ((line = br.readLine()) != null){
+                String[] userData = line.split("\\|");
+                if (userData[0].equals(thisUserId)){
+                    String role = userData[6];
 
-            while ((line = br.readLine()) != null) {
-                if (line.startsWith("Doctor: ")) {
-                    name = line.substring("Doctor: ".length()).trim();
-                } else if (line.startsWith("HospitalId=")) {
-                    hospitalId = line.substring("HospitalId=".length()).trim();
-                } else if (line.startsWith("Password=")) {
-                    password = line.substring("Password=".length()).trim();
-                } else if (line.startsWith("Role=")) {
-                    role = line.substring("Role=".length()).trim();
-                } else if (line.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}")) { // Availability format
-                    availability.add(LocalDateTime.parse(line.trim(), formatter));
+                    switch(role){
+                        case "Doctor":
+                            Doctor doctor = new Doctor(thisUserId, userData[1], userData[6], userData[2]);
+                            doctor.displayMenu();
+                        case "Administrator":
+                            Administrator administrator = new Administrator(thisUserId, userData[1]);
+                            administrator.displayMenu();
+                        case "Pharmacist":
+                            Pharmacist pharmacist = new Pharmacist(thisUserId, role, null);
+                            pharmacist.DisplayMenu();
+                        default:
+                            System.out.println("nah bro");
+                    }
                 }
             }
 
-            // Create a new Doctor object with the read data
-            Doctor doctor = new Doctor(hospitalId, password, role, name);
-            doctor.setAvailability(new java.util.Date(), availability);  // Example using today's date
-            System.out.println("Doctor created: " + doctor.getName());
-
-            
-            while (true) {
-            doctor.displayMenu();}
-
+        
         } catch (IOException e) {
             e.printStackTrace();
         }
