@@ -6,33 +6,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-// 0 = hospitalid
-// 1 = password
-// 2 = name
-// 3= age
-// 4 = gender
-// 5 = dob 
-// 6 = role
-
-/* 
-id 0
-password 1
-role2
-name3
-dob4
-gender5
-phone6
-email7
-blood8 */
-
-public class main {
-    public static void main(String[] args) {
+public class Test {
+    public void Run(){
         String staffListName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\StaffList.txt"; // specify your file path
         String patientListName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\PatientList.txt"; // specify your file path
-        FileRead.helppls();
-        Test.Run();
-
-        /*do{
+        int choice;
+        do{
         System.out.println("Menu: 1. Login 2. Shut down");
         Scanner sc = new Scanner(System.in);
         choice = sc.nextInt();
@@ -95,6 +74,6 @@ public class main {
     } 
     }while (choice != 2);
     
-        }*/
+        }
     }
 
