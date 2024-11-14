@@ -14,7 +14,7 @@ public class MedicalRecord {
     private ArrayList<String> treatments;
     private ArrayList<String> prescriptions;
         
-        private static HashMap<String, MedicalRecord> patientRecordMap = new HashMap<>();
+        protected static HashMap<String, MedicalRecord> patientRecordMap = new HashMap<>();
     
         // Constructor
         public MedicalRecord(String patientId, String patientName, String dob, String gender, String bloodType, String phoneNumber, String emailAddress) {

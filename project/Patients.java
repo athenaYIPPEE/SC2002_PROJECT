@@ -40,8 +40,9 @@ public class Patients extends AllUsers {
 				+ "4: Schedule an Appointment \n"
 				+ "5: Reschedule an Appointment \n"
 				+ "6: Cancel an Appointment \n"
-				+ "7: View Past Appointment Outcome Records \n"
-                + "8: Logout");
+				+ "7: View Scheduled Appointment \n"
+                + "8: View Past Appointment Records \n"
+                + "9: Logout");
 		Scanner sc = new Scanner(System.in);
 		int option = sc.nextInt();
 		switch(option) {
@@ -96,7 +97,7 @@ public class Patients extends AllUsers {
             }
             case 9->{
                 System.out.println("Logging out...");
-                return; // Exit the loop and terminate the method
+                return; 
             }
 			default -> System.out.println("Invalid option. Please try again.");
 		}

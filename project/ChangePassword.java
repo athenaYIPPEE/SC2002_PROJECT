@@ -4,17 +4,19 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ChangePassword{ //Solid
-	private HashMap<String, String> users;
+	//private HashMap<String, String> users;
 	
-	public ChangePassword(HashMap<String, String> users) 
+	public ChangePassword() 
 	{
-        this.users = users;
+        //this.users = users;
     }
 	
-	public void changeUserPassword(String hospital_id)
+	public void changeUserPassword(HashMap<String, String> users)
 	{
 		Scanner obj = new Scanner(System.in);
-		
+		System.out.print("Enter hospitalId: ");
+		String hospital_id = obj.next();
+	
 		if (!users.containsKey(hospital_id)) //just in case function calls invalid id
 		{
 			System.out.println("Incorrect username, please try again.");

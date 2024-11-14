@@ -1,0 +1,4 @@
+D001|password|JohnSmith|45|Male|1979-10-10|Doctor
+D002|password|EmilyClarke|38|Female|1986-9-9|Doctor
+P001|password|MarkLee|29|Male|1995-8-8|Pharmacist
+A001|password|SarahLee|40|Female|1984-7-7|Administrator

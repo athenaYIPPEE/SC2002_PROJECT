@@ -14,10 +14,7 @@ public class Pharmacist extends AllUsers {
     
     public void DisplayMenu()
     {
-    	System.out.print("Select an Appointment");
     	Scanner sc = new Scanner(System.in);
-    	int choice = sc.nextInt();
-    	
         System.out.println("Menu: \n" 
     		  
     		    + "1: View Appointment Outcome Record \n" 

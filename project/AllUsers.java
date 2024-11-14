@@ -38,7 +38,6 @@ public class AllUsers {
 		String hospital_id = obj.next();
 		System.out.print("Enter your password: ");
 		String password = obj.next(); //default password is 'password'. this is done by staff management under administrator(so no need initialise as pw=password)
-        String noUser = "lmfaohaha";
 
 		if (!user.containsKey(hospital_id))
 		{
@@ -48,7 +47,7 @@ public class AllUsers {
 		else if (user.get(hospital_id).equals(password)) 
 		{
             System.out.println("Login successful!");
-            return user.get(hospital_id);
+            return hospital_id;
         } 
 		else 
 		{
@@ -58,29 +57,33 @@ public class AllUsers {
         return null;
 	}
 	
-	public void resetPassword() //soliD, abstraction
+	public static void changeUserPassword(String hospital_id)
 	{
-	    ChangePassword managePassword = new ChangePassword(user);
-	    managePassword.changeUserPassword(this.hospitalId);
+		Scanner obj = new Scanner(System.in);
+		System.out.print("Enter your current password: ");
+		String cur_pw = obj.next();
+		if (!user.get(hospital_id).equals(cur_pw)) {
+            System.out.println("Incorrect password, please try again.");
+            return;
+        }
+		System.out.print("Enter your new password: ");
+		String new_pw = obj.next();
+		System.out.print("Confirm your new password: ");
+		String cfm_new_pw = obj.next();
+		
+		while (!new_pw.equals(cfm_new_pw))
+		{
+			System.out.println("Passwords do not match, please try again!");
+			System.out.print("Enter your new password: ");
+			new_pw = obj.next();
+			System.out.print("Confirm your new password: ");
+			cfm_new_pw = obj.next();
+		}
+		
+		user.put(hospital_id, new_pw);
+		System.out.println("Password updated!");
 	}
 	
-	public void roleSpecificAccess() //sort of soliD?, high level module
-	{
-        switch (this.getRole()) {
-            case "Patient":
-                ((Patients) this).displayMenu();
-                break;
-            case "Doctor":
-                ((Doctor) this).displayMenu();
-                break;
-            case "Pharmacist":
-                ((Pharmacist) this).DisplayMenu();
-                break;
-            case "Administrator":
-                ((Administrator) this).displayMenu();
-                break;
-        }
-    }
 	
     //no soLid in all_user bcos it's a superclass
 
