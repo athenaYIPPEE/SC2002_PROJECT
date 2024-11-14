@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 // 0 = hospitalid
 // 1 = password
@@ -56,10 +57,13 @@ public class main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        while (true){
+        System.out.println("Menu: 1. Login 2. Shut down");
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        
+        do{ choice = sc.nextInt();
             String thisUserId= AllUsers.login();
             try (BufferedReader br2 = new BufferedReader(new InputStreamReader(new FileInputStream(staffListName)))) {
-                
                 if (thisUserId.charAt(0) != 'P' && thisUserId.charAt(1) != '1'){
                     String line2;
                     while ((line2 = br2.readLine()) != null){
@@ -107,6 +111,7 @@ public class main {
             }catch (IOException e) {
                     e.printStackTrace();
                 }
-    }
+    } while (choice == 1);
+
     }
 }

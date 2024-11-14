@@ -67,32 +67,36 @@ public class Doctor extends AllUsers{
 		}
 
 	
-	public void displayMenu() {
-		System.out.println("Menu: \n"
-				+ "1: View Patient Medical Records \n"
-				+ "2: Update Patient Medical Records \n"
-				+ "3: View Personal Schedule \n"
-				+ "4: Set Availability for Appointments \n"
-				+ "5: Accept or Decline Appointment Requests \n"
-				+ "6: View Upcoming Appointments \n"
-				+ "7: Record Appointment Outcome \n"
-				+ "8: Logout");
-		Scanner sc = new Scanner(System.in);
-		int option = sc.nextInt();
+		public void displayMenu() {
+			int option; // Declare the option variable before the loop to be used inside
+			do {
+				System.out.println("Menu: \n"
+						+ "1: View Patient Medical Records \n"
+						+ "2: Update Patient Medical Records \n"
+						+ "3: View Personal Schedule \n"
+						+ "4: Set Availability for Appointments \n"
+						+ "5: Accept or Decline Appointment Requests \n"
+						+ "6: View Upcoming Appointments \n"
+						+ "7: Record Appointment Outcome \n"
+						+ "8: Logout");
 		
-		switch(option) {
-			case 1 -> doctorMedicalRecord.viewMedicalRecords();
-			case 2 -> doctorMedicalRecord.updateMedicalRecords();
-			case 3 -> doctorScheduleService.viewPersonalSchedule();
-			case 4 -> doctorScheduleService.setAvailability();
-			case 5 -> doctorAppointmentService.appointmentRequest();
-			case 6 -> doctorAppointmentService.viewUpcomingAppointments();
-			case 7 -> doctorAppointmentService.recordAppointmentOutcome();
-			case 8 -> {
-				System.out.println("Logging out...");
-				return; // Exit the loop and terminate the method
-			}
-			default -> System.out.println("Invalid option. Please try again."); 
-		}
-	}	
+				Scanner sc = new Scanner(System.in);
+				option = sc.nextInt(); // Take user input for menu option
+		
+				switch(option) {
+					case 1 -> doctorMedicalRecord.viewMedicalRecords();
+					case 2 -> doctorMedicalRecord.updateMedicalRecords();
+					case 3 -> doctorScheduleService.viewPersonalSchedule();
+					case 4 -> doctorScheduleService.setAvailability();
+					case 5 -> doctorAppointmentService.appointmentRequest();
+					case 6 -> doctorAppointmentService.viewUpcomingAppointments();
+					case 7 -> doctorAppointmentService.recordAppointmentOutcome();
+					case 8 -> {
+						System.out.println("Logging out...");
+						return; // Exit the loop and terminate the method when the user logs out
+					}
+					default -> System.out.println("Invalid option. Please try again."); 
+				}
+			} while (option != 8); // Continue looping until the user selects option 8 to log out
+		}		
 }

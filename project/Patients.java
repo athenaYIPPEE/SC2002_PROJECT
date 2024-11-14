@@ -32,84 +32,91 @@ public class Patients extends AllUsers {
         this.appointments = new ArrayList<>();
     }
 
-    public void displayMenu(){
-        System.out.println("Menu: \n"
-				+ "1: View Medical Records \n"
-				+ "2: Update Personal Information \n"
-				+ "3: View Available Appointment Slots \n"
-				+ "4: Schedule an Appointment \n"
-				+ "5: Reschedule an Appointment \n"
-				+ "6: Cancel an Appointment \n"
-				+ "7: View Scheduled Appointment \n"
-                + "8: View Past Appointment Records \n"
-                + "9: Logout");
-		Scanner sc = new Scanner(System.in);
-		int option = sc.nextInt();
-		switch(option) {
-			case 1 -> {MedicalRecord.displayRecords(hospitalId);
-                break;}
-			case 2 -> {
-                System.out.println("1. Update Phone Number   2. Update Email Address");
-                Scanner scanner = new Scanner(System.in);
-                int choice = scanner.nextInt();
-                switch(choice){
-                    case 1: 
-                        PatientsContactInfo.updatePhoneNumber(contactInfo);
-                        break;
-                    case 2:
-                        PatientsContactInfo.updateEmailAddress(contactInfo);
-                        break;
-                    default:
-                        System.out.println("Invalid Choice.");
-                        break;
+    public void displayMenu() {
+        int option;  // Declare the option variable outside the loop
+        do {
+            System.out.println("Menu: \n"
+                    + "1: View Medical Records \n"
+                    + "2: Update Personal Information \n"
+                    + "3: View Available Appointment Slots \n"
+                    + "4: Schedule an Appointment \n"
+                    + "5: Reschedule an Appointment \n"
+                    + "6: Cancel an Appointment \n"
+                    + "7: View Scheduled Appointment \n"
+                    + "8: View Past Appointment Records \n"
+                    + "9: Logout");
+    
+            Scanner sc = new Scanner(System.in);
+            option = sc.nextInt(); // Take user input for menu option
+    
+            switch (option) {
+                case 1 -> {
+                    MedicalRecord.displayRecords(hospitalId);
+                    break;
                 }
-                break;
-            }
-            case 3 -> {
-                System.out.println("Select a Doctor: ");
-                for (int i = 0; i < Doctor.doctorNames.size(); i++) {
-                    // Print the doctor number along with the doctor name
-                    System.out.println((i + 1) + ". " + Doctor.doctorNames.get(i));
+                case 2 -> {
+                    System.out.println("1. Update Phone Number   2. Update Email Address");
+                    Scanner scanner = new Scanner(System.in);
+                    int choice = scanner.nextInt();
+                    switch (choice) {
+                        case 1:
+                            PatientsContactInfo.updatePhoneNumber(contactInfo);
+                            break;
+                        case 2:
+                            PatientsContactInfo.updateEmailAddress(contactInfo);
+                            break;
+                        default:
+                            System.out.println("Invalid Choice.");
+                            break;
+                    }
+                    break;
                 }
-                Scanner scanner = new Scanner(System.in);
-                int choose = scanner.nextInt()-1;
-                Doctor selectedDoctor = Doctor.doctors.get(choose);
-                AppointmentSlots.viewAppointmentSlots(selectedDoctor.getName());
-                break;
+                case 3 -> {
+                    System.out.println("Select a Doctor: ");
+                    for (int i = 0; i < Doctor.doctorNames.size(); i++) {
+                        System.out.println((i + 1) + ". " + Doctor.doctorNames.get(i));
+                    }
+                    Scanner scanner = new Scanner(System.in);
+                    int choose = scanner.nextInt() - 1;
+                    Doctor selectedDoctor = Doctor.doctors.get(choose);
+                    AppointmentSlots.viewAppointmentSlots(selectedDoctor.getName());
+                    break;
+                }
+                case 4 -> {
+                    PatientsAppointments.scheduleAppointment();
+                    break;
+                }
+                case 5 -> {
+                    System.out.println("Enter Appointment ID to reschedule: ");
+                    Scanner scanner = new Scanner(System.in);
+                    String id = scanner.nextLine();
+                    PatientsAppointments.rescheduleAppointment(id);
+                    break;
+                }
+                case 6 -> {
+                    System.out.println("Enter Appointment ID to cancel: ");
+                    Scanner scanner = new Scanner(System.in);
+                    String id = scanner.nextLine();
+                    PatientsAppointments.cancelAppointment(id);
+                    break;
+                }
+                case 7 -> {
+                    PatientsAppointments.viewScheduledAppointments();
+                    break;
+                }
+                case 8 -> {
+                    PatientsAppointments.viewPastRecords();
+                    break;
+                }
+                case 9 -> {
+                    System.out.println("Logging out...");
+                    break; // Exit the loop when user selects 9
+                }
+                default -> System.out.println("Invalid option. Please try again.");
             }
-            case 4 -> {
-                PatientsAppointments.scheduleAppointment();
-                break;
-            }
-            case 5 ->{
-                System.out.println("Enter Appointment ID to reschedule: ");
-                Scanner scanner = new Scanner(System.in);
-                String id = scanner.nextLine();
-                PatientsAppointments.rescheduleAppointment(id);
-                break;
-            }
-            case 6 ->{
-                System.out.println("Enter Appointment ID to cancel: ");
-                Scanner scanner = new Scanner(System.in);
-                String id = scanner.nextLine();
-                PatientsAppointments.cancelAppointment(id);
-                break;
-            }
-            case 7->{
-                PatientsAppointments.viewScheduledAppointments();
-                break;
-            }
-            case 8->{
-                PatientsAppointments.viewPastRecords();
-                break;
-            }
-            case 9->{
-                System.out.println("Logging out...");
-                break; 
-            }
-			default -> System.out.println("Invalid option. Please try again.");
-		}
+        } while (option != 9); // Continue looping until the user selects "9" to log out
     }
+    
 
     public String getPatientId(){
         return hospitalId;

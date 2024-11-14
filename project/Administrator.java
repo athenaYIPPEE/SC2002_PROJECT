@@ -13,7 +13,7 @@ public class Administrator extends AllUsers {
     }  
      
     public void displayMenu() 
-    { 
+    { int option; do{
       
      System.out.println("Menu: \n"  
           + "1: Add Staff \n"  
@@ -24,7 +24,7 @@ public class Administrator extends AllUsers {
           + "6: Logout \n");  
      
     Scanner sc = new Scanner(System.in); 
-    int option = sc.nextInt(); 
+    option = sc.nextInt(); 
     switch(option) 
     { 
         case 1 -> addStaff(); 
@@ -34,6 +34,7 @@ public class Administrator extends AllUsers {
      	case 5 -> approveReplenishmentRequest(); 
         case 6 -> logout(); 
     } 
+}while (option != 6);
     } 
  
     private Object logout() 

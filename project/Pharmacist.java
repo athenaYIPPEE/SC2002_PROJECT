@@ -13,7 +13,7 @@ public class Pharmacist extends AllUsers {
     }
     
     public void DisplayMenu()
-    {
+    { int option; do{
     	Scanner sc = new Scanner(System.in);
         System.out.println("Menu: \n" 
     		  
@@ -23,7 +23,7 @@ public class Pharmacist extends AllUsers {
     		    + "4: Submit Replenishment Request \n"
     		    + "5: Logout \n"); 
         
-    	int option = sc.nextInt();
+    	option = sc.nextInt();
     	
     	switch(option)
     	{
@@ -34,7 +34,7 @@ public class Pharmacist extends AllUsers {
     	case 5 -> logout();
     	}
     			
-    	
+    }while (option != 5);
     }
 
     public void viewAppointmentOutcome() {
