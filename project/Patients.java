@@ -46,7 +46,8 @@ public class Patients extends AllUsers {
 		Scanner sc = new Scanner(System.in);
 		int option = sc.nextInt();
 		switch(option) {
-			case 1 -> MedicalRecord.displayRecords(hospitalId);
+			case 1 -> {MedicalRecord.displayRecords(hospitalId);
+                break;}
 			case 2 -> {
                 System.out.println("1. Update Phone Number   2. Update Email Address");
                 Scanner scanner = new Scanner(System.in);
@@ -62,6 +63,7 @@ public class Patients extends AllUsers {
                         System.out.println("Invalid Choice.");
                         break;
                 }
+                break;
             }
             case 3 -> {
                 System.out.println("Select a Doctor: ");
@@ -73,31 +75,37 @@ public class Patients extends AllUsers {
                 int choose = scanner.nextInt()-1;
                 Doctor selectedDoctor = Doctor.doctors.get(choose);
                 AppointmentSlots.viewAppointmentSlots(selectedDoctor.getName());
+                break;
             }
             case 4 -> {
                 PatientsAppointments.scheduleAppointment();
+                break;
             }
             case 5 ->{
                 System.out.println("Enter Appointment ID to reschedule: ");
                 Scanner scanner = new Scanner(System.in);
                 String id = scanner.nextLine();
                 PatientsAppointments.rescheduleAppointment(id);
+                break;
             }
             case 6 ->{
                 System.out.println("Enter Appointment ID to cancel: ");
                 Scanner scanner = new Scanner(System.in);
                 String id = scanner.nextLine();
                 PatientsAppointments.cancelAppointment(id);
+                break;
             }
             case 7->{
                 PatientsAppointments.viewScheduledAppointments();
+                break;
             }
             case 8->{
                 PatientsAppointments.viewPastRecords();
+                break;
             }
             case 9->{
                 System.out.println("Logging out...");
-                return; 
+                break; 
             }
 			default -> System.out.println("Invalid option. Please try again.");
 		}
