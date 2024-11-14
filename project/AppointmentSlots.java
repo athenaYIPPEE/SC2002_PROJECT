@@ -41,6 +41,7 @@ public class AppointmentSlots {
                 if (doctorName.equals(doctor.getName())) {
                     AppointmentSlots appointmentSlots = doctor.getAppointmentSlots(); // Get this doctor's AppointmentSlots
                     System.out.println("Available Appointment Slots for " + doctorName + ": ");
+                    
                     for (LocalDateTime slot : appointmentSlots.getSlots()) {
                         System.out.println(slot); // Print each slot
                     }

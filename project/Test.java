@@ -17,29 +17,71 @@ public class Test {
                         String role = staffInfo.getRole();
                         String password = AllUsers.user.get(thisUserId);
                         if (password.equals("password")) AllUsers.changeUserPassword(thisUserId);
+                        boolean found = false;
                         switch(role){
                             case "Doctor":
-                                Doctor doctor = new Doctor(thisUserId, password, role, staffInfo.getName());
-                                doctor.displayMenu();
+                                for (Doctor doctorInSystem : Doctor.doctors) {
+                                    // Find the corresponding doctor from the list
+                                    if (doctorInSystem.getHospitalId().equalsIgnoreCase(thisUserId)) {
+                                        doctorInSystem.displayMenu(thisUserId);  // Directly call displayMenu on the correct doctor
+                                        found = true;
+                                    }
+                                }
+                                if (found == false)
+                                {
+                                    Doctor doctor = new Doctor(thisUserId, password, role, staffInfo.getName());
+                                    doctor.displayMenu(thisUserId);
+                                }
                                 break;
                             case "Administrator":
-                                Administrator administrator = new Administrator(thisUserId, password);
-                                administrator.displayMenu();
+                                for (Administrator adminInSystem : Administrator.admins) {
+                                    // Find the corresponding doctor from the list
+                                    if (adminInSystem.getHospitalId().equalsIgnoreCase(thisUserId)) {
+                                        adminInSystem.displayMenu();  // Directly call displayMenu on the correct doctor
+                                        found = true;
+                                    }
+                                }
+                                if (found == false)
+                                {
+                                    Administrator administrator = new Administrator(thisUserId, password);
+                                    administrator.displayMenu();
+                                }
                                 break;
                             case "Pharmacist":
-                                Pharmacist pharmacist = new Pharmacist(thisUserId, role, null);
-                                pharmacist.DisplayMenu();
+                                for (Pharmacist pharmaInSystem : Pharmacist.pharmacists) {
+                                    // Find the corresponding doctor from the list
+                                    if (pharmaInSystem.getHospitalId().equalsIgnoreCase(thisUserId)) {
+                                        pharmaInSystem.DisplayMenu();  // Directly call displayMenu on the correct doctor
+                                        found = true;
+                                    }
+                                }
+                                if (found == false)
+                                {
+                                    Pharmacist pharmacist = new Pharmacist(thisUserId, role, null);
+                                    pharmacist.DisplayMenu();
+                                }
                                 break;
                             default:
                                 System.out.println("nah bro");
                                 break;
                         }
                     } else{
+                        boolean found = false;
                         Patients patient = Patients.patientList.get(thisUserId);
                         String passwordPatient = AllUsers.user.get(thisUserId);
                         if (passwordPatient.equals("password")) AllUsers.changeUserPassword(thisUserId);
-                        Patients thePatient = new Patients(thisUserId, AllUsers.user.get(thisUserId), "Patient", patient.getName(), patient.getDob(), patient.getGender(), patient.getPhone(), patient.getEmail(), patient.getBlood());
-                        patient.displayMenu();
+                        for (Patients patientInSystem : Patients.patients) {
+                            // Find the corresponding doctor from the list
+                            if (patientInSystem.getHospitalId().equalsIgnoreCase(thisUserId)) {
+                                patientInSystem.displayMenu();  // Directly call displayMenu on the correct doctor
+                                found = true;
+                            }
+                        }
+                        if (found == false)
+                        {
+                            Patients thePatient = new Patients(thisUserId, AllUsers.user.get(thisUserId), "Patient", patient.getName(), patient.getDob(), patient.getGender(), patient.getPhone(), patient.getEmail(), patient.getBlood());
+                            thePatient.displayMenu();
+                        }
                     }
 
                     }

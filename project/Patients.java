@@ -16,6 +16,7 @@ public class Patients extends AllUsers {
 
     // Static HashMap of all patients (name -> Patients object)
     protected static HashMap<String, Patients> patientList = new HashMap<>();
+    public static List<Patients> patients = new ArrayList<>();
 
     // Constructor
     public Patients(String hospitalId, String password, String role, String name, String dob, String gender, String phoneNumber, String emailAddress, String bloodType) {
@@ -30,6 +31,7 @@ public class Patients extends AllUsers {
         this.medicalRecord = new MedicalRecord(hospitalId, name, dob, gender, bloodType, phoneNumber, emailAddress); // Initialize medical record
         this.contactInfo = new PatientsContactInfo(phoneNumber, emailAddress);
         this.appointments = new ArrayList<>();
+        patients.add(this);
     }
 
     public void displayMenu() {

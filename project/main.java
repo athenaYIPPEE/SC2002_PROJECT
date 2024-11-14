@@ -19,8 +19,8 @@ blood8 */
 
 public class main {
     public static void main(String[] args) {
-        String staffListName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\StaffList.txt"; // specify your file path
-        String patientListName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\PatientList.txt"; // specify your file path
+        String staffListName = "C:\\Users\\prisc\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\StaffList.txt"; // specify your file path
+        String patientListName = "C:\\Users\\prisc\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\PatientList.txt"; // specify your file path
         FileRead.helppls();
         Test.Run();
 

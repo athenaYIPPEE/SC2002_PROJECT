@@ -6,10 +6,12 @@ import java.util.*;
 public class Administrator extends AllUsers { 
     private StaffManager staffManager;
 	private List<Appointment> appointments = Appointment.getAllAppointments();
+    public static List<Administrator> admins = new ArrayList<>();
  
     public Administrator(String hospitalId, String password) { 
         super(hospitalId, password, "Administrator");
         this.staffManager = new StaffManager(hospitalId, password, "Administrator");
+        admins.add(this);
     }  
      
     public void displayMenu() 

@@ -51,8 +51,16 @@ public class AllUsers {
         } 
 		else 
 		{
-            System.out.println("Invalid password. Please try again.");
-            System.exit(0);
+			while (!user.get(hospital_id).equals(password))
+			{
+				System.out.println("Invalid password. Please try again.");
+				System.out.print("Enter your password: ");
+				password = obj.next();
+
+			}
+			return hospital_id;
+            /*System.out.println("Invalid password. Please try again.");
+            System.exit(0);*/
         }
         return null;
 	}
@@ -62,9 +70,10 @@ public class AllUsers {
 		Scanner obj = new Scanner(System.in);
 		System.out.print("Enter your current password: ");
 		String cur_pw = obj.next();
-		if (!user.get(hospital_id).equals(cur_pw)) {
+		while (!user.get(hospital_id).equals(cur_pw)) {
             System.out.println("Incorrect password, please try again.");
-            return;
+            System.out.print("Enter your current password: ");
+			cur_pw = obj.next();
         }
 		System.out.print("Enter your new password: ");
 		String new_pw = obj.next();

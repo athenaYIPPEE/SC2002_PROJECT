@@ -1,15 +1,18 @@
 package project;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Pharmacist extends AllUsers {
     private AppointmentManager appointmentManager;
     private InventoryManager inventoryManager;
+    public static List<Pharmacist> pharmacists = new ArrayList<>();
 
     public Pharmacist(String hospitalId, String password, List<Medication> inventory) {
         super(hospitalId, password, "Pharmacist");
         this.appointmentManager = new AppointmentManager();
+        pharmacists.add(this);
     }
     
     public void DisplayMenu()
