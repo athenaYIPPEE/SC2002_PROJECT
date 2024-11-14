@@ -1,12 +1,4 @@
 package project;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Scanner;
-
-// 0 = hospitalid
 // 1 = password
 // 2 = name
 // 3= age
@@ -97,4 +89,5 @@ public class main {
     
         }*/
     }
+}
 
