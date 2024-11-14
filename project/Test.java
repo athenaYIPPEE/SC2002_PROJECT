@@ -60,7 +60,7 @@ public class Test {
                     if (patientData1[0].equals(thisUserId)){
                         Patients patient = new Patients(patientData1[0], patientData1[1], patientData1[2], patientData1[3], patientData1[4], patientData1[5], patientData1[6], patientData1[7], patientData1[8]);
                         patient.displayMenu();
-                    
+
                     }
                 } 
             }catch (IOException e) {
