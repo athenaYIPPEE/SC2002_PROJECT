@@ -15,6 +15,7 @@ public class Appointment {
     protected ArrayList<Medication> prescribedMedicationList;
     private String consultationNotes;
     public static List<Appointment> allAppointments = new ArrayList<>();
+    private Integer bill = 0;
             
                 // Constructor
                 public Appointment(String appointmentId, String doctorName, String patientId, LocalDateTime appointmentTime, String status, String serviceType) {
@@ -65,6 +66,32 @@ public class Appointment {
                 public String getConsultationNotes(){
                     return consultationNotes;
                 }
+
+                public Integer getBill(){
+                    return bill;
+                }
+
+                public void setBill(String serviceTypeStr){
+                    ServiceType serviceEnum;
+                    try {
+                        serviceEnum = ServiceType.valueOf(serviceTypeStr.toUpperCase());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Invalid service type: " + serviceTypeStr);
+                        return;
+                    }
+
+                    if (serviceEnum == ServiceType.CONSULTATION) {
+                        this.bill = 25;
+                    } else if (serviceEnum == ServiceType.XRAY) {
+                        this.bill = 200;
+                    } else if (serviceEnum == ServiceType.BLOOD_TEST) {
+                        this.bill = 50;
+                    } else if (serviceEnum == ServiceType.SURGERY) {
+                        this.bill = 50000;
+                    } else if (serviceEnum == ServiceType.OTHER) {
+                        this.bill = 250;
+                    }
+                }
             
                 @Override
                 public String toString() {
@@ -103,6 +130,9 @@ public class Appointment {
                     
                     // Print consultation notes
                     System.out.println("Consultation Notes: " + appointment.getConsultationNotes());
+
+                    appointment.setBill(appointment.getServiceType());
+                    System.out.println("Billing cost of appointment: $" + appointment.getBill());
                 }
             
                 public static List<Appointment> getAllAppointments() {

@@ -1,8 +1,11 @@
 package project;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class AllUsers {
     private String hospitalId;
@@ -75,8 +78,41 @@ public class AllUsers {
             System.out.print("Enter your current password: ");
 			cur_pw = obj.next();
         }
-		System.out.print("Enter your new password: ");
+		System.out.print("Enter your new password (Ensure your password is at least 8 characters long, has a small letter, a capital letter, a number and a special character ): ");
 		String new_pw = obj.next();
+
+		boolean hasLower = false, hasUpper = false, hasDigit = false, hasSpecialChar = false;
+        Set<Character> set = new HashSet<Character>(Arrays.asList('!', '@', '#', '$', '%', '^', '&','*', '(', ')', '-', '+'));
+        for (char i : new_pw.toCharArray())
+        {
+            if (Character.isLowerCase(i))
+                hasLower = true;
+            if (Character.isUpperCase(i))
+                hasUpper = true;
+            if (Character.isDigit(i))
+                hasDigit = true;
+            if (set.contains(i))
+                hasSpecialChar = true;
+        }
+
+		while(!(new_pw.length() >= 8 && hasLower==true && hasUpper==true && hasDigit==true && hasSpecialChar==true))
+		{
+			System.out.println("New password does not fulfil requirements. Please try again.");
+			System.out.print("Enter your new password again: ");
+			new_pw = obj.next();
+			for (char i : new_pw.toCharArray())
+			{
+				if (Character.isLowerCase(i))
+					hasLower = true;
+				if (Character.isUpperCase(i))
+					hasUpper = true;
+				if (Character.isDigit(i))
+					hasDigit = true;
+				if (set.contains(i))
+					hasSpecialChar = true;
+			}
+		} //new feature!! safe password for all!!
+
 		System.out.print("Confirm your new password: ");
 		String cfm_new_pw = obj.next();
 		

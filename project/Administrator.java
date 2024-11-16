@@ -27,7 +27,8 @@ public class Administrator extends AllUsers {
           + "3: View Doctor's Appointments details \n"  
           + "4: Manage Inventory \n"  
           + "5: Approve Replenishment Requests \n"
-          + "6: Logout \n");  
+          + "6: Filter Staff \n"
+          + "7: Logout \n");  
      
     Scanner sc = new Scanner(System.in); 
     option = sc.nextInt(); 
@@ -38,9 +39,10 @@ public class Administrator extends AllUsers {
         case 3 -> viewDoctorAppointments();
         case 4 -> manageInventory();
      	case 5 -> approveReplenishmentRequest(); 
-        case 6 -> logout(); 
+        case 6 -> displayStaff();
+        case 7 -> logout(); 
     } 
-    }while (option != 6);
+    }while (option != 7);
     } 
  
     private Object logout() 
@@ -117,6 +119,39 @@ public class Administrator extends AllUsers {
             System.out.println("Appointment ID not found.");
         }
         
+    }
+
+    public void displayStaff()
+    {
+        Scanner obj = new Scanner(System.in);
+        System.out.print("Enter role to filter by. (Enter 'no' if otherwise): ");
+        String respond = obj.nextLine();
+        String roles;
+        if (respond.equals("no"))
+        {
+            roles = null;
+        }
+        else
+        {
+            roles = respond;
+        }
+        System.out.print("Enter gender to filter by. (Enter 'no' if otherwise): ");
+        respond = obj.nextLine();
+        String gender;
+        if (respond.equals("no"))
+        {
+            gender = null;
+        }
+        else
+        {
+            gender = respond;
+        }
+        System.out.print("Enter minimum age to filter by: ");
+        Integer ageMin = obj.nextInt();
+        System.out.print("Enter maximum age to filter by: ");
+        Integer ageMax = obj.nextInt();
+
+        StaffManager.displayStaff(roles, gender, ageMin, ageMax);
     }
     
  
