@@ -12,7 +12,7 @@ public class Test {
             switch(choice){
                 case 1->{
                     String thisUserId= AllUsers.login();
-                    if (thisUserId.charAt(0) != 'P' && thisUserId.charAt(1) != '1'){
+                    if (thisUserId.length() == 4){
                         StaffInfo staffInfo = AllUsers.userInfoMap.get(thisUserId);
                         String role = staffInfo.getRole();
                         String password = AllUsers.user.get(thisUserId);
@@ -57,7 +57,7 @@ public class Test {
                                 }
                                 if (found == false)
                                 {
-                                    Pharmacist pharmacist = new Pharmacist(thisUserId, role, null);
+                                    Pharmacist pharmacist = new Pharmacist(thisUserId, role);
                                     pharmacist.DisplayMenu();
                                 }
                                 break;

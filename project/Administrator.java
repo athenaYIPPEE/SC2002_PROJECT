@@ -5,12 +5,14 @@ import java.util.*;
  
 public class Administrator extends AllUsers { 
     private StaffManager staffManager;
+    private InventoryManager inventoryManager;
 	private List<Appointment> appointments = Appointment.getAllAppointments();
     public static List<Administrator> admins = new ArrayList<>();
  
     public Administrator(String hospitalId, String password) { 
         super(hospitalId, password, "Administrator");
         this.staffManager = new StaffManager(hospitalId, password, "Administrator");
+        this.inventoryManager = new InventoryManager();
         admins.add(this);
     }  
      
@@ -36,7 +38,7 @@ public class Administrator extends AllUsers {
      	case 5 -> approveReplenishmentRequest(); 
         case 6 -> logout(); 
     } 
-}while (option != 6);
+    }while (option != 6);
     } 
  
     private Object logout() 
@@ -67,11 +69,11 @@ public class Administrator extends AllUsers {
         int option = sc.nextInt(); 
         switch(option) 
         { 
-            case 1 -> InventoryManager.viewInventory(); 
-            case 2 -> InventoryManager.addingStock(); 
-            case 3 -> InventoryManager.removingStock();
-            case 4 -> InventoryManager.alertUpdate(); 
-            case 5 -> InventoryManager.showAlert();
+            case 1 -> inventoryManager.viewInventory(); 
+            case 2 -> inventoryManager.addingStock(); 
+            case 3 -> inventoryManager.removingStock();
+            case 4 -> inventoryManager.alertUpdate(); 
+            case 5 -> inventoryManager.showAlert();
         }
     } 
     

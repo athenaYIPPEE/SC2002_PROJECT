@@ -1,34 +1,39 @@
 package project;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class ReplenishmentManager {
     private static MedicationStock inventory;
-
-    public ReplenishmentManager(MedicationStock inventory) {
-        this.inventory = inventory;
-    }
-
-    public static void approveReplenishmentRequest(){
-        for (int i = 0; i < InventoryMonitor.replenishmentRequest.size(); i++){
-            System.out.println(InventoryMonitor.replenishmentRequest.get(i));
-            ReplenishmentRequest request = InventoryMonitor.replenishmentRequest.get(i);
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("1. Approve   2. Reject");
-            int choice = scanner.nextInt();
-            switch (choice){
-                case 1: 
-                    System.out.println("Replenishment Approved.");
-                    String medicationName = request.getName();
-                    int replenishmentAmount = request.getQuantity();
-                    MedicationName medicationEnum = null;
-                    for (MedicationName medication : MedicationName.values()) {
-                        if (medication.getName().equals(medicationName)) {
-                            medicationEnum = medication;
-                            break;
+        private static Map<MedicationName, Integer> inventoryMap;
+    
+        public ReplenishmentManager() {
+            this.inventory = new MedicationStock();
+            this.inventoryMap = inventory.stock;
+        }
+    
+        public static void approveReplenishmentRequest(){
+            for (int i = 0; i < InventoryMonitor.replenishmentRequest.size(); i++){
+                System.out.println(InventoryMonitor.replenishmentRequest.get(i));
+                ReplenishmentRequest request = InventoryMonitor.replenishmentRequest.get(i);
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("1. Approve   2. Reject");
+                int choice = scanner.nextInt();
+                switch (choice){
+                    case 1: 
+                        System.out.println("Replenishment Approved.");
+                        String medicationName = request.getName();
+                        int replenishmentAmount = request.getQuantity();
+                        MedicationName medicationEnum = null;
+                        for (MedicationName medication : MedicationName.values()) {
+                            if (medication.getName().equals(medicationName)) {
+                                medicationEnum = medication;
+                                break;
+                            }
                         }
-                    }
-                    inventory.addStock(medicationEnum, replenishmentAmount);
+                        inventory.addStock(medicationEnum, replenishmentAmount);
+                    Integer choiceInInt = inventoryMap.get(medicationEnum) + replenishmentAmount;
+                    //inventoryMap.put(medicationEnum, choiceInInt);
                     InventoryMonitor.replenishmentRequest.remove(i);
                     i--;
                     break;

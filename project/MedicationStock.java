@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class MedicationStock {
 
-	private static Map<MedicationName, Integer> stock;
+	static Map<MedicationName, Integer> stock;
         private static Map<MedicationName, Integer> alert;
                 
                 public MedicationStock() {
@@ -21,7 +21,7 @@ public class MedicationStock {
                 }
             
                 
-                public static void addStock(MedicationName medication, int amount) {
+                public void addStock(MedicationName medication, int amount) {
                     if (stock.containsKey(medication)) {
                     stock.put(medication, stock.get(medication) + amount);
                     System.out.println("Added " + amount + " units to " + medication.getName() + ". Current stock: " + stock.get(medication));
@@ -30,7 +30,7 @@ public class MedicationStock {
                 }
             }
             
-            public static void removeStock(MedicationName medication, int amount) {
+            public void removeStock(MedicationName medication, int amount) {
                 if (stock.containsKey(medication)) {
                     int currentStock = stock.get(medication);
                     if (amount <= currentStock) {
@@ -48,7 +48,7 @@ public class MedicationStock {
                 return stock.getOrDefault(medication, 0); // Returns 0 if not found
             }
         
-            public static void setAlert(MedicationName medication, int level){
+            public void setAlert(MedicationName medication, int level){
                 if (alert.containsKey(medication)) {
             alert.put(medication, level);
         } else {
@@ -56,13 +56,13 @@ public class MedicationStock {
         }
     }
 
-    public static void showAlert(MedicationName medication){
+    public void showAlert(MedicationName medication){
         if (alert.containsKey(medication)) {
             System.out.println("Alert level is: " + alert.get(medication));
     }
 }
 
-    public static Integer getAlert(MedicationName medication) {
+    public Integer getAlert(MedicationName medication) {
         return alert.get(medication);
     }
 

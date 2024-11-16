@@ -7,7 +7,7 @@ public class Medication {
     // Constructor to initialize Medication with a name and an optional status
     public Medication(MedicationName name) {
         this.name = name;
-        this.status = "pending";  // Default status is "pending"
+        this.status = "Pending";  // Default status is "pending"
     }
 
     // Getter for the medication name

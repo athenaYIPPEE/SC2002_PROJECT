@@ -3,15 +3,20 @@ package project;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.*;
 
 public class Pharmacist extends AllUsers {
     private AppointmentManager appointmentManager;
     private InventoryManager inventoryManager;
+    private InventoryMonitor inventoryMonitor;
     public static List<Pharmacist> pharmacists = new ArrayList<>();
+    private Map<MedicationName, Integer> inventory;
 
-    public Pharmacist(String hospitalId, String password, List<Medication> inventory) {
+    public Pharmacist(String hospitalId, String password) {
         super(hospitalId, password, "Pharmacist");
         this.appointmentManager = new AppointmentManager();
+        this.inventoryMonitor = new InventoryMonitor();
+        this.inventory = MedicationStock.stock;
         pharmacists.add(this);
     }
     
@@ -24,7 +29,7 @@ public class Pharmacist extends AllUsers {
     		    + "2: Update Prescription Status \n" 
     		    + "3: View Medication Inventory \n" 
     		    + "4: Submit Replenishment Request \n"
-    		    + "5: Logout \n"); 
+    		    + "5: Logout"); 
         
     	option = sc.nextInt();
     	
@@ -53,7 +58,7 @@ public class Pharmacist extends AllUsers {
     }
 
     public void submitReplenishmentRequest() {
-        InventoryMonitor.submitReplenishmentRequest();
+        inventoryMonitor.submitReplenishmentRequest();
     }
 
     public void logout()

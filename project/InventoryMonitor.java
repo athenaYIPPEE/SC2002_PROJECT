@@ -6,12 +6,12 @@ import java.util.Scanner;
 // pharmacist
 
 public class InventoryMonitor {
-    private static MedicationStock inventory;
+        private MedicationStock inventory;
         private Medication medication;
         static ArrayList<ReplenishmentRequest> replenishmentRequest = new ArrayList<>();
     
-        public InventoryMonitor(MedicationStock inventory) {
-            this.inventory = inventory;
+        public InventoryMonitor() {
+            this.inventory = new MedicationStock();
         }
     
         // View medication inventory
@@ -23,15 +23,15 @@ public class InventoryMonitor {
         }
     
         // Submit replenishment request
-        public static void submitReplenishmentRequest() {
-            System.out.print("Enter Mediaction Name");
+        public void submitReplenishmentRequest() {
+            System.out.print("Enter Medication Name: ");
             Scanner sc = new Scanner(System.in);
             String medicationName = sc.nextLine();
             boolean found = false;
             for (MedicationName medication : MedicationName.values()) {
                 if (medication.getName().equals(medicationName) && inventory.getStock(medication) < inventory.getAlert(medication)) {
                 found = true;
-            	System.out.println("How much stock to add to " + medicationName);
+            	System.out.println("How much stock to add to " + medicationName + "?");
                 int amt = sc.nextInt();
                 ReplenishmentRequest request = new ReplenishmentRequest(medicationName, amt);
                 replenishmentRequest.add(request);    
