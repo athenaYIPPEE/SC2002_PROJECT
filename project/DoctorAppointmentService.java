@@ -1,5 +1,6 @@
 package project;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -7,9 +8,11 @@ import java.util.*;
 public class DoctorAppointmentService {
 	
 	private Doctor doctor;
+	private static HashMap<LocalDate, AppointmentSlots> personalSchedule;
 	
 	public DoctorAppointmentService(Doctor doctor) {
 		this.doctor = doctor;
+		this.personalSchedule = Doctor.personalSchedule;
 	}
 	
 	public void appointmentRequest() {
@@ -22,6 +25,20 @@ public class DoctorAppointmentService {
                 if (decision == 1) {
                     appointment.setStatus("Confirmed");
                     System.out.println("Appointment confirmed.");
+					LocalDateTime date = appointment.getAppointmentDate();
+					LocalDate date1 = date.toLocalDate();
+					AppointmentSlots slotList = personalSchedule.get(date1);
+					if (slotList != null) {
+						// Remove the specific slot from the list
+						slotList.slots.remove(date);
+					
+						// If no slots are left, remove the date from personalSchedule
+						if (slotList.slots.isEmpty()) {
+							personalSchedule.remove(date1);
+						}
+					}
+					//slotList.slots.remove(date);
+					//if (slotList.slots.isEmpty()) personalSchedule.remove(date1);
                 } else if (decision == 2) {
                     appointment.setStatus("Cancelled");
                     System.out.println("Appointment declined.");
@@ -81,25 +98,30 @@ public class DoctorAppointmentService {
             			//medication
             			boolean addingMedications = true;
             			while (addingMedications) {
-                    			System.out.println("Medication prescribed: ");
-                    			for (int i = 0; i < MedicationName.values().length; i++) {
-                    				System.out.println((i + 1) + ": " + MedicationName.values()[i].getName());
-                			}
-						Scanner scanner = new Scanner(System.in);
-						int choice = scanner.nextInt();
-            				if (choice < 1 || choice > MedicationName.values().length) {
+                    		System.out.println("Medication prescribed: ");
+                    		for (int i = 0; i < MedicationName.values().length; i++) {
+                    			System.out.println((i + 1) + ": " + MedicationName.values()[i].getName());
+                			} 
+							System.out.println((MedicationName.values().length + 1) + ": No medication needed");
+							Scanner scanner = new Scanner(System.in);
+
+							int choice = scanner.nextInt();
+            				if (choice < 1 || choice > MedicationName.values().length+1) {
                 				System.out.println("Invalid choice. Please select a valid medication.");
                 				continue; // Restart the loop if the input is invalid
             				}
-					MedicationName medication = MedicationName.values()[choice - 1];
+							if (choice == MedicationName.values().length + 1) {
+								break;  
+							}
+							MedicationName medication = MedicationName.values()[choice - 1];
                     		Medication prescribedMedication = new Medication(medication);
 							appointment.addMedication(prescribedMedication); // Add the medication to the appointment
 
-                    			System.out.println("Medication added: " + medication);    
-					System.out.println("Do you want to add another medication? (y/n)");
+                    		System.out.println("Medication added: " + medication);    
+							System.out.println("Do you want to add another medication? (y/n)");
             				String response = scanner.next();
             				addingMedications = response.equalsIgnoreCase("y");
-            			}
+						}
 				
             			//consultation
             			boolean addingNotes = true;
@@ -109,10 +131,12 @@ public class DoctorAppointmentService {
 							appointment.recordConsultationNotes(consultationNote);
 							if (consultationNote.equalsIgnoreCase("exit")) {
 								addingNotes = false;
-								continue;
 							}
 
-            			} System.out.println("Appointment outcome recorded.");
+            			} 
+						appointment.setStatus("Completed");
+						System.out.println("Appointment outcome recorded and completed.");
+
             		} 
             		if (found == false) System.out.println("Appointment not found.");
         	}

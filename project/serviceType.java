@@ -1,6 +1,6 @@
 package project;
 
-public enum serviceType {
+public enum ServiceType {
   CONSULTATION,
   XRAY,
   BLOOD_TEST,

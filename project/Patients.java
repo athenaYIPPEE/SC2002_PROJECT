@@ -13,6 +13,7 @@ public class Patients extends AllUsers {
     private MedicalRecord medicalRecord; // Encapsulated medical data
     private PatientsContactInfo contactInfo;
     private List<Appointment> appointments; // List of appointments for the patient
+    private AppointmentSlots appointmentSlots;
 
     // Static HashMap of all patients (name -> Patients object)
     protected static HashMap<String, Patients> patientList = new HashMap<>();
@@ -64,10 +65,10 @@ public class Patients extends AllUsers {
                     int choice = scanner.nextInt();
                     switch (choice) {
                         case 1:
-                            PatientsContactInfo.updatePhoneNumber(contactInfo);
+                            contactInfo.updatePhoneNumber(hospitalId);
                             break;
                         case 2:
-                            PatientsContactInfo.updateEmailAddress(contactInfo);
+                            contactInfo.updateEmailAddress(hospitalId);
                             break;
                         default:
                             System.out.println("Invalid Choice.");
@@ -78,7 +79,7 @@ public class Patients extends AllUsers {
                 case 3 -> {
                     System.out.println("Select a Doctor: ");
                     for (int i = 0; i < Doctor.doctorNames.size(); i++) {
-                        System.out.println((i + 1) + ". " + Doctor.doctorNames.get(i));
+                        System.out.println((i + 1) + ". Dr. " + Doctor.doctorNames.get(i));
                     }
                     Scanner scanner = new Scanner(System.in);
                     int choose = scanner.nextInt() - 1;
