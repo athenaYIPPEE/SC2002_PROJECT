@@ -22,7 +22,15 @@ public class AppointmentSlots {
         }
 
         // Get the slots for this doctor
+        /*public List<LocalDateTime> getSlots() {
+            return this.slots;
+        }*/
+
         public List<LocalDateTime> getSlots() {
+            System.out.println("Debug: Fetching slots list - current contents:");
+            for (LocalDateTime slot : slots) {
+                System.out.println(slot);
+            }
             return this.slots;
         }
 
@@ -41,6 +49,7 @@ public class AppointmentSlots {
             for (Doctor doctor : Doctor.doctors) {
                 if (doctorName.equals(doctor.getName())) {
                     found = true;
+                    
                     AppointmentSlots appointmentSlots = doctor.getAppointmentSlots(); // Get this doctor's AppointmentSlots
                     System.out.println("Available Appointment Slots for " + doctorName + ": ");
                     

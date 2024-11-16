@@ -3,9 +3,7 @@ package project;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class PatientsAppointments {
 
@@ -35,21 +33,24 @@ public class PatientsAppointments {
             LocalDate date = LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
     
             // Step 4: Print available time slots for the selected doctor on the chosen date
-            AppointmentSlots appointmentSlots = selectedDoctor.getAppointmentSlots();
-            List<LocalDateTime> availableSlots = new ArrayList<>();
-            if (appointmentSlots != null) {
-                availableSlots = appointmentSlots.getSlotsForDate(date);
-                if (availableSlots.isEmpty()) {
+            HashMap<LocalDate, AppointmentSlots> appointmentSlots = selectedDoctor.returnPersonalSchedule();
+            //List<AppointmentSlots> availableSlots = new ArrayList<>();
+            AppointmentSlots availableSlots = appointmentSlots.get(date);
+            List<LocalDateTime> slots = availableSlots.getSlots();
+            
+                //availableSlots = appointmentSlots.getSlotsForDate(date);
+                if (availableSlots == null) {
                     System.out.println("No available slots for this doctor on the selected date.");
                     return;  // Exit if no slots are available
                 }
+                
     
                 // Display available slots for the patient to choose from
                 System.out.println("Available time slots for " + selectedDoctor.getName() + " on " + date + ":");
-                for (int i = 0; i < availableSlots.size(); i++) {
-                    System.out.println((i + 1) + ". " + availableSlots.get(i).toLocalTime());
+                for (int i = 0; i < slots.size(); i++) {
+                    System.out.println((i + 1) + ". " + slots.get(i).toLocalTime());
                 }
-            } else {
+            
                 System.out.println("No appointment slots are available for this doctor.");
                 return;  // Exit if no slots are found
             }
@@ -59,8 +60,8 @@ public class PatientsAppointments {
             int slotChoice = scanner.nextInt() - 1;  // Adjust for 0-based index
     
             // Validate the slot choice
-            if (slotChoice >= 0 && slotChoice < availableSlots.size()) {
-                LocalDateTime chosenSlot = availableSlots.get(slotChoice);
+            if (slotChoice >= 0 && slotChoice < slots.size()) {
+                LocalDateTime chosenSlot = slots.get(slotChoice);
                 System.out.println("You have selected " + chosenSlot.toLocalTime() + " for your appointment.");
     
                 // Step 6: Schedule the appointment (create an Appointment object)

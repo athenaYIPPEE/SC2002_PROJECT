@@ -51,7 +51,12 @@ public class Doctor extends AllUsers{
 		public AppointmentSlots getAppointmentSlots() {
 			// Retrieve the appointment slots for today's date (or a given date)
 			LocalDate today = LocalDate.now(); //cannot use 'new Date();' bcos the java library constructor giives up to millisecond precision which isnt what we want // Today's date, for example
+			
 			return personalSchedule.get(today); // Return the slots for today or specific date
+		}
+
+		public HashMap<LocalDate, AppointmentSlots> returnPersonalSchedule(){
+			return personalSchedule;
 		}
 
 		public List<LocalDateTime> returnAppointmentSlots(){
