@@ -5,12 +5,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Pharmacist extends AllUsers {
+    private String name;
+    private int age;
+    private String gender;
     private AppointmentManager appointmentManager;
     private InventoryManager inventoryManager;
     public static List<Pharmacist> pharmacists = new ArrayList<>();
 
-    public Pharmacist(String hospitalId, String password, List<Medication> inventory) {
+    public Pharmacist(String hospitalId, String password, String role, String name, int age, String gender, List<Medication> inventory) {
         super(hospitalId, password, "Pharmacist");
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
         this.appointmentManager = new AppointmentManager();
         pharmacists.add(this);
     }
