@@ -10,13 +10,13 @@ import java.util.Scanner;
 public class PatientsAppointments {
 
     // Constructor
-    private static Patients currentPatient;
+    private Patients currentPatient;
     
         public PatientsAppointments(Patients patient) {
             this.currentPatient = patient;
         }
     
-        public static void scheduleAppointment() {
+        public void scheduleAppointment() {
             System.out.println("Select a Doctor: ");
             for (int i = 0; i < Doctor.doctorNames.size(); i++) {
                 // Print the doctor number along with the doctor name
@@ -24,6 +24,7 @@ public class PatientsAppointments {
             }
             Scanner scanner = new Scanner(System.in);
             int choose = scanner.nextInt()-1;
+            String buffer = scanner.nextLine();
             
             Doctor selectedDoctor = Doctor.doctors.get(choose);
             AppointmentSlots.viewAppointmentSlots(selectedDoctor.getName());
@@ -98,7 +99,7 @@ public class PatientsAppointments {
         }
     }
 }   
-    public static void cancelAppointment(String appointmentId) {
+    public void cancelAppointment(String appointmentId) {
         // Find the appointment by ID in the current patient's appointment list
         for (Appointment appointment : currentPatient.getAppointments()) { // Get appointments from the current patient
             if (appointment.getAppointmentId().equals(appointmentId)) {
@@ -114,7 +115,7 @@ public class PatientsAppointments {
     }
 
 
-    public static void rescheduleAppointment(String appointmentId) {
+    public void rescheduleAppointment(String appointmentId) {
         // Find the appointment by ID in the current patient's appointment list
         Appointment appointmentToReschedule = null;
         for (Appointment appointment : currentPatient.getAppointments()) { 
@@ -193,16 +194,16 @@ public class PatientsAppointments {
                        + newAppointmentDateTime.toLocalDate() + " at " + newAppointmentDateTime.toLocalTime());
     }
 
-    public static void viewScheduledAppointments() {
+    public void viewScheduledAppointments() {
         // Assuming currentPatient.getAppointments() returns a list of appointments
         for (Appointment appointment : currentPatient.getAppointments()) {
             // Check if the status of the appointment is "Confirmed"
                 // Print the appointment details (you may need to use toString() or customize the print output)
-                System.out.println(appointment.getStatus());  // Assuming toString() method in Appointment handles the print
+                System.out.println(appointment); // Assuming toString() method in Appointment handles the print
             }
         }
     
-    public static void viewPastRecords() {
+    public void viewPastRecords() {
         for (Appointment appointment : currentPatient.getAppointments()) {
             // Check if the status of the appointment is "Completed"
             if (appointment.getStatus().equals("Completed")) {
@@ -214,4 +215,4 @@ public class PatientsAppointments {
     
     
 
-}
+}   

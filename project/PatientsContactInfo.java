@@ -20,7 +20,7 @@ public class PatientsContactInfo {
         patient.phoneNumber = newPhoneNumber;
         MedicalRecord.updatePhoneNumber(newPhoneNumber);
         System.out.println("Updated Phone Number: "+ newPhoneNumber);
-        System.out.println("Email Address" + patient.emailAddress);
+        System.out.println("Email Address: " + patient.emailAddress);
 }
     public static void updateEmailAddress(PatientsContactInfo patient){
         Scanner scanner = new Scanner(System.in);

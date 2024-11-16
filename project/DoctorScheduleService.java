@@ -33,7 +33,7 @@ public class DoctorScheduleService {
             System.out.println("Enter slot " + (i + 1) + " in the format (YYYY-MM-DDTHH:MM): ");
             String slotString = scanner.nextLine();
             LocalDateTime slot = LocalDateTime.parse(slotString);
-            doctor.appointmentSlots.add(slot);
+            //doctor.appointmentSlots.add(slot);
 
             //test
             LocalDate datePart = slot.toLocalDate();

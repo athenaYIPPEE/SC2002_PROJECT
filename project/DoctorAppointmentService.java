@@ -4,24 +4,25 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class DoctorAppointmentService {
-
-	private List<Appointment> appointments;
 	
-	public DoctorAppointmentService() {
-		this.appointments = new ArrayList<>();
+	private Doctor doctor;
+	
+	public DoctorAppointmentService(Doctor doctor) {
+		this.doctor = doctor;
 	}
 	
 	public void appointmentRequest() {
 		Scanner sc = new Scanner(System.in);
-        for (Appointment appointment : appointments) {
+        for (Appointment appointment : doctor.appointments) {
             if (appointment.getStatus().equals("Pending")) {
+				System.out.println(appointment.toString());
                 System.out.println("Do you want to accept or decline this appointment? (1. Accept 2.Decline)");
                 int decision = sc.nextInt();
                 if (decision == 1) {
-                    appointment.setStatus("confirmed");
+                    appointment.setStatus("Confirmed");
                     System.out.println("Appointment confirmed.");
                 } else if (decision == 2) {
-                    appointment.setStatus("cancelled");
+                    appointment.setStatus("Cancelled");
                     System.out.println("Appointment declined.");
                 } else {
                     System.out.println("Invalid choice.");
@@ -34,7 +35,7 @@ public class DoctorAppointmentService {
 	public void viewUpcomingAppointments() {
 		System.out.println("Upcoming confirmed appointments:");
     		boolean hasConfirmedAppointments = false;
-        	for (Appointment appointment : appointments) {
+        	for (Appointment appointment : doctor.appointments) {
             		if (appointment.getStatus().equals("Confirmed")) {
                 		System.out.println(appointment);
                 		hasConfirmedAppointments = true;
@@ -50,7 +51,7 @@ public class DoctorAppointmentService {
         	System.out.println("Enter the appointment ID to record the outcome: ");
         	String appointmentID = sc.nextLine();
 
-        	for (Appointment appointment : appointments) {
+        	for (Appointment appointment : doctor.appointments) {
             		if (appointment.getAppointmentId().equals(appointmentID)) {
                 		//record date
             			LocalDateTime appointmentDate = LocalDateTime.now();

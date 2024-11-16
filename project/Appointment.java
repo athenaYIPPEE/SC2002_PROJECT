@@ -16,7 +16,7 @@ public class Appointment {
         public static List<Appointment> allAppointments = new ArrayList<>();
             
                 // Constructor
-                public Appointment(String appointmentId, String doctorName, String patientId, LocalDateTime appointmentDate, String status, String serviceType) {
+                public Appointment(String appointmentId, String doctorName, String patientId, LocalDateTime appointmentTime, String status, String serviceType) {
                     this.appointmentId = appointmentId;
                     this.doctorName = doctorName;
                     this.patientId = patientId;

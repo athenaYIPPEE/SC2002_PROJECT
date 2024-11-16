@@ -17,6 +17,7 @@ public class Patients extends AllUsers {
     // Static HashMap of all patients (name -> Patients object)
     protected static HashMap<String, Patients> patientList = new HashMap<>();
     public static List<Patients> patients = new ArrayList<>();
+    private PatientsAppointments Patient;
 
     // Constructor
     public Patients(String hospitalId, String password, String role, String name, String dob, String gender, String phoneNumber, String emailAddress, String bloodType) {
@@ -32,6 +33,7 @@ public class Patients extends AllUsers {
         this.contactInfo = new PatientsContactInfo(phoneNumber, emailAddress);
         this.appointments = new ArrayList<>();
         patients.add(this);
+        this.Patient = new PatientsAppointments(this);
     }
 
     public void displayMenu() {
@@ -85,29 +87,29 @@ public class Patients extends AllUsers {
                     break;
                 }
                 case 4 -> {
-                    PatientsAppointments.scheduleAppointment();
+                    Patient.scheduleAppointment();
                     break;
                 }
                 case 5 -> {
                     System.out.println("Enter Appointment ID to reschedule: ");
                     Scanner scanner = new Scanner(System.in);
                     String id = scanner.nextLine();
-                    PatientsAppointments.rescheduleAppointment(id);
+                    Patient.rescheduleAppointment(id);
                     break;
                 }
                 case 6 -> {
                     System.out.println("Enter Appointment ID to cancel: ");
                     Scanner scanner = new Scanner(System.in);
                     String id = scanner.nextLine();
-                    PatientsAppointments.cancelAppointment(id);
+                    Patient.cancelAppointment(id);
                     break;
                 }
                 case 7 -> {
-                    PatientsAppointments.viewScheduledAppointments();
+                    Patient.viewScheduledAppointments();
                     break;
                 }
                 case 8 -> {
-                    PatientsAppointments.viewPastRecords();
+                    Patient.viewPastRecords();
                     break;
                 }
                 case 9 -> {

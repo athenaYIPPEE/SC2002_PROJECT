@@ -1,9 +1,8 @@
 package project;
 
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +11,7 @@ public class Doctor extends AllUsers{
 
 	private String name;
 		private HashMap<String, Patients> patientsMap;
-		protected List<Appointment> appointments; //list of confirmed appts
+		protected List<Appointment> appointments; 
 		private static HashMap<LocalDate, AppointmentSlots> personalSchedule; // personal schedule hashmap
 		protected List<LocalDateTime> appointmentSlots; //list of avail appts
 		protected static List<String> doctorNames = new ArrayList<>();
@@ -30,7 +29,7 @@ public class Doctor extends AllUsers{
 			this.appointmentSlots = new ArrayList<>();
 			this.personalSchedule = new HashMap<>();
 			this.doctorScheduleService = new DoctorScheduleService(this);  
-			this.doctorAppointmentService = new DoctorAppointmentService();
+			this.doctorAppointmentService = new DoctorAppointmentService(this);
 			doctors.add(this);
 			doctorNames.add(name);
 		}
