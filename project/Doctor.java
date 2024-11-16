@@ -10,34 +10,38 @@ import java.util.Scanner;
 public class Doctor extends AllUsers{
 
 	private String name;
-		private HashMap<String, Patients> patientsMap;
-		protected List<Appointment> appointments; 
-		private static HashMap<LocalDate, AppointmentSlots> personalSchedule; // personal schedule hashmap
-		protected List<LocalDateTime> appointmentSlots; //list of avail appts
-		protected static List<String> doctorNames = new ArrayList<>();
-		public static List<Doctor> doctors = new ArrayList<>();
+	private int age;
+	private String gender;
+	private HashMap<String, Patients> patientsMap;
+	protected List<Appointment> appointments; 
+	protected static HashMap<LocalDate, AppointmentSlots> personalSchedule; // personal schedule hashmap
+	protected List<LocalDateTime> appointmentSlots; //list of avail appts
+	protected static List<String> doctorNames = new ArrayList<>();
+	public static List<Doctor> doctors = new ArrayList<>();
 
-		private DoctorMedicalRecord doctorMedicalRecord;
-		private DoctorScheduleService doctorScheduleService;
-		private DoctorAppointmentService doctorAppointmentService;
+	private DoctorMedicalRecord doctorMedicalRecord;
+	private DoctorScheduleService doctorScheduleService;
+	private DoctorAppointmentService doctorAppointmentService;
 		
-		public Doctor(String hospitalId, String password, String role, String name) {
-			super(hospitalId, password, role);
-			this.patientsMap = new HashMap<>();
-			this.appointments = new ArrayList<>();
-			this.name = name;
-			this.appointmentSlots = new ArrayList<>();
-			this.personalSchedule = new HashMap<>();
-			this.doctorMedicalRecord = new DoctorMedicalRecord(this);
-			this.doctorScheduleService = new DoctorScheduleService(this);  
-			this.doctorAppointmentService = new DoctorAppointmentService(this);
-			doctors.add(this);
-			doctorNames.add(name);
-		}
+	public Doctor(String hospitalId, String password, String role, String name, int age, String gender) {
+		super(hospitalId, password, role);
+		this.patientsMap = new HashMap<>();
+		this.appointments = new ArrayList<>();
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+		this.appointmentSlots = new ArrayList<>();
+		this.personalSchedule = new HashMap<>();
+		this.doctorMedicalRecord = new DoctorMedicalRecord(this);
+		this.doctorScheduleService = new DoctorScheduleService(this);  
+		this.doctorAppointmentService = new DoctorAppointmentService(this);
+		doctors.add(this);
+		doctorNames.add(name);
+	}
 	
-		public String getName() {
-			return name;
-		}
+	public String getName() {
+		return name;
+	}
 
 		// Add availability for this doctor
 		public void setAvailability(LocalDate date, List<LocalDateTime> availableSlots) {

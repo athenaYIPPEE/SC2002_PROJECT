@@ -1,6 +1,7 @@
 package project;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Appointment {
@@ -12,8 +13,8 @@ public class Appointment {
     private String serviceType;
     private Medication prescribedMedications; 
     protected ArrayList<Medication> prescribedMedicationList;
-        private String consultationNotes;
-        public static List<Appointment> allAppointments = new ArrayList<>();
+    private String consultationNotes;
+    public static List<Appointment> allAppointments = new ArrayList<>();
             
                 // Constructor
                 public Appointment(String appointmentId, String doctorName, String patientId, LocalDateTime appointmentTime, String status, String serviceType) {
@@ -24,6 +25,7 @@ public class Appointment {
                     this.status = status;
                     this.serviceType = serviceType;
                     this.prescribedMedicationList = new ArrayList<>();
+                    this.consultationNotes = "";
                     allAppointments.add(this);
                 }
             
@@ -45,7 +47,7 @@ public class Appointment {
                 }
             
                 public void setAppointmentDateTime(LocalDateTime appointmentDate) {
-                    this.appointmentTime= appointmentDate;
+                    this.appointmentTime = appointmentDate.truncatedTo(ChronoUnit.MINUTES);
                 }
             
                 public String getStatus() {
@@ -85,21 +87,22 @@ public class Appointment {
                     } else {
                         this.consultationNotes += "\n" + notes; // Append new notes with a newline
                     }*/
-                    this.consultationNotes += "\n" + notes;
+                    if (!notes.equals("exit")) this.consultationNotes += "\n" + notes;
                 }
             
-                public void getOutcome() {
+                public void getOutcome(Appointment appointment) {
                     // Print appointment date and service type
-                    System.out.println(getAppointmentDate());
-                    System.out.println(getServiceType());
+                    System.out.println("Appointment ID: " + appointment.getAppointmentId());
+                    System.out.println("Date: " + appointment.getAppointmentDate());
+                    System.out.println("Service Type: " + appointment.getServiceType());
                     
                     // Print each prescribed medication in the list
-                    for (int i = 0; i < prescribedMedicationList.size(); i++) {
-                        System.out.println(prescribedMedicationList.get(i));  // Corrected this line
+                    for (int i = 0; i < appointment.prescribedMedicationList.size(); i++) {
+                        System.out.println(appointment.prescribedMedicationList.get(i));  // Corrected this line
                     }
                     
                     // Print consultation notes
-                    System.out.println(getConsultationNotes());
+                    System.out.println("Consultation Notes: " + appointment.getConsultationNotes());
                 }
             
                 public static List<Appointment> getAllAppointments() {

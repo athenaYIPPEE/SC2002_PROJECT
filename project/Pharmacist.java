@@ -1,19 +1,22 @@
 package project;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import java.util.*;
 
 public class Pharmacist extends AllUsers {
+    private String name;
+    private int age;
+    private String gender;
     private AppointmentManager appointmentManager;
     private InventoryManager inventoryManager;
     private InventoryMonitor inventoryMonitor;
     public static List<Pharmacist> pharmacists = new ArrayList<>();
     private Map<MedicationName, Integer> inventory;
 
-    public Pharmacist(String hospitalId, String password) {
+    public Pharmacist(String hospitalId, String password, String role, String name, int age, String gender, List<Medication> inventory) {
         super(hospitalId, password, "Pharmacist");
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
         this.appointmentManager = new AppointmentManager();
         this.inventoryMonitor = new InventoryMonitor();
         this.inventory = MedicationStock.stock;

@@ -30,6 +30,8 @@ public class FileRead {
                     Patients patient = new Patients(patientData[0], patientData[1], patientData[2], patientData[3], patientData[4], patientData[5], patientData[6], patientData[7], patientData[8]);
                     Patients.patientList.put(patientData[0], patient);
                     AllUsers.user.put(patientData[0], patientData[1]);
+                    PatientsContactInfo contactInfo = new PatientsContactInfo(patientData[6], patientData[7]);
+                    PatientsContactInfo.contactInfoMap.put(patientData[0], contactInfo);
                     MedicalRecord medicalRecord = new MedicalRecord(patientData[0], patientData[3], patientData[4], patientData[5], patientData[8], patientData[6], patientData[7]);
                     MedicalRecord.patientRecordMap.put(patientData[0], medicalRecord);
                 }

@@ -8,13 +8,13 @@ public class MedicalRecord {
     private String dob;
     private String gender;
     private String bloodType;
-    private static String phoneNumber;
-    private static String emailAddress;
+    private String phoneNumber;
+    private String emailAddress;
     private ArrayList<String> diagnoses;
     private ArrayList<String> treatments;
     private ArrayList<String> prescriptions;
         
-        protected static HashMap<String, MedicalRecord> patientRecordMap = new HashMap<>();
+    protected static HashMap<String, MedicalRecord> patientRecordMap = new HashMap<>();
     
         // Constructor
         public MedicalRecord(String patientId, String patientName, String dob, String gender, String bloodType, String phoneNumber, String emailAddress) {
@@ -70,11 +70,11 @@ public class MedicalRecord {
         patientRecordMap.get(patientIdString).viewMedicalRecord();
     }
 
-    public static void updatePhoneNumber(String newPhoneNumber) {
+    public void updatePhoneNumber(String newPhoneNumber) {
     	phoneNumber = newPhoneNumber;
     }
     
-    public static void updateEmailAddress(String newEmailAddress) {
+    public void updateEmailAddress(String newEmailAddress) {
     	emailAddress= newEmailAddress;
     }
 

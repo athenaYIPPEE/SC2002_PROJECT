@@ -13,11 +13,12 @@ public class Patients extends AllUsers {
     private MedicalRecord medicalRecord; // Encapsulated medical data
     private PatientsContactInfo contactInfo;
     private List<Appointment> appointments; // List of appointments for the patient
+    private AppointmentSlots appointmentSlots;
 
     // Static HashMap of all patients (name -> Patients object)
     protected static HashMap<String, Patients> patientList = new HashMap<>();
     public static List<Patients> patients = new ArrayList<>();
-    private PatientsAppointments Patient;
+    private PatientsAppointments patientAppointments;
 
     // Constructor
     public Patients(String hospitalId, String password, String role, String name, String dob, String gender, String phoneNumber, String emailAddress, String bloodType) {
@@ -33,7 +34,7 @@ public class Patients extends AllUsers {
         this.contactInfo = new PatientsContactInfo(phoneNumber, emailAddress);
         this.appointments = new ArrayList<>();
         patients.add(this);
-        this.Patient = new PatientsAppointments(this);
+        this.patientAppointments = new PatientsAppointments(this);
     }
 
     public void displayMenu() {
@@ -64,10 +65,10 @@ public class Patients extends AllUsers {
                     int choice = scanner.nextInt();
                     switch (choice) {
                         case 1:
-                            PatientsContactInfo.updatePhoneNumber(contactInfo);
+                            contactInfo.updatePhoneNumber(hospitalId);
                             break;
                         case 2:
-                            PatientsContactInfo.updateEmailAddress(contactInfo);
+                            contactInfo.updateEmailAddress(hospitalId);
                             break;
                         default:
                             System.out.println("Invalid Choice.");
@@ -78,7 +79,7 @@ public class Patients extends AllUsers {
                 case 3 -> {
                     System.out.println("Select a Doctor: ");
                     for (int i = 0; i < Doctor.doctorNames.size(); i++) {
-                        System.out.println((i + 1) + ". " + Doctor.doctorNames.get(i));
+                        System.out.println((i + 1) + ". Dr. " + Doctor.doctorNames.get(i));
                     }
                     Scanner scanner = new Scanner(System.in);
                     int choose = scanner.nextInt() - 1;
@@ -87,29 +88,29 @@ public class Patients extends AllUsers {
                     break;
                 }
                 case 4 -> {
-                    Patient.scheduleAppointment();
+                    patientAppointments.scheduleAppointment();
                     break;
                 }
                 case 5 -> {
                     System.out.println("Enter Appointment ID to reschedule: ");
                     Scanner scanner = new Scanner(System.in);
                     String id = scanner.nextLine();
-                    Patient.rescheduleAppointment(id);
+                    patientAppointments.rescheduleAppointment(id);
                     break;
                 }
                 case 6 -> {
                     System.out.println("Enter Appointment ID to cancel: ");
                     Scanner scanner = new Scanner(System.in);
                     String id = scanner.nextLine();
-                    Patient.cancelAppointment(id);
+                    patientAppointments.cancelAppointment(id);
                     break;
                 }
                 case 7 -> {
-                    Patient.viewScheduledAppointments();
+                    patientAppointments.viewScheduledAppointments();
                     break;
                 }
                 case 8 -> {
-                    Patient.viewPastRecords();
+                    patientAppointments.viewPastRecords();
                     break;
                 }
                 case 9 -> {

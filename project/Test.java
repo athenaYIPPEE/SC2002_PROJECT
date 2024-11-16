@@ -29,7 +29,7 @@ public class Test {
                                 }
                                 if (found == false)
                                 {
-                                    Doctor doctor = new Doctor(thisUserId, password, role, staffInfo.getName());
+                                    Doctor doctor = new Doctor(thisUserId, password, role, staffInfo.getName(), staffInfo.getAge(), staffInfo.getGender());
                                     doctor.displayMenu(thisUserId);
                                 }
                                 break;
@@ -57,7 +57,7 @@ public class Test {
                                 }
                                 if (found == false)
                                 {
-                                    Pharmacist pharmacist = new Pharmacist(thisUserId, role);
+                                    Pharmacist pharmacist = new Pharmacist(thisUserId, password, role, staffInfo.getName(), staffInfo.getAge(), staffInfo.getGender(), null);
                                     pharmacist.DisplayMenu();
                                 }
                                 break;
@@ -83,14 +83,13 @@ public class Test {
                             thePatient.displayMenu();
                         }
                     }
-
-                    }
-                    case 2 ->System.out.println("Shut down");
-                    default-> System.out.println("Shut down");
                 }
+                case 2 ->System.out.println("Shut down");
+                default-> System.out.println("Shut down");
+            }
 
     }while (choice != 2);
     
-        }
     }
+}
 

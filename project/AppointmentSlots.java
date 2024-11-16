@@ -8,8 +8,9 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class AppointmentSlots {
-    private List<LocalDateTime> slots;
-        private String doctorName;
+    protected List<LocalDateTime> slots;
+    private String doctorName;  
+
     
         public AppointmentSlots(String doctorName){
             this.doctorName = doctorName;
@@ -21,10 +22,6 @@ public class AppointmentSlots {
             this.slots.add(slot);
         }
 
-        // Get the slots for this doctor
-        /*public List<LocalDateTime> getSlots() {
-            return this.slots;
-        }*/
 
         public List<LocalDateTime> getSlots() {
             return this.slots;
@@ -42,6 +39,7 @@ public class AppointmentSlots {
     
         public static void viewAppointmentSlots(String doctorName) {
             boolean found = false;
+            boolean hasSlots = false;
             for (Doctor doctor : Doctor.doctors) {
                 if (doctorName.equals(doctor.getName())) {
                     found = true;
@@ -49,21 +47,66 @@ public class AppointmentSlots {
                     //AppointmentSlots appointmentSlots = doctor.getAppointmentSlots(); // Get this doctor's AppointmentSlots
                     HashMap<LocalDate, AppointmentSlots> appointmentSlots = doctor.returnPersonalSchedule();
 
-                    System.out.println("Available Appointment Slots for " + doctorName + ": ");
+                    System.out.println("Available Appointment Slots for Dr. " + doctorName + ": ");
                     
                     for (Map.Entry<LocalDate, AppointmentSlots> entry : appointmentSlots.entrySet()) {
                         LocalDate date = entry.getKey(); // The date (key)
                         AppointmentSlots slotsForDate = entry.getValue(); // The AppointmentSlots for that date (value)
                 
                 // Print the date and available slots for that date
-                System.out.println("Date: " + date);
-                for (LocalDateTime slot : slotsForDate.getSlotsForDate(date)) {
-                    System.out.println("  " + slot.toLocalTime()); // Print each slot for the date
+                List<LocalDateTime> slots = slotsForDate.getSlotsForDate(date);
+
+                // Only print if there are available slots
+                if (!slots.isEmpty()) {
+                    hasSlots = true;
+                    System.out.println("Date: " + date);
+                    for (LocalDateTime slot : slots) {
+                        System.out.println("  " + slot.toLocalTime()); // Print each slot for the date
+                    }
                 }
+            }
+            if (!hasSlots) {
+                System.out.println("No available slots for Dr. " + doctorName + ".");
             }
                 }
             }
             if (found == false) System.out.println("Doctor not found.");
+        }
+
+        public static boolean viewAppointmentSlotsBoolean(String doctorName) {
+            boolean hasSlots = false;  // Track if there are any available slots
+        
+            for (Doctor doctor : Doctor.doctors) {
+                if (doctorName.equals(doctor.getName())) {
+                    HashMap<LocalDate, AppointmentSlots> appointmentSlots = doctor.returnPersonalSchedule();
+        
+                    System.out.println("Available Appointment Slots for Dr. " + doctorName + ": ");
+                    
+                    // Check if there are any available slots for the doctor
+                    for (Map.Entry<LocalDate, AppointmentSlots> entry : appointmentSlots.entrySet()) {
+                        LocalDate date = entry.getKey();
+                        AppointmentSlots slotsForDate = entry.getValue();
+                        List<LocalDateTime> slots = slotsForDate.getSlotsForDate(date);
+        
+                        if (!slots.isEmpty()) {
+                            hasSlots = true;
+                            System.out.println("Date: " + date);
+                            for (LocalDateTime slot : slots) {
+                                System.out.println("  " + slot.toLocalTime()); // Print each slot for the date
+                            }
+                        }
+                    }
+        
+                    if (!hasSlots) {
+                        System.out.println("No available slots for Dr. " + doctorName + ".");
+                    }
+        
+                    return hasSlots;  // Return whether there are available slots
+                }
+            }
+        
+            System.out.println("Doctor not found.");  // If no doctor is found
+            return false;  // Return false if the doctor is not found
         }
 
         public void printTimeSlotsForDate(LocalDateTime date) {
@@ -82,6 +125,7 @@ public class AppointmentSlots {
             if (!found) {
                 System.out.println("No time slots found for " + date.toLocalDate());
             }
+            
         }
 
 }

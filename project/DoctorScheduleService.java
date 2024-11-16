@@ -13,7 +13,7 @@ public class DoctorScheduleService {
 	}
 	
 	public void viewPersonalSchedule() {
-		System.out.println("Upcoming Appointments:");
+		System.out.println("Appointments:");
         if (doctor.getAppointments().isEmpty()) {  // Correctly using doctor instance
             System.out.println("No upcoming appointments.");
         } else {

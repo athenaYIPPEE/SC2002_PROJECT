@@ -25,7 +25,9 @@ public class PatientsAppointments {
             String buffer = scanner.nextLine();
             
             Doctor selectedDoctor = Doctor.doctors.get(choose);
-            AppointmentSlots.viewAppointmentSlots(selectedDoctor.getName());
+            boolean hasAppointment = AppointmentSlots.viewAppointmentSlotsBoolean(selectedDoctor.getName());
+
+            if (hasAppointment == false) return;
     
             System.out.println("Enter a date (YYYY-MM-DD): ");
             String inputDate = scanner.nextLine();
@@ -34,23 +36,18 @@ public class PatientsAppointments {
     
             // Step 4: Print available time slots for the selected doctor on the chosen date
             HashMap<LocalDate, AppointmentSlots> appointmentSlots = selectedDoctor.returnPersonalSchedule();
-            //List<AppointmentSlots> availableSlots = new ArrayList<>();
             AppointmentSlots availableSlots = appointmentSlots.get(date);
+            if (availableSlots == null) {
+                System.out.println("No available time slots for " + selectedDoctor.getName() + " on " + date + ".");
+                return;  // Exit the method if no slots are available
+            }
             List<LocalDateTime> slots = availableSlots.getSlotsForDate(date);
-                //availableSlots = appointmentSlots.getSlotsForDate(date);
-                /*if (availableSlots == null) {
-                    System.out.println("No available slots for this doctor on the selected date.");
-                    return;  // Exit if no slots are available
-                }
-                */
-                // Display available slots for the patient to choose from
-                System.out.println("Available time slots for " + selectedDoctor.getName() + " on " + date + ":");
-                for (int i = 0; i < slots.size(); i++) {
-                    System.out.println((i + 1) + ". " + slots.get(i).toLocalTime());
-                }
-            
-            
-        
+            // Display available slots for the patient to choose from
+            System.out.println("Available time slots for " + selectedDoctor.getName() + " on " + date + ":");
+            for (int i = 0; i < slots.size(); i++) {
+                System.out.println((i + 1) + ". " + slots.get(i).toLocalTime());
+            }
+
             // Step 5: Let the patient select a time slot
             System.out.println("Select a time slot by entering the corresponding number:");
             int slotChoice = scanner.nextInt() - 1;  // Adjust for 0-based index
@@ -78,12 +75,12 @@ public class PatientsAppointments {
                 String patientId = currentPatient.getPatientId();
             // service type
             System.out.println("Select type of service provided:");
-               for (int i = 0; i < serviceType.values().length; i++) {
-                       System.out.println((i + 1) + ": " + serviceType.values()[i]);
+               for (int i = 0; i < ServiceType.values().length; i++) {
+                       System.out.println((i + 1) + ": " + ServiceType.values()[i]);
                   }
                 int serviceChoice = scanner.nextInt() - 1;
-                if (serviceChoice >= 0 && serviceChoice < serviceType.values().length) {
-                    serviceType selectedService = serviceType.values()[serviceChoice];
+                if (serviceChoice >= 0 && serviceChoice < ServiceType.values().length) {
+                    ServiceType selectedService = ServiceType.values()[serviceChoice];
             String serviceTypeString = selectedService.name();
             Appointment newAppointment = new Appointment(appointmentID, selectedDoctor.getName(), patientId, chosenSlot, "Pending", serviceTypeString);
             selectedDoctor.addAppointment(newAppointment);  // Add appointment to the doctor's list
@@ -208,7 +205,7 @@ public class PatientsAppointments {
             // Check if the status of the appointment is "Completed"
             if (appointment.getStatus().equals("Completed")) {
                 // Call getOutcome() on the instance of Appointment
-                appointment.getOutcome();
+                appointment.getOutcome(appointment);
             }
         }
     }
