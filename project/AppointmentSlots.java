@@ -37,7 +37,7 @@ public class AppointmentSlots {
             return slotsForDate;
         }
     
-        public static void viewAppointmentSlots(String doctorName) {
+        public void viewAppointmentSlots(String doctorName) {
             boolean found = false;
             boolean hasSlots = false;
             for (Doctor doctor : Doctor.doctors) {
@@ -73,7 +73,7 @@ public class AppointmentSlots {
             if (found == false) System.out.println("Doctor not found.");
         }
 
-        public static boolean viewAppointmentSlotsBoolean(String doctorName) {
+        public boolean viewAppointmentSlotsBoolean(String doctorName) {
             boolean hasSlots = false;  // Track if there are any available slots
         
             for (Doctor doctor : Doctor.doctors) {

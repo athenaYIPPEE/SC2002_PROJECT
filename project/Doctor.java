@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Doctor extends AllUsers{
@@ -14,7 +15,7 @@ public class Doctor extends AllUsers{
 	private String gender;
 	private HashMap<String, Patients> patientsMap;
 	protected List<Appointment> appointments; 
-	protected static HashMap<LocalDate, AppointmentSlots> personalSchedule; // personal schedule hashmap
+	protected HashMap<LocalDate, AppointmentSlots> personalSchedule; // personal schedule hashmap
 	protected List<LocalDateTime> appointmentSlots; //list of avail appts
 	protected static List<String> doctorNames = new ArrayList<>();
 	public static List<Doctor> doctors = new ArrayList<>();
@@ -53,11 +54,20 @@ public class Doctor extends AllUsers{
 		}
 
 		// Get this doctor's AppointmentSlots for a given date
-		public AppointmentSlots getAppointmentSlots() {
+		public AppointmentSlots getAppointmentSlots(String doctorName) {
 			// Retrieve the appointment slots for today's date (or a given date)
-			LocalDate today = LocalDate.now(); //cannot use 'new Date();' bcos the java library constructor giives up to millisecond precision which isnt what we want // Today's date, for example
+			//LocalDate today = LocalDate.now(); //cannot use 'new Date();' bcos the java library constructor giives up to millisecond precision which isnt what we want // Today's date, for example
 			
-			return personalSchedule.get(today); // Return the slots for today or specific date
+			//return personalSchedule.get(today); // Return the slots for today or specific date
+			AppointmentSlots allSlots = new AppointmentSlots(doctorName); // You can specify a generic name or use the doctor's name if needed
+    
+			// Iterate through all dates in the personal schedule and add the slots to the `allSlots` object
+			for (Map.Entry<LocalDate, AppointmentSlots> entry : personalSchedule.entrySet()) {
+				AppointmentSlots slots = entry.getValue(); // Get the slots for a specific date
+				allSlots.getSlots().addAll(slots.getSlots()); // Add all the slots for that date to the allSlots object
+			}
+
+			return allSlots;
 		}
 
 		public HashMap<LocalDate, AppointmentSlots> returnPersonalSchedule(){
