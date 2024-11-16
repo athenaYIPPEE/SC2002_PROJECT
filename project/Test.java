@@ -3,8 +3,12 @@ package project;
 import java.util.Scanner;
 
 public class Test {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+
     public static void Run(){
         int choice;
+        System.out.println(ANSI_GREEN + "Welcome to our hospital system!" + ANSI_RESET);
         do{
         System.out.println("Menu: 1. Login 2. Shut down");
         Scanner sc = new Scanner(System.in);
@@ -84,8 +88,8 @@ public class Test {
                         }
                     }
                 }
-                case 2 ->System.out.println("Shut down");
-                default-> System.out.println("Shut down");
+                case 2 ->System.out.println(ANSI_GREEN + "Shut down. Thank you for using our system." + ANSI_RESET);
+                default-> System.out.println(ANSI_GREEN + "Shut down" + ANSI_RESET);
             }
 
     }while (choice != 2);
