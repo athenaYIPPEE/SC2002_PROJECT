@@ -25,7 +25,7 @@ public class PatientsAppointments {
             String buffer = scanner.nextLine();
             
             Doctor selectedDoctor = Doctor.doctors.get(choose);
-            boolean hasAppointment = AppointmentSlots.viewAppointmentSlotsBoolean(selectedDoctor.getName());
+            boolean hasAppointment = selectedDoctor.getAppointmentSlots(selectedDoctor.getName()).viewAppointmentSlotsBoolean(selectedDoctor.getName());
 
             if (hasAppointment == false) return;
     

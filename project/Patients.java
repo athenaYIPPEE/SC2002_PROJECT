@@ -13,7 +13,7 @@ public class Patients extends AllUsers {
     private MedicalRecord medicalRecord; // Encapsulated medical data
     private PatientsContactInfo contactInfo;
     private List<Appointment> appointments; // List of appointments for the patient
-    private AppointmentSlots appointmentSlots;
+    protected AppointmentSlots appointmentSlots;
 
     // Static HashMap of all patients (name -> Patients object)
     protected static HashMap<String, Patients> patientList = new HashMap<>();
@@ -84,7 +84,7 @@ public class Patients extends AllUsers {
                     Scanner scanner = new Scanner(System.in);
                     int choose = scanner.nextInt() - 1;
                     Doctor selectedDoctor = Doctor.doctors.get(choose);
-                    AppointmentSlots.viewAppointmentSlots(selectedDoctor.getName());
+                    selectedDoctor.getAppointmentSlots(selectedDoctor.getName()).viewAppointmentSlots(selectedDoctor.getName());
                     break;
                 }
                 case 4 -> {

@@ -12,7 +12,7 @@ public class DoctorAppointmentService {
 	
 	public DoctorAppointmentService(Doctor doctor) {
 		this.doctor = doctor;
-		this.personalSchedule = Doctor.personalSchedule;
+		this.personalSchedule = doctor.personalSchedule;
 	}
 	
 	public void appointmentRequest() {
