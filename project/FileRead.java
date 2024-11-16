@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 
 public class FileRead {
     public static void helppls(){
-        String staffListName = "C:\\Users\\prisc\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\StaffList.txt"; // specify your file path
-            String patientListName = "C:\\Users\\prisc\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\PatientList.txt"; // specify your file path
+        String staffListName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\StaffList.txt"; // specify your file path
+            String patientListName = "C:\\Users\\athen\\OneDrive\\Documents\\GitHub\\SC2002_PROJECT\\project\\PatientList.txt"; // specify your file path
             try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(staffListName)))) {
                 String line;
     

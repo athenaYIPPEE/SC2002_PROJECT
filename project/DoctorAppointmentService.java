@@ -56,8 +56,8 @@ public class DoctorAppointmentService {
                 hasConfirmedAppointments = true;
             	}
         	}
-        	if (!hasConfirmedAppointments) {
-            		System.out.println("No confirmed appointments.");
+        	if (hasConfirmedAppointments == false) {
+				System.out.println("No confirmed appointments.");
         	}
 	}
 	
@@ -135,8 +135,8 @@ public class DoctorAppointmentService {
 				System.out.println("Appointment outcome recorded and completed.");
 
             } 
-            if (found == false) System.out.println("Appointment not found.");
-        }
+            
+        }if (found == false) System.out.println("Appointment not found.");
 	}
 	
 }
