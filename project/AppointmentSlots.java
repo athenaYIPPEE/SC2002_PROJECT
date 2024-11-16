@@ -27,10 +27,6 @@ public class AppointmentSlots {
         }*/
 
         public List<LocalDateTime> getSlots() {
-            System.out.println("Debug: Fetching slots list - current contents:");
-            for (LocalDateTime slot : slots) {
-                System.out.println(slot);
-            }
             return this.slots;
         }
 
@@ -50,12 +46,21 @@ public class AppointmentSlots {
                 if (doctorName.equals(doctor.getName())) {
                     found = true;
                     
-                    AppointmentSlots appointmentSlots = doctor.getAppointmentSlots(); // Get this doctor's AppointmentSlots
+                    //AppointmentSlots appointmentSlots = doctor.getAppointmentSlots(); // Get this doctor's AppointmentSlots
+                    HashMap<LocalDate, AppointmentSlots> appointmentSlots = doctor.returnPersonalSchedule();
+
                     System.out.println("Available Appointment Slots for " + doctorName + ": ");
                     
-                    for (LocalDateTime slot : appointmentSlots.getSlots()) {
-                        System.out.println(slot); // Print each slot
-                    }
+                    for (Map.Entry<LocalDate, AppointmentSlots> entry : appointmentSlots.entrySet()) {
+                        LocalDate date = entry.getKey(); // The date (key)
+                        AppointmentSlots slotsForDate = entry.getValue(); // The AppointmentSlots for that date (value)
+                
+                // Print the date and available slots for that date
+                System.out.println("Date: " + date);
+                for (LocalDateTime slot : slotsForDate.getSlotsForDate(date)) {
+                    System.out.println("  " + slot.toLocalTime()); // Print each slot for the date
+                }
+            }
                 }
             }
             if (found == false) System.out.println("Doctor not found.");

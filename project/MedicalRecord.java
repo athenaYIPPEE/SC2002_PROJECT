@@ -44,16 +44,16 @@ public class MedicalRecord {
         }
     
         // Methods to add diagnosis and treatment (only accessible by Doctor)
-        protected void addDiagnosis(String diagnosis) {
+        public void addDiagnosis(String diagnosis) {
             diagnoses.add(diagnosis);
         }
 
-        protected void addPrescription(String prescription){
+        public void addPrescription(String prescription){
             prescriptions.add(prescription);
         }
 
 
-    protected void addTreatment(String treatment) {
+    public void addTreatment(String treatment) {
         treatments.add(treatment);
     }
 
@@ -66,7 +66,7 @@ public class MedicalRecord {
         return patientRecordMap.get(patientId);
     }
 
-    public static void displayRecords(String patientIdString) {
+    public void displayRecords(String patientIdString) {
         patientRecordMap.get(patientIdString).viewMedicalRecord();
     }
 

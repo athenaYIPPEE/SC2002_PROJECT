@@ -67,7 +67,7 @@ public class Appointment {
                 @Override
                 public String toString() {
                     return "Appointment [Appointment ID: " + appointmentId + ", Doctor: " + doctorName + 
-                            ", Patient ID: " + patientId + ", Date: " + appointmentTime + "Service Type: " + serviceType +
+                            ", Patient ID: " + patientId + ", Date: " + appointmentTime + ", Service Type: " + serviceType +
                              ", Status: " + status + "]";
                 }
             
@@ -80,11 +80,12 @@ public class Appointment {
                 } 
                 
                 public void recordConsultationNotes(String notes) {
-                    if (this.consultationNotes.isEmpty()) {
+                    /*if (this.consultationNotes.isEmpty()) {
                         this.consultationNotes = notes; // If no existing notes, set directly
                     } else {
                         this.consultationNotes += "\n" + notes; // Append new notes with a newline
-                    }
+                    }*/
+                    this.consultationNotes += "\n" + notes;
                 }
             
                 public void getOutcome() {

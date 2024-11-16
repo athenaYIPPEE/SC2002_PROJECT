@@ -55,7 +55,7 @@ public class Patients extends AllUsers {
     
             switch (option) {
                 case 1 -> {
-                    MedicalRecord.displayRecords(hospitalId);
+                    medicalRecord.displayRecords(hospitalId);
                     break;
                 }
                 case 2 -> {

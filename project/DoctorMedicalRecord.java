@@ -5,11 +5,13 @@ import java.util.*;
 public class DoctorMedicalRecord {
 
 	private HashMap<String, Patients> patientsMap;
-	private HashMap<Patients, MedicalRecord> doctorRecord;
+	private HashMap<String, MedicalRecord> doctorRecord;
+	private Doctor doctor;
 	
-	public DoctorMedicalRecord() {
-		this.patientsMap = new HashMap<>();
-		this.doctorRecord = new HashMap<>();
+	public DoctorMedicalRecord(Doctor doctor) {
+		this.doctor = doctor;
+		this.patientsMap = Patients.patientList;
+		this.doctorRecord = MedicalRecord.patientRecordMap;
 	}
 	
 	public void viewMedicalRecords() {
@@ -22,12 +24,10 @@ public class DoctorMedicalRecord {
         	String patientID = sc.next();
         
         	Patients patient = patientsMap.get(patientID);
-			MedicalRecord medicalRecord = doctorRecord.get(patient);
+			MedicalRecord medicalRecord = doctorRecord.get(patient.getHospitalId());
         	if (patient != null) {
-				MedicalRecord.displayRecords(patientID);
-        	} else {
-            		System.out.println("Patient not found.");
-        	}
+				medicalRecord.displayRecords(patientID);
+        	} 
 	}
 	
 	public void updateMedicalRecords() {
@@ -36,17 +36,7 @@ public class DoctorMedicalRecord {
         	String patientID = sc.next();
         
         	Patients patient = patientsMap.get(patientID);
-        	if (patient == null) {
-            		System.out.println("Patient not found.");
-            		return;
-        	}
-
-			MedicalRecord medicalRecord = doctorRecord.get(patient);
-			if (medicalRecord == null) {
-				System.out.println("Medical record not found for this patient.");
-				return;
-			}
-
+			MedicalRecord medicalRecord = doctorRecord.get(patient.getHospitalId());
         
         	boolean updating = true;
         	while (updating) {
@@ -90,7 +80,6 @@ public class DoctorMedicalRecord {
         	}
         
         	System.out.println("Medical record updated successfully.");
-
 	}
 	
 }

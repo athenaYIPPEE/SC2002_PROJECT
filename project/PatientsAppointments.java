@@ -36,25 +36,21 @@ public class PatientsAppointments {
             HashMap<LocalDate, AppointmentSlots> appointmentSlots = selectedDoctor.returnPersonalSchedule();
             //List<AppointmentSlots> availableSlots = new ArrayList<>();
             AppointmentSlots availableSlots = appointmentSlots.get(date);
-            List<LocalDateTime> slots = availableSlots.getSlots();
-            
+            List<LocalDateTime> slots = availableSlots.getSlotsForDate(date);
                 //availableSlots = appointmentSlots.getSlotsForDate(date);
-                if (availableSlots == null) {
+                /*if (availableSlots == null) {
                     System.out.println("No available slots for this doctor on the selected date.");
                     return;  // Exit if no slots are available
                 }
-                
-    
+                */
                 // Display available slots for the patient to choose from
                 System.out.println("Available time slots for " + selectedDoctor.getName() + " on " + date + ":");
                 for (int i = 0; i < slots.size(); i++) {
                     System.out.println((i + 1) + ". " + slots.get(i).toLocalTime());
                 }
             
-                System.out.println("No appointment slots are available for this doctor.");
-                return;  // Exit if no slots are found
-            }
-    
+            
+        
             // Step 5: Let the patient select a time slot
             System.out.println("Select a time slot by entering the corresponding number:");
             int slotChoice = scanner.nextInt() - 1;  // Adjust for 0-based index
@@ -156,36 +152,34 @@ public class PatientsAppointments {
         scanner.nextLine();  // Consume the newline character
         String inputDate = scanner.nextLine();
         LocalDate newDate;
-        try {
-            newDate = LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
-        } catch (Exception e) {
-            System.out.println("Invalid date format.");
-            return;  // Exit if the date is invalid
-        }
+        newDate = LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
     
         // Get the available slots for the new date
-        AppointmentSlots appointmentSlots = selectedDoctor.getAppointmentSlots();
-        List<LocalDateTime> availableSlots = appointmentSlots.getSlotsForDate(newDate);
-        if (availableSlots.isEmpty()) {
-            System.out.println("No available slots for the selected date.");
-            return;  // Exit if no slots are available
-        }
-    
-        // Display available slots for the patient to choose from
-        System.out.println("Available time slots for Dr. " + selectedDoctor.getName() + " on " + newDate + ":");
-        for (int i = 0; i < availableSlots.size(); i++) {
-            System.out.println((i + 1) + ". " + availableSlots.get(i).toLocalTime());
-        }
+        HashMap<LocalDate, AppointmentSlots> appointmentSlots = selectedDoctor.returnPersonalSchedule();
+            //List<AppointmentSlots> availableSlots = new ArrayList<>();
+            AppointmentSlots availableSlots = appointmentSlots.get(newDate);
+            List<LocalDateTime> slots = availableSlots.getSlotsForDate(newDate);
+                //availableSlots = appointmentSlots.getSlotsForDate(date);
+                /*if (availableSlots == null) {
+                    System.out.println("No available slots for this doctor on the selected date.");
+                    return;  // Exit if no slots are available
+                }
+                */
+                // Display available slots for the patient to choose from
+                System.out.println("Available time slots for " + selectedDoctor.getName() + " on " + newDate + ":");
+                for (int i = 0; i < slots.size(); i++) {
+                    System.out.println((i + 1) + ". " + slots.get(i).toLocalTime());
+                }
     
         // Let the patient select a time slot
         System.out.println("Select a time slot by entering the corresponding number:");
         int slotChoice = scanner.nextInt() - 1;  // Adjust for 0-based index
-        if (slotChoice < 0 || slotChoice >= availableSlots.size()) {
+        if (slotChoice < 0 || slotChoice >= slots.size()) {
             System.out.println("Invalid slot choice.");
             return;  // Exit if the choice is invalid
         }
         
-        LocalDateTime newTimeSlot = availableSlots.get(slotChoice);
+        LocalDateTime newTimeSlot = slots.get(slotChoice);
         
         LocalDateTime newAppointmentDateTime = LocalDateTime.of(newDate, newTimeSlot.toLocalTime());
     
@@ -194,6 +188,7 @@ public class PatientsAppointments {
     
     // Reschedule the appointment by updating the appointment's date and time
     appointmentToReschedule.setAppointmentDateTime(newAppointmentDateTime);  // Update with LocalDateTime
+    appointmentToReschedule.setStatus("Pending");
     
     System.out.println("Appointment " + appointmentId + " has been rescheduled with Dr. " + selectedDoctor.getName() + " on " 
                        + newAppointmentDateTime.toLocalDate() + " at " + newAppointmentDateTime.toLocalTime());

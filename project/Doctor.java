@@ -28,6 +28,7 @@ public class Doctor extends AllUsers{
 			this.name = name;
 			this.appointmentSlots = new ArrayList<>();
 			this.personalSchedule = new HashMap<>();
+			this.doctorMedicalRecord = new DoctorMedicalRecord(this);
 			this.doctorScheduleService = new DoctorScheduleService(this);  
 			this.doctorAppointmentService = new DoctorAppointmentService(this);
 			doctors.add(this);

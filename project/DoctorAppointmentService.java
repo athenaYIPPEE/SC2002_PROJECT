@@ -1,6 +1,7 @@
 package project;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DoctorAppointmentService {
@@ -49,12 +50,16 @@ public class DoctorAppointmentService {
 		Scanner sc = new Scanner(System.in);
         	System.out.println("Enter the appointment ID to record the outcome: ");
         	String appointmentID = sc.nextLine();
+			boolean found = false;
 
         	for (Appointment appointment : doctor.appointments) {
             		if (appointment.getAppointmentId().equals(appointmentID)) {
                 		//record date
+						found = true;
             			LocalDateTime appointmentDate = LocalDateTime.now();
-            			System.out.println(appointmentDate);
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+						String formattedDate = appointmentDate.format(formatter);
+            			System.out.println(formattedDate);
             			appointment.setAppointmentDateTime(appointmentDate);
             	
             			//service type
@@ -109,7 +114,7 @@ public class DoctorAppointmentService {
 
             			} System.out.println("Appointment outcome recorded.");
             		} 
-            		else System.out.println("Appointment not found.");
+            		if (found == false) System.out.println("Appointment not found.");
         	}
 	}
 	
