@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class InventoryManager {
     private int lowStockAlert;
-    private Map<MedicationName, Integer> inventory;
-        private MedicationStock medicationStock;
+    private static Map<MedicationName, Integer> inventory;
+    protected static MedicationStock medicationStock;
             
                 /*view and manage inventory 
                  * aka adding removing updating stock

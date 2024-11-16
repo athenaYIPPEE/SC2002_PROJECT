@@ -4,15 +4,15 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ReplenishmentManager {
-    private static MedicationStock inventory;
-        private static Map<MedicationName, Integer> inventoryMap;
+    private MedicationStock inventory;
+    private Map<MedicationName, Integer> inventoryMap;
     
         public ReplenishmentManager() {
-            this.inventory = new MedicationStock();
+            this.inventory = InventoryManager.medicationStock;
             this.inventoryMap = inventory.stock;
         }
     
-        public static void approveReplenishmentRequest(){
+        public void approveReplenishmentRequest(){
             for (int i = 0; i < InventoryMonitor.replenishmentRequest.size(); i++){
                 System.out.println(InventoryMonitor.replenishmentRequest.get(i));
                 ReplenishmentRequest request = InventoryMonitor.replenishmentRequest.get(i);

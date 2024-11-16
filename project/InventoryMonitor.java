@@ -11,7 +11,7 @@ public class InventoryMonitor {
         static ArrayList<ReplenishmentRequest> replenishmentRequest = new ArrayList<>();
     
         public InventoryMonitor() {
-            this.inventory = new MedicationStock();
+            this.inventory = InventoryManager.medicationStock;
         }
     
         // View medication inventory

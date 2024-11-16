@@ -57,7 +57,7 @@ public class Pharmacist extends AllUsers {
     }
 
     public void viewInventory() {
-        inventoryManager.viewInventory();
+        inventoryMonitor.viewInventory();
     }
 
     public void submitReplenishmentRequest() {

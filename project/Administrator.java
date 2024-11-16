@@ -6,6 +6,7 @@ import java.util.*;
 public class Administrator extends AllUsers { 
     private StaffManager staffManager;
     private InventoryManager inventoryManager;
+    private ReplenishmentManager replenishmentManager;
 	private List<Appointment> appointments = Appointment.getAllAppointments();
     public static List<Administrator> admins = new ArrayList<>();
  
@@ -13,6 +14,7 @@ public class Administrator extends AllUsers {
         super(hospitalId, password, "Administrator");
         this.staffManager = new StaffManager(hospitalId, password, "Administrator");
         this.inventoryManager = new InventoryManager();
+        this.replenishmentManager = new ReplenishmentManager();
         admins.add(this);
     }  
      
@@ -118,8 +120,8 @@ public class Administrator extends AllUsers {
     }
     
  
-    public static void approveReplenishmentRequest() { 
-       ReplenishmentManager.approveReplenishmentRequest(); 
+    public void approveReplenishmentRequest() { 
+       replenishmentManager.approveReplenishmentRequest(); 
  /*// can add/remove stocks in 2 ways - 
   * inventorymanager(can add any amt they want) OR 
   * medicationstock (admin look at request made by pharmacist via replenishmentmanager and add the fixed amt of stock requested by pharmacist)
