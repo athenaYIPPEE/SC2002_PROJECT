@@ -95,7 +95,7 @@ public class AllUsers {
                 hasSpecialChar = true;
         }
 
-		while(!(new_pw.length() < 8 && hasLower==true && hasUpper==true && hasDigit==true && hasSpecialChar==true))
+		while(!(new_pw.length() >= 8 && hasLower==true && hasUpper==true && hasDigit==true && hasSpecialChar==true))
 		{
 			System.out.println("New password does not fulfil requirements. Please try again.");
 			System.out.print("Enter your new password again: ");
