@@ -27,7 +27,6 @@ public class DoctorAppointmentService {
                 } else {
                     System.out.println("Invalid choice.");
                 }
-                return;
             }
         }
 	}

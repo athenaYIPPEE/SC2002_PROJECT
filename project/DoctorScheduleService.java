@@ -33,7 +33,7 @@ public class DoctorScheduleService {
             System.out.println("Enter slot " + (i + 1) + " in the format (YYYY-MM-DDTHH:MM): ");
             String slotString = scanner.nextLine();
             LocalDateTime slot = LocalDateTime.parse(slotString);
-            //doctor.appointmentSlots.add(slot);
+            doctor.appointmentSlots.add(slot);
 
             //test
             LocalDate datePart = slot.toLocalDate();
@@ -43,10 +43,10 @@ public class DoctorScheduleService {
 
         System.out.println("Slots added successfully for Dr. " + doctor.getName());
 
-        /*System.out.println("Appointment Slots:");
+        System.out.println("Appointment Slots:");
         for (LocalDateTime slot : doctor.appointmentSlots) {
             System.out.println(slot); // This will print each LocalDateTime in the default format
-        }*/ //testing
+        } //testing
 
         }
 	

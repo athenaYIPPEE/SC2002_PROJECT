@@ -91,7 +91,7 @@ public class PatientsAppointments {
             Appointment newAppointment = new Appointment(appointmentID, selectedDoctor.getName(), patientId, chosenSlot, "Pending", serviceTypeString);
             selectedDoctor.addAppointment(newAppointment);  // Add appointment to the doctor's list
             currentPatient.addAppointment(newAppointment);
-            System.out.println("Appointment scheduled with Dr. " + selectedDoctor.getName() + " on " 
+            System.out.println("Appointment requested with Dr. " + selectedDoctor.getName() + " on " 
              + chosenSlot.toLocalDate() + " at " + chosenSlot.toLocalTime());
         } else {
             System.out.println("Invalid choice. Please try again.");
@@ -144,7 +144,11 @@ public class PatientsAppointments {
         
         Doctor selectedDoctor = Doctor.doctors.get(choose);
         // Assuming that the AppointmentSlots class has a method to view available slots for a doctor
-        AppointmentSlots.viewAppointmentSlots(selectedDoctor.getName());  
+        for (Appointment appointment : selectedDoctor.getAppointments()){
+            if (!appointment.getStatus().equals("Confirmed"))
+                System.out.println(appointment);
+        }
+        
         
         // Get a new date for the appointment
         System.out.println("Enter a new date (YYYY-MM-DD): ");

@@ -67,7 +67,7 @@ public class Appointment {
                 @Override
                 public String toString() {
                     return "Appointment [Appointment ID: " + appointmentId + ", Doctor: " + doctorName + 
-                            ", Patient ID: " + patientId + ", Date: " + appointmentTime + 
+                            ", Patient ID: " + patientId + ", Date: " + appointmentTime + "Service Type: " + serviceType +
                              ", Status: " + status + "]";
                 }
             

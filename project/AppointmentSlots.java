@@ -37,18 +37,19 @@ public class AppointmentSlots {
         }
     
         public static void viewAppointmentSlots(String doctorName) {
+            boolean found = false;
             for (Doctor doctor : Doctor.doctors) {
                 if (doctorName.equals(doctor.getName())) {
+                    found = true;
                     AppointmentSlots appointmentSlots = doctor.getAppointmentSlots(); // Get this doctor's AppointmentSlots
                     System.out.println("Available Appointment Slots for " + doctorName + ": ");
                     
                     for (LocalDateTime slot : appointmentSlots.getSlots()) {
                         System.out.println(slot); // Print each slot
                     }
-                    return;
                 }
             }
-            System.out.println("Doctor not found.");
+            if (found == false) System.out.println("Doctor not found.");
         }
 
         public void printTimeSlotsForDate(LocalDateTime date) {
