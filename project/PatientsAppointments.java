@@ -16,10 +16,12 @@ public class PatientsAppointments {
     
         public void scheduleAppointment() {
             System.out.println("Select a Doctor: ");
+
             for (int i = 0; i < Doctor.doctorNames.size(); i++) {
                 // Print the doctor number along with the doctor name
                 System.out.println((i + 1) + ". Dr." + Doctor.doctorNames.get(i));
             }
+
             Scanner scanner = new Scanner(System.in);
             int choose = scanner.nextInt()-1;
             String buffer = scanner.nextLine();
@@ -37,10 +39,12 @@ public class PatientsAppointments {
             // Step 4: Print available time slots for the selected doctor on the chosen date
             HashMap<LocalDate, AppointmentSlots> appointmentSlots = selectedDoctor.returnPersonalSchedule();
             AppointmentSlots availableSlots = appointmentSlots.get(date);
+
             if (availableSlots == null) {
                 System.out.println("No available time slots for " + selectedDoctor.getName() + " on " + date + ".");
                 return;  // Exit the method if no slots are available
             }
+
             List<LocalDateTime> slots = availableSlots.getSlotsForDate(date);
             // Display available slots for the patient to choose from
             System.out.println("Available time slots for " + selectedDoctor.getName() + " on " + date + ":");
@@ -73,22 +77,24 @@ public class PatientsAppointments {
                     }
                 } while (!isUnique);
                 String patientId = currentPatient.getPatientId();
+            
             // service type
             System.out.println("Select type of service provided:");
                for (int i = 0; i < ServiceType.values().length; i++) {
                        System.out.println((i + 1) + ": " + ServiceType.values()[i]);
-                  }
+                }
+
                 int serviceChoice = scanner.nextInt() - 1;
                 if (serviceChoice >= 0 && serviceChoice < ServiceType.values().length) {
                     ServiceType selectedService = ServiceType.values()[serviceChoice];
-            String serviceTypeString = selectedService.name();
-            Appointment newAppointment = new Appointment(appointmentID, selectedDoctor.getName(), patientId, chosenSlot, "Pending", serviceTypeString);
-            selectedDoctor.addAppointment(newAppointment);  // Add appointment to the doctor's list
-            currentPatient.addAppointment(newAppointment);
-            System.out.println("Appointment requested with Dr. " + selectedDoctor.getName() + " on " 
-             + chosenSlot.toLocalDate() + " at " + chosenSlot.toLocalTime());
-        } else {
-            System.out.println("Invalid choice. Please try again.");
+                    String serviceTypeString = selectedService.name();
+                    Appointment newAppointment = new Appointment(appointmentID, selectedDoctor.getName(), patientId, chosenSlot, "Pending", serviceTypeString);
+                    selectedDoctor.addAppointment(newAppointment);  // Add appointment to the doctor's list
+                    currentPatient.addAppointment(newAppointment);
+                    System.out.println("Appointment requested with Dr. " + selectedDoctor.getName() + " on " 
+                    + chosenSlot.toLocalDate() + " at " + chosenSlot.toLocalTime());
+                 } else {
+                    System.out.println("Invalid choice. Please try again.");
         
         }
     }

@@ -47,10 +47,9 @@ public class DoctorScheduleService {
         for (LocalDateTime slot : doctor.appointmentSlots) {
             System.out.println(slot); // This will print each LocalDateTime in the default format
         } //testing
-
-        }
+    }
 	
-	}
+}
 
 	
 

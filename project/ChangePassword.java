@@ -6,10 +6,7 @@ import java.util.Scanner;
 public class ChangePassword{ //Solid
 	//private HashMap<String, String> users;
 	
-	public ChangePassword() 
-	{
-        //this.users = users;
-    }
+	public ChangePassword(){}
 	
 	public void changeUserPassword(HashMap<String, String> users)
 	{
@@ -42,7 +39,6 @@ public class ChangePassword{ //Solid
 			System.out.print("Confirm your new password: ");
 			cfm_new_pw = obj.next();
 		}
-		
 		users.put(hospital_id, new_pw);
 		System.out.println("Password updated!");
 	}

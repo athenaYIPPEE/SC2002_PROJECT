@@ -25,9 +25,11 @@ public class DoctorAppointmentService {
                 if (decision == 1) {
                     appointment.setStatus("Confirmed");
                     System.out.println("Appointment confirmed.");
+
 					LocalDateTime date = appointment.getAppointmentDate();
 					LocalDate date1 = date.toLocalDate();
 					AppointmentSlots slotList = personalSchedule.get(date1);
+
 					if (slotList != null) {
 						// Remove the specific slot from the list
 						slotList.slots.remove(date);
@@ -82,6 +84,7 @@ public class DoctorAppointmentService {
 				for (int i = 0; i < ServiceType.values().length; i++) {
 					System.out.println((i + 1) + ": " + ServiceType.values()[i]);
 				}
+
 				int serviceChoice = sc.nextInt() - 1; // Get the user choice, adjusting for 0-index
 				sc.nextLine();
 				if (serviceChoice >= 0 && serviceChoice < ServiceType.values().length) {
@@ -96,10 +99,12 @@ public class DoctorAppointmentService {
 				//medication
 				boolean addingMedications = true;
 				while (addingMedications) {
-				System.out.println("Medication prescribed: ");
-				for (int i = 0; i < MedicationName.values().length; i++) {
-					System.out.println((i + 1) + ": " + MedicationName.values()[i].getName());
-				} 
+					System.out.println("Medication prescribed: ");
+
+					for (int i = 0; i < MedicationName.values().length; i++) {
+						System.out.println((i + 1) + ": " + MedicationName.values()[i].getName());
+					} 
+
 					System.out.println((MedicationName.values().length + 1) + ": No medication needed");
 					Scanner scanner = new Scanner(System.in);
 
@@ -108,9 +113,11 @@ public class DoctorAppointmentService {
 						System.out.println("Invalid choice. Please select a valid medication.");
 						continue; // Restart the loop if the input is invalid
 					}
+
 					if (choice == MedicationName.values().length + 1) {
 						break;  
 					}
+
 					MedicationName medication = MedicationName.values()[choice - 1];
 					Medication prescribedMedication = new Medication(medication);
 					appointment.addMedication(prescribedMedication); // Add the medication to the appointment
@@ -127,16 +134,16 @@ public class DoctorAppointmentService {
 					System.out.println("Enter consultation note (or type 'exit' to stop adding notes): ");
 					String consultationNote = sc.nextLine();
 					appointment.recordConsultationNotes(consultationNote);
+
 					if (consultationNote.equalsIgnoreCase("exit")) {
 						addingNotes = false;
 					}
 				} 
 				appointment.setStatus("Completed");
 				System.out.println("Appointment outcome recorded and completed.");
-
             } 
             
-        }if (found == false) System.out.println("Appointment not found.");
+        } if (found == false) System.out.println("Appointment not found.");
 	}
 	
 }

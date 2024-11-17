@@ -36,12 +36,9 @@ public class InventoryMonitor {
                 ReplenishmentRequest request = new ReplenishmentRequest(medicationName, amt);
                 replenishmentRequest.add(request);    
                 System.out.println("Replenishment request submitted for medication: " + medicationName);
+                }   
             }
-        }
     	if (found == false) System.out.println("Medication not found or stock is sufficient.");
-        
     }
-
     // Manage medication inventory
-  
 }
