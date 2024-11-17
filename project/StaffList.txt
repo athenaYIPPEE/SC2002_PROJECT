@@ -1,6 +1,6 @@
-D001|password|John Smith|45|Male|1979-10-10|Doctor
-D002|password|Emily Clarke|38|Female|1986-9-9|Doctor
+D001|package|John Smith|45|Male|1979-10-10|Doctor
+D002|p|Emily Clarke|38|Female|1986-9-9|Doctor
 D003|password|Robert Johnson|35|Male|1989-9-9|Doctor
-P001|password|Mark Lee|29|Male|1995-8-8|Pharmacist
+P001|p|Mark Lee|29|Male|1995-8-8|Pharmacist
 P002|password|Prisca Sum|45|Female|1979-1-1|Pharmacist
-A001|password|Sarah Lee|40|Female|1984-7-7|Administrator
+A001|p|Sarah Lee|40|Female|1984-7-7|Administrator
