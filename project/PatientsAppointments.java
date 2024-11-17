@@ -91,7 +91,7 @@ public class PatientsAppointments {
                     Appointment newAppointment = new Appointment(appointmentID, selectedDoctor.getName(), patientId, chosenSlot, "Pending", serviceTypeString);
                     selectedDoctor.addAppointment(newAppointment);  // Add appointment to the doctor's list
                     currentPatient.addAppointment(newAppointment);
-                    System.out.println("Appointment requested with Dr. " + selectedDoctor.getName() + " on " 
+                    System.out.println("Appointment " +appointmentID+  " requested with Dr. " + selectedDoctor.getName() + " on " 
                     + chosenSlot.toLocalDate() + " at " + chosenSlot.toLocalTime());
                  } else {
                     System.out.println("Invalid choice. Please try again.");
