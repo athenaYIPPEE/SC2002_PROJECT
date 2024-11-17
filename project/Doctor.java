@@ -112,13 +112,13 @@ public class Doctor extends AllUsers{
 			option = sc.nextInt(); // Take user input for menu option
 	
 			switch(option) {
-				case 1 -> doctors.get(curDoc).doctorMedicalRecord.viewMedicalRecords();
-				case 2 -> doctors.get(curDoc).doctorMedicalRecord.updateMedicalRecords();
-				case 3 -> doctors.get(curDoc).doctorScheduleService.viewPersonalSchedule();
-				case 4 -> doctors.get(curDoc).doctorScheduleService.setAvailability();
-				case 5 -> doctors.get(curDoc).doctorAppointmentService.appointmentRequest();
-				case 6 -> doctors.get(curDoc).doctorAppointmentService.viewUpcomingAppointments();
-				case 7 -> doctors.get(curDoc).doctorAppointmentService.recordAppointmentOutcome();
+				case 1 -> doctorMedicalRecord.viewMedicalRecords();
+				case 2 -> doctorMedicalRecord.updateMedicalRecords();
+				case 3 -> doctorScheduleService.viewPersonalSchedule();
+				case 4 -> doctorScheduleService.setAvailability();
+				case 5 -> doctorAppointmentService.appointmentRequest();
+				case 6 -> doctorAppointmentService.viewUpcomingAppointments();
+				case 7 -> doctorAppointmentService.recordAppointmentOutcome();
 				case 8 -> {
 					System.out.println("Logging out...");
 					return; // Exit the loop and terminate the method when the user logs out
