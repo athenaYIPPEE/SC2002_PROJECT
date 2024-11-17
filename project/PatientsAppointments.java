@@ -104,9 +104,23 @@ public class PatientsAppointments {
         // Find the appointment by ID in the current patient's appointment list
         for (Appointment appointment : currentPatient.getAppointments()) { // Get appointments from the current patient
             if (appointment.getAppointmentId().equals(appointmentId)) {
-                // Set the status to "Cancelled"
                 appointment.setStatus("Cancelled");
-            
+                LocalDateTime date = appointment.getAppointmentDate();
+				LocalDate date1 = date.toLocalDate();
+				int i;
+				for (i = 0; i < Doctor.doctorNames.size(); i++) {
+	                if (Doctor.doctorNames.get(i).equals(appointment.getDoctorName())){
+	                	break;
+	                }
+				}
+	            Doctor doctor = Doctor.doctors.get(i);    
+				AppointmentSlots slotList = doctor.personalSchedule.get(date1);
+				if (slotList == null) {
+				    // If the date does not exist, create a new AppointmentSlots object
+				    slotList = new AppointmentSlots(appointment.getDoctorName()); // Replace with actual doctor name
+				    doctor.personalSchedule.put(date1, slotList);  // Add the new date and its AppointmentSlots object to the personal schedule
+				}
+				slotList.addSlot(date);
                 System.out.println("Appointment " + appointmentId + " has been cancelled.");
                 return;
             }
