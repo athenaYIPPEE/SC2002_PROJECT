@@ -135,15 +135,15 @@ public class PatientsAppointments {
         Appointment appointmentToReschedule = null;
         for (Appointment appointment : currentPatient.getAppointments()) { 
             if (appointment.getAppointmentId().equals(appointmentId)) {
-                appointmentToReschedule = appointment;
-                break;
+                if (appointment.getStatus().equals("Confirmed")) {
+                	appointmentToReschedule = appointment;
+                    break;
+                }else {
+                	System.out.println("No confirmed appointments to reschedule.");
+                	return;
+                }
             }
-        }
-        
-        if (appointmentToReschedule == null) {
-            System.out.println("Appointment not found.");
-            return;  // Exit if the appointment is not found
-        }
+	}
     
         // Let the patient select a doctor to reschedule with
         System.out.println("Select a Doctor: ");
@@ -192,7 +192,21 @@ public class PatientsAppointments {
             System.out.println("Invalid slot choice.");
             return;  // Exit if the choice is invalid
         }
-        
+        LocalDateTime date = appointmentToReschedule.getAppointmentDate();
+    	LocalDate date1 = date.toLocalDate();
+    	int j;
+    	for (j = 0; j < Doctor.doctorNames.size(); j++) {
+    		if (Doctor.doctorNames.get(j).equals(appointmentToReschedule.getDoctorName())){
+    		break;
+    		}
+    	}
+    	Doctor doctor = Doctor.doctors.get(j);    
+    	AppointmentSlots slotList = doctor.personalSchedule.get(date1);
+    	if (slotList == null) {
+    	    slotList = new AppointmentSlots(appointmentToReschedule.getDoctorName()); // Replace with actual doctor name
+    	    doctor.personalSchedule.put(date1, slotList);  // Add the new date and its AppointmentSlots object to the personal schedule
+    	}
+    	slotList.addSlot(date); 
         LocalDateTime newTimeSlot = slots.get(slotChoice);
         
         LocalDateTime newAppointmentDateTime = LocalDateTime.of(newDate, newTimeSlot.toLocalTime());
