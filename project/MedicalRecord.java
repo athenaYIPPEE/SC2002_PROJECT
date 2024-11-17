@@ -16,41 +16,41 @@ public class MedicalRecord {
         
     protected static HashMap<String, MedicalRecord> patientRecordMap = new HashMap<>();
     
-        // Constructor
-        public MedicalRecord(String patientId, String patientName, String dob, String gender, String bloodType, String phoneNumber, String emailAddress) {
-            this.patientId = patientId;
-            this.bloodType = bloodType;
-            this.phoneNumber = phoneNumber;
-            this.emailAddress = emailAddress;
-            this.patientName = patientName;
-            this.dob = dob;
-            this.gender = gender;
-            this.diagnoses = new ArrayList<>();
-            this.treatments = new ArrayList<>();
-            this.prescriptions = new ArrayList<>();
-        }
-    
-        // Getter methods
-        public String getBloodType() {
-            return bloodType;
-        }
-    
-        public ArrayList<String> getDiagnoses() {
-            return diagnoses;
-        }
-    
-        public ArrayList<String> getTreatments() {
-            return treatments;
-        }
+    // Constructor
+    public MedicalRecord(String patientId, String patientName, String dob, String gender, String bloodType, String phoneNumber, String emailAddress) {
+        this.patientId = patientId;
+        this.bloodType = bloodType;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.patientName = patientName;
+        this.dob = dob;
+        this.gender = gender;
+        this.diagnoses = new ArrayList<>();
+        this.treatments = new ArrayList<>();
+        this.prescriptions = new ArrayList<>();
+    }
+
+    // Getter methods
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public ArrayList<String> getDiagnoses() {
+        return diagnoses;
+    }
+
+    public ArrayList<String> getTreatments() {
+        return treatments;
+    }
     
         // Methods to add diagnosis and treatment (only accessible by Doctor)
-        public void addDiagnosis(String diagnosis) {
-            diagnoses.add(diagnosis);
-        }
+    public void addDiagnosis(String diagnosis) {
+        diagnoses.add(diagnosis);
+    }
 
-        public void addPrescription(String prescription){
-            prescriptions.add(prescription);
-        }
+    public void addPrescription(String prescription){
+        prescriptions.add(prescription);
+    }
 
 
     public void addTreatment(String treatment) {

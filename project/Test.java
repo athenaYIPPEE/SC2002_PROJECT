@@ -91,9 +91,7 @@ public class Test {
                 case 2 ->System.out.println(ANSI_GREEN + "Shut down. Thank you for using our system." + ANSI_RESET);
                 default-> System.out.println(ANSI_GREEN + "Shut down" + ANSI_RESET);
             }
-
-    }while (choice != 2);
-    
+        } while (choice != 2);
     }
 }
 

@@ -43,9 +43,8 @@ public class Pharmacist extends AllUsers {
     	case 3 -> viewInventory();
     	case 4 -> submitReplenishmentRequest();
     	case 5 -> logout();
-    	}
-    			
-    }while (option != 5);
+    	}			
+    } while (option != 5);
     }
 
     public void viewAppointmentOutcome() {

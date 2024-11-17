@@ -29,6 +29,4 @@ public class Medication {
     public String toString(){
         return "Medication: " + name + ", Status: " + status; 
     }
-
-
 }

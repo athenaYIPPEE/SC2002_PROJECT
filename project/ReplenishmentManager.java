@@ -19,6 +19,7 @@ public class ReplenishmentManager {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("1. Approve   2. Reject");
                 int choice = scanner.nextInt();
+
                 switch (choice){
                     case 1: 
                         System.out.println("Replenishment Approved.");
@@ -45,8 +46,7 @@ public class ReplenishmentManager {
                 default:
                     System.out.println("Invalid Choice."); 
                     break;
-                } 
+            } 
         }
     }
-
 }

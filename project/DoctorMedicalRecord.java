@@ -19,6 +19,7 @@ public class DoctorMedicalRecord {
 			System.out.println("No patients available.");
 			return;
 		}
+
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the patient's ID: ");
 		String patientID = sc.next();
@@ -40,15 +41,15 @@ public class DoctorMedicalRecord {
 	
 		boolean updating = true;
 		while (updating) {
-				System.out.println("What would you like to update?");
-				System.out.println("1. Add new diagnosis");
-				System.out.println("2. Add new prescription");
-				System.out.println("3. Add new treatment plan");
-				System.out.println("4. Exit update menu");
-				int choice = sc.nextInt();
-				sc.nextLine();
-		
-				switch (choice) {
+			System.out.println("What would you like to update?");
+			System.out.println("1. Add new diagnosis");
+			System.out.println("2. Add new prescription");
+			System.out.println("3. Add new treatment plan");
+			System.out.println("4. Exit update menu");
+			int choice = sc.nextInt();
+			sc.nextLine();
+	
+			switch (choice) {
 				case 1:
 					System.out.println("Enter new diagnosis: ");
 					String diagnosis = sc.nextLine();
@@ -72,10 +73,8 @@ public class DoctorMedicalRecord {
 					break;
 				default:
 					System.out.println("Invalid choice. Please try again.");
-				}
+			}
 		}
-		
 		System.out.println("Medical record updated successfully.");
 	}
-	
 }

@@ -95,18 +95,19 @@ public class PatientsAppointments {
                     + chosenSlot.toLocalDate() + " at " + chosenSlot.toLocalTime());
                  } else {
                     System.out.println("Invalid choice. Please try again.");
-        
-        }
-    }
-}   
+                    }
+            }
+        }   
+
+
     public void cancelAppointment(String appointmentId) {
         // Find the appointment by ID in the current patient's appointment list
         for (Appointment appointment : currentPatient.getAppointments()) { // Get appointments from the current patient
             if (appointment.getAppointmentId().equals(appointmentId)) {
-                // Set the status to "Cancelled"
-                appointment.setStatus("Cancelled");
+                // Set the status to "Canceled"
+                appointment.setStatus("Canceled");
             
-                System.out.println("Appointment " + appointmentId + " has been cancelled.");
+                System.out.println("Appointment " + appointmentId + " has been canceled.");
                 return;
             }
         }
@@ -135,6 +136,7 @@ public class PatientsAppointments {
         for (int i = 0; i < Doctor.doctors.size(); i++) {
             System.out.println((i + 1) + ". " + Doctor.doctors.get(i).getName());
         }
+
         Scanner scanner = new Scanner(System.in);
         int choose = scanner.nextInt() - 1;  // 0-based index
         if (choose < 0 || choose >= Doctor.doctors.size()) {
@@ -160,20 +162,15 @@ public class PatientsAppointments {
         // Get the available slots for the new date
         HashMap<LocalDate, AppointmentSlots> appointmentSlots = selectedDoctor.returnPersonalSchedule();
             //List<AppointmentSlots> availableSlots = new ArrayList<>();
-            AppointmentSlots availableSlots = appointmentSlots.get(newDate);
-            List<LocalDateTime> slots = availableSlots.getSlotsForDate(newDate);
-                //availableSlots = appointmentSlots.getSlotsForDate(date);
-                /*if (availableSlots == null) {
-                    System.out.println("No available slots for this doctor on the selected date.");
-                    return;  // Exit if no slots are available
-                }
-                */
-                // Display available slots for the patient to choose from
-                System.out.println("Available time slots for " + selectedDoctor.getName() + " on " + newDate + ":");
-                for (int i = 0; i < slots.size(); i++) {
-                    System.out.println((i + 1) + ". " + slots.get(i).toLocalTime());
-                }
-    
+        AppointmentSlots availableSlots = appointmentSlots.get(newDate);
+        List<LocalDateTime> slots = availableSlots.getSlotsForDate(newDate);
+        //availableSlots = appointmentSlots.getSlotsForDate(date);
+        // Display available slots for the patient to choose from
+        System.out.println("Available time slots for " + selectedDoctor.getName() + " on " + newDate + ":");
+        for (int i = 0; i < slots.size(); i++) {
+            System.out.println((i + 1) + ". " + slots.get(i).toLocalTime());
+        }
+
         // Let the patient select a time slot
         System.out.println("Select a time slot by entering the corresponding number:");
         int slotChoice = scanner.nextInt() - 1;  // Adjust for 0-based index
@@ -186,15 +183,16 @@ public class PatientsAppointments {
         
         LocalDateTime newAppointmentDateTime = LocalDateTime.of(newDate, newTimeSlot.toLocalTime());
     
-    // Confirm the new appointment details
-    System.out.println("You have selected " + newAppointmentDateTime + " for your appointment.");
+        // Confirm the new appointment details
+        System.out.println("You have selected " + newAppointmentDateTime + " for your appointment.");
+        
+        // Reschedule the appointment by updating the appointment's date and time
+        appointmentToReschedule.setAppointmentDateTime(newAppointmentDateTime);  // Update with LocalDateTime
+        appointmentToReschedule.setStatus("Pending");
+        
+        System.out.println("Appointment " + appointmentId + " has been rescheduled with Dr. " + selectedDoctor.getName() + " on " 
+                        + newAppointmentDateTime.toLocalDate() + " at " + newAppointmentDateTime.toLocalTime());
     
-    // Reschedule the appointment by updating the appointment's date and time
-    appointmentToReschedule.setAppointmentDateTime(newAppointmentDateTime);  // Update with LocalDateTime
-    appointmentToReschedule.setStatus("Pending");
-    
-    System.out.println("Appointment " + appointmentId + " has been rescheduled with Dr. " + selectedDoctor.getName() + " on " 
-                       + newAppointmentDateTime.toLocalDate() + " at " + newAppointmentDateTime.toLocalTime());
     }
 
     public void viewScheduledAppointments() {
@@ -207,17 +205,12 @@ public class PatientsAppointments {
         }
     
     public void viewPastRecords() {
-        boolean found = false;
         for (Appointment appointment : currentPatient.getAppointments()) {
             // Check if the status of the appointment is "Completed"
             if (appointment.getStatus().equals("Completed")) {
-                found = true;
                 // Call getOutcome() on the instance of Appointment
                 appointment.getOutcome(appointment);
             }
-        } if (found == false) System.out.println("No past appointments.");
+        }
     }
-    
-    
-
 }   

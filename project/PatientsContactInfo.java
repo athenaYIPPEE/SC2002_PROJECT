@@ -22,6 +22,7 @@ public class PatientsContactInfo {
         String newPhoneNumber = scanner.nextLine();
 
         PatientsContactInfo patientContactInfo = contactInfoMap.get(hospitalId);
+
         if (patientContactInfo != null) {
             patientContactInfo.phoneNumber = newPhoneNumber;
             patientMedicalRecordMap.get(hospitalId).updatePhoneNumber(newPhoneNumber);
@@ -32,13 +33,15 @@ public class PatientsContactInfo {
 
         System.out.println("Updated Phone Number: "+ newPhoneNumber);
         System.out.println("Email Address: " + patientContactInfo.emailAddress);
-}
+    }
+
     public void updateEmailAddress(String hospitalId){
         Scanner scanner = new Scanner(System.in);
         System.out.println("New Email Address: ");
         String newEmailAddress = scanner.nextLine();
 
         PatientsContactInfo patientContactInfo = contactInfoMap.get(hospitalId);
+        
         if (patientContactInfo != null) {
             patientContactInfo.emailAddress = newEmailAddress;
             patientMedicalRecordMap.get(hospitalId).updateEmailAddress(newEmailAddress);

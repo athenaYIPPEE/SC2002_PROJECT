@@ -14,7 +14,9 @@ public class MedicationStock {
         for (MedicationName medication : MedicationName.values()) {
             stock.put(medication, 0);
         }
+
         this.alert = new HashMap<>();
+
         for (MedicationName medication : MedicationName.values()) {
             alert.put(medication, 50);
         }
@@ -23,22 +25,24 @@ public class MedicationStock {
                 
     public void addStock(MedicationName medication, int amount) {
         if (stock.containsKey(medication)) {
-        stock.put(medication, stock.get(medication) + amount);
-        System.out.println("Added " + amount + " units to " + medication.getName() + ". Current stock: " + stock.get(medication));
-    } else {
-        System.out.println("Medication " + medication.getName() + " not found in stock.");
+            stock.put(medication, stock.get(medication) + amount);
+            System.out.println("Added " + amount + " units to " + medication.getName() + ". Current stock: " + stock.get(medication));
+        } else {
+            System.out.println("Medication " + medication.getName() + " not found in stock.");
         }
     }
             
     public void removeStock(MedicationName medication, int amount) {
         if (stock.containsKey(medication)) {
             int currentStock = stock.get(medication);
+
             if (amount <= currentStock) {
                 stock.put(medication, currentStock - amount);
                 System.out.println("Removed " + amount + " units from " + medication.getName() + ". Current stock: " + (currentStock - amount));
             } else {
                 System.out.println("Insufficient stock. Current stock: " + currentStock);
             }
+
         } else {
             System.out.println("Medication " + medication.getName() + " not found in stock.");
         }
@@ -50,9 +54,9 @@ public class MedicationStock {
 
     public void setAlert(MedicationName medication, int level){
         if (alert.containsKey(medication)) {
-        alert.put(medication, level);
+            alert.put(medication, level);
         } else {
-        System.out.println("Invalid Choice.");
+            System.out.println("Invalid Choice.");
         }
     }
 

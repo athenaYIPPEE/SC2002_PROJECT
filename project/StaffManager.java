@@ -12,15 +12,20 @@ public class StaffManager extends AllUsers {
         System.out.print("Enter the Hospital ID of the new Staff: ");
         Scanner sc = new Scanner(System.in);
         String hospitalId = sc.nextLine();
+
         System.out.print("Enter Name: ");
         String name = sc.nextLine();
+
         System.out.print("Enter DOB (yyyy-mm-dd): ");
         String dob = sc.nextLine();
+
         System.out.print("Enter Age: ");
         int age = sc.nextInt();
         sc.nextLine(); // consume the newline
+
         System.out.print("Enter Gender: ");
         String gender = sc.nextLine();
+
         System.out.print("Enter Role: ");
         String role = sc.nextLine();
 
@@ -43,6 +48,7 @@ public class StaffManager extends AllUsers {
         } else {
             System.out.println("No staff found with ID " + hospitalId);
         }
+        
     }
 
     public static void displayStaff(String roleFilter, String genderFilter, int minAge, int maxAge) {
