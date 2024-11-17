@@ -201,13 +201,15 @@ public class PatientsAppointments {
         }
     
     public void viewPastRecords() {
+        boolean found = false;
         for (Appointment appointment : currentPatient.getAppointments()) {
             // Check if the status of the appointment is "Completed"
             if (appointment.getStatus().equals("Completed")) {
+                found = true;
                 // Call getOutcome() on the instance of Appointment
                 appointment.getOutcome(appointment);
             }
-        }
+        } if (found == false) System.out.println("No past appointments.");
     }
     
     
