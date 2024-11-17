@@ -32,19 +32,22 @@ public class MedicationStock {
         }
     }
             
-    public void removeStock(MedicationName medication, int amount) {
+    public boolean removeStock(MedicationName medication, int amount) {
         if (stock.containsKey(medication)) {
             int currentStock = stock.get(medication);
 
             if (amount <= currentStock) {
                 stock.put(medication, currentStock - amount);
                 System.out.println("Removed " + amount + " units from " + medication.getName() + ". Current stock: " + (currentStock - amount));
+		return true;    
             } else {
                 System.out.println("Insufficient stock. Current stock: " + currentStock);
+		return false;
             }
 
         } else {
-            System.out.println("Medication " + medication.getName() + " not found in stock.");
+            	System.out.println("Medication " + medication.getName() + " not found in stock.");
+		return false;
         }
     }
             
