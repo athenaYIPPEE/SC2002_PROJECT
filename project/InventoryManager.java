@@ -36,7 +36,7 @@ public class InventoryManager {
         MedicationName medicationEnum = null;
 
         for (MedicationName medication : MedicationName.values()) {
-            if (medication.getName().equals(choice)) {
+            if (medication.getName().equalsIgnoreCase(choice)) {
                 medicationEnum = medication;}
             }
         System.out.println("How much?");
@@ -51,7 +51,7 @@ public class InventoryManager {
         MedicationName medicationEnum = null;
 
         for (MedicationName medication : MedicationName.values()) {
-            if (medication.getName().equals(choice)) {
+            if (medication.getName().equalsIgnoreCase(choice)) {
                 medicationEnum = medication;
             }
         }
@@ -70,7 +70,7 @@ public class InventoryManager {
         MedicationName medicationEnum = null;
 
         for (MedicationName medication : MedicationName.values()) {
-            if (medication.getName().equals(choice)) {
+            if (medication.getName().equalsIgnoreCase(choice)) {
                 medicationEnum = medication;
             }
         }
@@ -87,7 +87,7 @@ public class InventoryManager {
         MedicationName medicationEnum = null;
 
         for (MedicationName medication : MedicationName.values()) {
-            if (medication.getName().equals(choice)) {
+            if (medication.getName().equalsIgnoreCase(choice)) {
                 medicationEnum = medication;
             }
         }
