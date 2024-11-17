@@ -218,8 +218,8 @@ public class PatientsAppointments {
         appointmentToReschedule.setAppointmentDateTime(newAppointmentDateTime);  // Update with LocalDateTime
         appointmentToReschedule.setStatus("Pending");
         
-        System.out.println("Appointment " + appointmentId + " has been rescheduled with Dr. " + selectedDoctor.getName() + " on " 
-                        + newAppointmentDateTime.toLocalDate() + " at " + newAppointmentDateTime.toLocalTime());
+        System.out.println("Appointment " + appointmentId + " reschedule to Dr. " + selectedDoctor.getName() + " on " 
+                        + newAppointmentDateTime.toLocalDate() + " at " + newAppointmentDateTime.toLocalTime() + " has been requested");
     
     }
 
