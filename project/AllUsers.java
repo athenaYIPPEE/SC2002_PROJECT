@@ -78,7 +78,7 @@ public class AllUsers {
             System.out.print("Enter your current password: ");
 			cur_pw = obj.next();
         }
-		System.out.print("Enter your new password (Ensure your password is at least 8 characters long, has a small letter, a capital letter, a number and a special character ): ");
+		System.out.print("Enter your new password (At least 8 characters long, has a small letter, a capital letter, a number and a special character): ");
 		String new_pw = obj.next();
 
 		boolean hasLower = false, hasUpper = false, hasDigit = false, hasSpecialChar = false;
