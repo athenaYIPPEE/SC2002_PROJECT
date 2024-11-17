@@ -97,10 +97,10 @@ public class PatientsAppointments {
         // Find the appointment by ID in the current patient's appointment list
         for (Appointment appointment : currentPatient.getAppointments()) { // Get appointments from the current patient
             if (appointment.getAppointmentId().equals(appointmentId)) {
-                // Set the status to "Canceled"
-                appointment.setStatus("Canceled");
+                // Set the status to "Cancelled"
+                appointment.setStatus("Cancelled");
             
-                System.out.println("Appointment " + appointmentId + " has been canceled.");
+                System.out.println("Appointment " + appointmentId + " has been cancelled.");
                 return;
             }
         }
