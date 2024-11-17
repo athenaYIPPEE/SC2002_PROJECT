@@ -58,9 +58,11 @@ public class InventoryManager {
 
         System.out.println("How much?");
         int amt = scanner.nextInt();
-        medicationStock.removeStock(medicationEnum, amt);
-        Integer choiceInInt = inventory.get(medicationEnum) - amt;
-        inventory.put(medicationEnum, choiceInInt);
+        boolean removed = medicationStock.removeStock(medicationEnum, amt);
+        if (removed == true) {
+        	Integer choiceInInt = inventory.get(medicationEnum) - amt;
+        	inventory.put(medicationEnum, choiceInInt);
+        }
     }
 
     public void alertUpdate(){
