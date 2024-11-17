@@ -8,7 +8,7 @@ import java.util.*;
 public class DoctorAppointmentService {
 	
 	private Doctor doctor;
-	private static HashMap<LocalDate, AppointmentSlots> personalSchedule;
+	private HashMap<LocalDate, AppointmentSlots> personalSchedule;
 	
 	public DoctorAppointmentService(Doctor doctor) {
 		this.doctor = doctor;
